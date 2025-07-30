@@ -1,0 +1,93 @@
+{
+  "apiVersion": 3,
+  "name": "carpentry/request-quote",
+  "version": "0.1.0",
+  "title": "Request Quote Section",
+  "category": "carpentry-blocks",
+  "icon": "email-alt",
+  "description": "Sección de formulario de solicitud de presupuesto con testimonio",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "formTitle": {
+      "type": "string",
+      "default": "Solicita tu Presupuesto"
+    },
+    "namePlaceholder": {
+      "type": "string",
+      "default": "Nombre *"
+    },
+    "emailPlaceholder": {
+      "type": "string",
+      "default": "Email *"
+    },
+    "phonePlaceholder": {
+      "type": "string",
+      "default": "Teléfono *"
+    },
+    "servicePlaceholder": {
+      "type": "string",
+      "default": "—Por favor, elije una opción—"
+    },
+    "messageePlaceholder": {
+      "type": "string",
+      "default": "Mensaje"
+    },
+    "privacyText": {
+      "type": "string",
+      "default": "He leído y acepto la política de privacidad"
+    },
+    "privacyUrl": {
+      "type": "string",
+      "default": "/politica-privacidad"
+    },
+    "submitButtonText": {
+      "type": "string",
+      "default": "Enviar"
+    },
+    "serviceOptions": {
+      "type": "array",
+      "default": [
+        "Reformas",
+        "Mantenimiento",
+        "Tabiquería",
+        "Electricidad",
+        "Fontanería",
+        "Pintura"
+      ]
+    },
+    "testimonialStars": {
+      "type": "number",
+      "default": 5
+    },
+    "testimonialText": {
+      "type": "string",
+      "default": "Estamos muy satisfechos de haber hecho la reforma con Servilucas. Gabriela da mucha confianza llevando el control de la obra, y Lucas ha sabido buscar soluciones a todas mis solicitudes, siendo además exigente y detallista en la ejecución del trabajo. Sin duda repetiríamos."
+    },
+    "testimonialAuthor": {
+      "type": "string",
+      "default": "Ivan Martín"
+    },
+    "testimonialDesignation": {
+      "type": "string",
+      "default": "- OPINIÓN"
+    },
+    "statNumber": {
+      "type": "string",
+      "default": "100+"
+    },
+    "statLabel": {
+      "type": "string",
+      "default": "Clientes satisfechos"
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:../../build/request-quote/style-index.css",
+  "render": "file:./render.php"
+}

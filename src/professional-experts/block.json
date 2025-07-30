@@ -1,0 +1,87 @@
+{
+  "apiVersion": 3,
+  "name": "carpentry/professional-experts",
+  "version": "0.1.0",
+  "title": "Professional Experts Section",
+  "category": "carpentry-blocks",
+  "icon": "businessman",
+  "description": "Sección de expertos profesionales con estadísticas e información de contacto",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "sectionImage": {
+      "type": "string",
+      "default": ""
+    },
+    "sectionImageAlt": {
+      "type": "string",
+      "default": "Experto profesional en reformas"
+    },
+    "sectionSubtitle": {
+      "type": "string",
+      "default": "SOBRE NOSOTROS"
+    },
+    "sectionTitle": {
+      "type": "string",
+      "default": "Expertos Profesionales En Reformas"
+    },
+    "paragraph1": {
+      "type": "string",
+      "default": "Proporcionamos servicios de reformas de alta calidad, asegurando la satisfacción total de nuestros clientes a través de un trabajo detallado y profesional."
+    },
+    "paragraph2": {
+      "type": "string",
+      "default": "Nos encargamos de todos los aspectos del proceso de reforma, desde el diseño y la planificación, hasta la ejecución y el acabado final. Nuestra dedicación y atención al detalle nos distinguen en cada proyecto que realizamos."
+    },
+    "stat1Icon": {
+      "type": "string",
+      "default": "fas fa-tools"
+    },
+    "stat1Number": {
+      "type": "string",
+      "default": "10+"
+    },
+    "stat1Label": {
+      "type": "string",
+      "default": "años de Experiencia"
+    },
+    "stat2Icon": {
+      "type": "string",
+      "default": "fas fa-users"
+    },
+    "stat2Number": {
+      "type": "string",
+      "default": "150+"
+    },
+    "stat2Label": {
+      "type": "string",
+      "default": "Clientes"
+    },
+    "servicesButtonText": {
+      "type": "string",
+      "default": "Servicios"
+    },
+    "servicesButtonUrl": {
+      "type": "string",
+      "default": "/servicios"
+    },
+    "contactEmail": {
+      "type": "string",
+      "default": "info@reformasservilucas.com"
+    },
+    "contactPhone": {
+      "type": "string",
+      "default": "910 05 37 00"
+    },
+    "contactPhoneLink": {
+      "type": "string",
+      "default": "910053700"
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:../../build/professional-experts/style-index.css",
+  "render": "file:./render.php"
+}

@@ -1,0 +1,46 @@
+{
+  "apiVersion": 3,
+  "name": "carpentry/cta-casa-suenos",
+  "version": "0.1.0",
+  "title": "CTA Casa de Sueños",
+  "category": "carpentry-blocks",
+  "icon": "heart",
+  "description": "Sección CTA con mensaje inspiracional y botón de contacto",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "backgroundImage": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundImageAlt": {
+      "type": "string",
+      "default": "Casa de sueños"
+    },
+    "mainText": {
+      "type": "string",
+      "default": "Hacemos de tu casa, la casa de tus sueños"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Contactanos"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "/contacto"
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 0.6
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:../../build/cta-casa-suenos/style-index.css",
+  "render": "file:./render.php"
+}

@@ -44,6 +44,13 @@ This theme supports Full Site Editing (FSE) and is built with modern WordPress b
 // Block-specific styles
 @import "blocks/header";
 @import "blocks/footer";
-@import "pages/services";
-@import "pages/blog";
-@import "pages/contacto";
+@import "blocks/hero";
+@import "blocks/button";
+@import "blocks/about";
+@import "blocks/services-projects";
+@import "blocks/added-value";
+@import "blocks/how-we-work";
+@import "blocks/request-quote";
+@import "blocks/professional-experts";
+@import "blocks/cta-casa-suenos";
+@import "blocks/valor-anadido-nosotros";

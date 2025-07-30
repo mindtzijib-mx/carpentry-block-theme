@@ -1,0 +1,489 @@
+// ===================================
+// ABOUT BLOCK - Carpentry Block Theme
+// ===================================
+
+// Block wrapper class for editor
+.wp-block-carpentry-about {
+  // About us section styles
+  .about-us-section {
+    background-color: $gray-light;
+    padding: 80px 0;
+
+    .about-content {
+      padding-right: $spacing-xl;
+    }
+
+    .section-subtitle {
+      color: $text-muted;
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: $spacing-md;
+    }
+
+    .section-title {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $gray-dark;
+      line-height: $line-height-tight;
+      margin-bottom: 25px;
+    }
+
+    .section-description {
+      color: $gray-medium;
+      font-size: $font-size-md;
+      line-height: $line-height-base;
+      margin-bottom: $spacing-xxl;
+    }
+
+    .stats-wrapper {
+      display: flex;
+      gap: $spacing-xxl;
+      margin-bottom: $spacing-xl;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+    }
+
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      background-color: $white;
+      border-radius: $border-radius-round;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+      i {
+        color: $primary-color;
+        font-size: 20px;
+      }
+    }
+
+    .about-stat-number {
+      font-size: 32px;
+      font-weight: $font-weight-bold;
+      color: $gray-dark;
+      line-height: 1;
+    }
+
+    .about-stat-label {
+      font-size: 12px;
+      color: $text-muted;
+      font-weight: $font-weight-semibold;
+      letter-spacing: 0.5px;
+    }
+
+    .additional-text {
+      color: $gray-medium;
+      font-size: 15px;
+      line-height: $line-height-base;
+      margin-bottom: $spacing-xxl;
+    }
+
+    .contact-info-wrapper {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xl;
+    }
+
+    .contact-cta .btn {
+      background-color: $gray-dark;
+      color: $white;
+      border: none;
+      padding: 12px $spacing-xl;
+      border-radius: $border-radius-xl;
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+      font-size: $font-size-base;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-email {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+    }
+
+    .email-icon {
+      width: 45px;
+      height: 45px;
+      background-color: #f0f0f0;
+      border-radius: $border-radius-round;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        color: $gray-medium;
+        font-size: $font-size-lg;
+      }
+    }
+
+    .email-label {
+      font-size: $font-size-base;
+      color: $text-muted;
+      font-weight: $font-weight-semibold;
+    }
+
+    .email-address {
+      font-size: 15px;
+      color: $gray-dark;
+      font-weight: $font-weight-medium;
+    }
+
+    .about-image-wrapper {
+      position: relative;
+      border-radius: $border-radius-lg;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: $border-radius-lg;
+      }
+    }
+
+    .phone-contact-overlay {
+      position: absolute;
+      bottom: $spacing-xl;
+      right: $spacing-xl;
+      background-color: rgba($white, 0.95);
+      padding: $spacing-lg $spacing-xl;
+      border-radius: $border-radius-lg;
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      box-shadow: $shadow-xl;
+      backdrop-filter: blur(10px);
+    }
+
+    .about-phone-icon {
+      width: 40px;
+      height: 40px;
+      background-color: $primary-color;
+      border-radius: $border-radius-round;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        color: $white;
+        font-size: $font-size-md;
+      }
+    }
+
+    .about-phone-label {
+      font-size: 12px;
+      color: $text-muted;
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .about-phone-number {
+      font-size: $font-size-lg;
+      color: $gray-dark;
+      font-weight: $font-weight-bold;
+    }
+
+    // Responsive
+    @media (max-width: $breakpoint-lg) {
+      .about-content {
+        padding-right: 0;
+        margin-bottom: $spacing-xxl;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .stats-wrapper {
+        justify-content: center;
+        margin-bottom: 25px;
+      }
+
+      .contact-info-wrapper {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: $breakpoint-md) {
+      padding: 60px 0;
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .stats-wrapper {
+        flex-direction: column;
+        gap: $spacing-lg;
+        align-items: center;
+      }
+
+      .contact-info-wrapper {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .phone-contact-overlay {
+        position: static;
+        margin-top: $spacing-lg;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+// Front-end styles (without .wp-block-carpentry-about wrapper)
+.about-us-section {
+  background-color: $gray-light;
+  padding: 80px 0;
+
+  .about-content {
+    padding-right: $spacing-xl;
+  }
+
+  .section-subtitle {
+    color: $text-muted;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: $spacing-md;
+  }
+
+  .section-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $gray-dark;
+    line-height: $line-height-tight;
+    margin-bottom: 25px;
+  }
+
+  .section-description {
+    color: $gray-medium;
+    font-size: $font-size-md;
+    line-height: $line-height-base;
+    margin-bottom: $spacing-xxl;
+  }
+
+  .stats-wrapper {
+    display: flex;
+    gap: $spacing-xxl;
+    margin-bottom: $spacing-xl;
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    background-color: $white;
+    border-radius: $border-radius-round;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    i {
+      color: $primary-color;
+      font-size: 20px;
+    }
+  }
+
+  .about-stat-number {
+    font-size: 32px;
+    font-weight: $font-weight-bold;
+    color: $gray-dark;
+    line-height: 1;
+  }
+
+  .about-stat-label {
+    font-size: 12px;
+    color: $text-muted;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.5px;
+  }
+
+  .additional-text {
+    color: $gray-medium;
+    font-size: 15px;
+    line-height: $line-height-base;
+    margin-bottom: $spacing-xxl;
+  }
+
+  .contact-info-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl;
+  }
+
+  .contact-cta .btn {
+    background-color: $gray-dark;
+    color: $white;
+    border: none;
+    padding: 12px $spacing-xl;
+    border-radius: $border-radius-xl;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    font-size: $font-size-base;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: darken($gray-dark, 10%);
+      color: $white;
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .contact-email {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  .email-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #f0f0f0;
+    border-radius: $border-radius-round;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      color: $gray-medium;
+      font-size: $font-size-lg;
+    }
+  }
+
+  .email-label {
+    font-size: $font-size-base;
+    color: $text-muted;
+    font-weight: $font-weight-semibold;
+  }
+
+  .email-address {
+    font-size: 15px;
+    color: $gray-dark;
+    font-weight: $font-weight-medium;
+  }
+
+  .about-image-wrapper {
+    position: relative;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: $border-radius-lg;
+    }
+  }
+
+  .phone-contact-overlay {
+    position: absolute;
+    bottom: $spacing-xl;
+    right: $spacing-xl;
+    background-color: rgba($white, 0.95);
+    padding: $spacing-lg $spacing-xl;
+    border-radius: $border-radius-lg;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    box-shadow: $shadow-xl;
+    backdrop-filter: blur(10px);
+  }
+
+  .about-phone-icon {
+    width: 40px;
+    height: 40px;
+    background-color: $primary-color;
+    border-radius: $border-radius-round;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      color: $white;
+      font-size: $font-size-md;
+    }
+  }
+
+  .about-phone-label {
+    font-size: 12px;
+    color: $text-muted;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .about-phone-number {
+    font-size: $font-size-lg;
+    color: $gray-dark;
+    font-weight: $font-weight-bold;
+  }
+
+  // Responsive
+  @media (max-width: $breakpoint-lg) {
+    .about-content {
+      padding-right: 0;
+      margin-bottom: $spacing-xxl;
+    }
+
+    .section-title {
+      font-size: 32px;
+    }
+
+    .stats-wrapper {
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .contact-info-wrapper {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: 60px 0;
+
+    .section-title {
+      font-size: 28px;
+    }
+
+    .stats-wrapper {
+      flex-direction: column;
+      gap: $spacing-lg;
+      align-items: center;
+    }
+
+    .contact-info-wrapper {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .phone-contact-overlay {
+      position: static;
+      margin-top: $spacing-lg;
+      justify-content: center;
+    }
+  }
+}

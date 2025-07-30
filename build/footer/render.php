@@ -10,6 +10,19 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+
+// Get company information from customizer
+$company_address = get_theme_mod('carpentry_company_address', 'Calle Teleférico de las Canteras 4, bajo A, 28052 Madrid');
+$company_email = get_theme_mod('carpentry_company_email', 'info@reformasservilucas.com');
+$company_phone = get_theme_mod('carpentry_company_phone', '910 05 37 00');
+$company_phone_link = get_theme_mod('carpentry_company_phone_link', '910053700');
+
+// Get social media URLs from customizer
+$instagram_url = get_theme_mod('carpentry_instagram_url', 'https://www.instagram.com/reformas.servilucas/');
+$linkedin_url = get_theme_mod('carpentry_linkedin_url', 'https://www.linkedin.com/company/reformas-servilucas-s-l/');
+$facebook_url = get_theme_mod('carpentry_facebook_url', '');
+$twitter_url = get_theme_mod('carpentry_twitter_url', '');
+$youtube_url = get_theme_mod('carpentry_youtube_url', '');
 ?>
 
 <div class="wp-block-carpentry-footer">
@@ -36,7 +49,7 @@ if (!defined('ABSPATH')) {
                             </div>
                             <div class="contact-content">
                                 <h4 class="contact-title">Dirección</h4>
-                                <p class="contact-text">Calle Teleférico<br>de las Canteras<br>4, bajo A, 28052<br>Madrid</p>
+                                <p class="contact-text"><?php echo nl2br(esc_html($company_address)); ?></p>
                             </div>
                         </div>
                         <div class="contact-divider"></div>
@@ -48,7 +61,7 @@ if (!defined('ABSPATH')) {
                             <div class="contact-content">
                                 <h4 class="contact-title">Teléfono</h4>
                                 <p class="contact-text">
-                                    <a href="tel:910053700">910 05 37 00</a>
+                                    <a href="tel:<?php echo esc_attr($company_phone_link); ?>"><?php echo esc_html($company_phone); ?></a>
                                 </p>
                             </div>
                         </div>
@@ -61,7 +74,7 @@ if (!defined('ABSPATH')) {
                             <div class="contact-content">
                                 <h4 class="contact-title">Email</h4>
                                 <p class="contact-text">
-                                    <a href="mailto:info@reformasservilucas.com">info@reformasservilucas.com</a>
+                                    <a href="mailto:<?php echo esc_attr($company_email); ?>"><?php echo esc_html($company_email); ?></a>
                                 </p>
                             </div>
                         </div>
@@ -147,16 +160,41 @@ if (!defined('ABSPATH')) {
                 <div class="col-lg-6 col-md-6">
                     <div class="social-info-wrapper">
                         <ul class="social-info">
+                            <?php if (!empty($instagram_url)): ?>
                             <li>
-                                <a href="https://www.instagram.com/reformas.servilucas/" target="_blank" rel="nofollow">
+                                <a href="<?php echo esc_url($instagram_url); ?>" target="_blank" rel="nofollow">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </li>
+                            <?php endif; ?>
+                            <?php if (!empty($linkedin_url)): ?>
                             <li>
-                                <a href="https://www.linkedin.com/company/reformas-servilucas-s-l/" target="_blank" rel="nofollow">
+                                <a href="<?php echo esc_url($linkedin_url); ?>" target="_blank" rel="nofollow">
                                     <i class="fab fa-linkedin"></i>
                                 </a>
                             </li>
+                            <?php endif; ?>
+                            <?php if (!empty($facebook_url)): ?>
+                            <li>
+                                <a href="<?php echo esc_url($facebook_url); ?>" target="_blank" rel="nofollow">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                            <?php if (!empty($twitter_url)): ?>
+                            <li>
+                                <a href="<?php echo esc_url($twitter_url); ?>" target="_blank" rel="nofollow">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                            <?php if (!empty($youtube_url)): ?>
+                            <li>
+                                <a href="<?php echo esc_url($youtube_url); ?>" target="_blank" rel="nofollow">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>

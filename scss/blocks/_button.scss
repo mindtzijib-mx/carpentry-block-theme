@@ -1,0 +1,208 @@
+// ===================================
+// BUTTON BLOCK - Carpentry Block Theme
+// ===================================
+
+// Base button styles
+.carpentry-button {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: $border-radius-xl;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-base;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1;
+
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  &:focus {
+    outline: none;
+    text-decoration: none;
+  }
+}
+
+// Button styles variants
+.btn-primary-custom {
+  background-color: $primary-color;
+  color: $white;
+  box-shadow: 0 4px 15px rgba($primary-color, 0.2);
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    color: $white;
+    box-shadow: 0 6px 20px rgba($primary-color, 0.3);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+  }
+}
+
+.btn-dark-custom {
+  background-color: $secondary-color;
+  color: $white;
+  box-shadow: 0 4px 15px rgba($secondary-color, 0.2);
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+    color: $white;
+    box-shadow: 0 6px 20px rgba($secondary-color, 0.3);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($secondary-color, 0.3);
+  }
+}
+
+.btn-hero-modern {
+  background-color: $primary-color;
+  color: $white;
+  padding: 15px 35px;
+  box-shadow: 0 8px 25px rgba(161, 122, 102, 0.2);
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    color: $white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(161, 122, 102, 0.3);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+  }
+}
+
+.btn-outline-custom {
+  background-color: transparent;
+  color: $primary-color;
+  border: 2px solid $primary-color;
+  box-shadow: none;
+
+  &:hover {
+    background-color: $primary-color;
+    color: $white;
+    border-color: $primary-color;
+    box-shadow: 0 4px 15px rgba($primary-color, 0.2);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+  }
+}
+
+// Button sizes
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 18px;
+  border-radius: 30px;
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+  .carpentry-button {
+    padding: 10px 20px;
+    font-size: 14px;
+
+    &.btn-lg {
+      padding: 14px 28px;
+      font-size: 16px;
+    }
+
+    &.btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+
+  .btn-hero-modern {
+    padding: 12px 28px;
+  }
+}
+
+// Button block specific styles (for editor)
+.wp-block-carpentry-button {
+  // Inherits all button styles from above classes
+  display: inline-block;
+}
+
+// Button combinations and spacing
+.hero-buttons,
+.action-buttons,
+.content-buttons {
+  .carpentry-button {
+    margin-right: 15px;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .carpentry-button {
+      margin-right: 10px;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+// Accessibility improvements
+.carpentry-button {
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+
+  // Ensure sufficient contrast for all states
+  &.btn-outline-custom {
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+  }
+}
+
+// Animation for loading states (future enhancement)
+.carpentry-button {
+  &.is-loading {
+    position: relative;
+    color: transparent;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 16px;
+      height: 16px;
+      margin: -8px 0 0 -8px;
+      border: 2px solid;
+      border-color: transparent currentColor currentColor transparent;
+      border-radius: 50%;
+      animation: button-spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes button-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

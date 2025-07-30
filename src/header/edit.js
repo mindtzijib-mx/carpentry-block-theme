@@ -14,8 +14,6 @@ export default function Edit() {
           color: "#fff",
           padding: "20px",
           textAlign: "center",
-          borderRadius: "8px",
-          border: "2px dashed #a17a66",
         }}
       >
         <h3 style={{ margin: "0 0 10px 0", color: "#fff" }}>

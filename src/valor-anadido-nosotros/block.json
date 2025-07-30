@@ -1,0 +1,99 @@
+{
+  "apiVersion": 3,
+  "name": "carpentry/valor-anadido-nosotros",
+  "version": "0.1.0",
+  "title": "Valor Añadido Nosotros",
+  "category": "carpentry-blocks",
+  "icon": "star-filled",
+  "description": "Sección de valor añadido con características principales y testimonios",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "default": "Nuestro Valor Añadido"
+    },
+    "sectionSubtitle": {
+      "type": "string",
+      "default": "Lo que nos diferencia"
+    },
+    "feature1Icon": {
+      "type": "string",
+      "default": "fas fa-clock"
+    },
+    "feature1Title": {
+      "type": "string",
+      "default": "Puntualidad"
+    },
+    "feature1Description": {
+      "type": "string",
+      "default": "Cumplimos con los plazos establecidos y respetamos tu tiempo"
+    },
+    "feature2Icon": {
+      "type": "string",
+      "default": "fas fa-shield-alt"
+    },
+    "feature2Title": {
+      "type": "string",
+      "default": "Garantía"
+    },
+    "feature2Description": {
+      "type": "string",
+      "default": "Todos nuestros trabajos incluyen garantía de satisfacción"
+    },
+    "feature3Icon": {
+      "type": "string",
+      "default": "fas fa-tools"
+    },
+    "feature3Title": {
+      "type": "string",
+      "default": "Calidad"
+    },
+    "feature3Description": {
+      "type": "string",
+      "default": "Utilizamos materiales de primera calidad y técnicas profesionales"
+    },
+    "feature4Icon": {
+      "type": "string",
+      "default": "fas fa-users"
+    },
+    "feature4Title": {
+      "type": "string",
+      "default": "Profesionalismo"
+    },
+    "feature4Description": {
+      "type": "string",
+      "default": "Equipo experimentado y certificado en reformas y construcción"
+    },
+    "testimonial1Name": {
+      "type": "string",
+      "default": "María González"
+    },
+    "testimonial1Text": {
+      "type": "string",
+      "default": "Excelente trabajo en la reforma de mi cocina. Muy profesionales y puntuales."
+    },
+    "testimonial1Rating": {
+      "type": "number",
+      "default": 5
+    },
+    "testimonial2Name": {
+      "type": "string",
+      "default": "Carlos López"
+    },
+    "testimonial2Text": {
+      "type": "string",
+      "default": "Reformaron mi baño completamente. El resultado superó mis expectativas."
+    },
+    "testimonial2Rating": {
+      "type": "number",
+      "default": 5
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:../../build/valor-anadido-nosotros/style-index.css",
+  "render": "file:./render.php"
+}

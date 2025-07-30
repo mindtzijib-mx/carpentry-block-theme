@@ -1,0 +1,241 @@
+/*
+Theme Name: Carpentry Block Theme
+Description: Editor styles for Gutenberg block editor
+*/
+
+/* Import Google Fonts for editor - CRITICAL for editor display */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Viga:wght@400&display=swap");
+
+/* Ensure fonts load in all editor contexts */
+@font-face {
+  font-family: "Poppins";
+  src: url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+}
+
+@font-face {
+  font-family: "Viga";
+  src: url("https://fonts.googleapis.com/css2?family=Viga:wght@400&display=swap");
+}
+
+/* Force font loading in editor wrapper */
+.block-editor-page,
+.block-editor-page *,
+.editor-styles-wrapper,
+.editor-styles-wrapper * {
+  font-family:
+    "Poppins",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    "Helvetica Neue",
+    sans-serif !important;
+}
+
+/* Body and general text styles */
+.editor-styles-wrapper {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Headings - Force Viga font */
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6,
+.block-editor-page h1,
+.block-editor-page h2,
+.block-editor-page h3,
+.block-editor-page h4,
+.block-editor-page h5,
+.block-editor-page h6 {
+  font-family: "Viga", sans-serif !important;
+  font-weight: 400 !important;
+  line-height: 1.2;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.editor-styles-wrapper h1 {
+  font-size: 2.5rem;
+  color: #a17a66;
+}
+
+.editor-styles-wrapper h2 {
+  font-size: 2rem;
+  color: #a17a66;
+}
+
+.editor-styles-wrapper h3 {
+  font-size: 1.75rem;
+  color: #a17a66;
+}
+
+.editor-styles-wrapper h4 {
+  font-size: 1.5rem;
+  color: #a17a66;
+}
+
+.editor-styles-wrapper h5 {
+  font-size: 1.25rem;
+  color: #a17a66;
+}
+
+.editor-styles-wrapper h6 {
+  font-size: 1rem;
+  color: #a17a66;
+}
+
+/* Paragraphs and text blocks */
+.editor-styles-wrapper p,
+.block-editor-page p,
+.editor-styles-wrapper .wp-block-paragraph,
+.block-editor-page .wp-block-paragraph {
+  font-family: "Poppins", sans-serif !important;
+  margin-bottom: 1em;
+}
+
+/* Links */
+.editor-styles-wrapper a {
+  color: #a17a66;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.editor-styles-wrapper a:hover {
+  color: #8b6854;
+  text-decoration: underline;
+}
+
+/* Lists */
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol {
+  font-family: "Poppins", sans-serif !important;
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+/* Buttons */
+.editor-styles-wrapper .wp-block-button__link {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500;
+  background-color: #a17a66;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  transition: all 0.3s ease;
+}
+
+.editor-styles-wrapper .wp-block-button__link:hover {
+  background-color: #8b6854;
+}
+
+/* Quote blocks */
+.editor-styles-wrapper .wp-block-quote {
+  font-family: "Poppins", sans-serif !important;
+  font-style: italic;
+  border-left: 4px solid #a17a66;
+  padding-left: 1em;
+  margin: 1.5em 0;
+}
+
+/* Code blocks */
+.editor-styles-wrapper code {
+  font-family: Monaco, "Courier New", monospace !important;
+  background-color: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.editor-styles-wrapper pre {
+  font-family: Monaco, "Courier New", monospace !important;
+  background-color: #f4f4f4;
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+/* Color palette display in editor */
+.editor-styles-wrapper .has-primary-color {
+  color: #a17a66;
+}
+
+.editor-styles-wrapper .has-primary-background-color {
+  background-color: #a17a66;
+}
+
+.editor-styles-wrapper .has-primary-dark-color {
+  color: #8b6854;
+}
+
+.editor-styles-wrapper .has-primary-dark-background-color {
+  background-color: #8b6854;
+}
+
+/* Font family classes - ensure they work in editor */
+.editor-styles-wrapper .has-poppins-font-family,
+.block-editor-page .has-poppins-font-family {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.editor-styles-wrapper .has-viga-font-family,
+.block-editor-page .has-viga-font-family {
+  font-family: "Viga", sans-serif !important;
+}
+
+/* Font sizes */
+.editor-styles-wrapper .has-small-font-size {
+  font-size: 14px;
+}
+
+.editor-styles-wrapper .has-medium-font-size {
+  font-size: 18px;
+}
+
+.editor-styles-wrapper .has-large-font-size {
+  font-size: 24px;
+}
+
+.editor-styles-wrapper .has-x-large-font-size {
+  font-size: 32px;
+}
+
+.editor-styles-wrapper .has-hero-title-font-size {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+}
+
+/* Additional specificity for editor interface */
+.interface-interface-skeleton__editor .editor-styles-wrapper,
+.interface-interface-skeleton__editor .editor-styles-wrapper * {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.interface-interface-skeleton__editor .editor-styles-wrapper h1,
+.interface-interface-skeleton__editor .editor-styles-wrapper h2,
+.interface-interface-skeleton__editor .editor-styles-wrapper h3,
+.interface-interface-skeleton__editor .editor-styles-wrapper h4,
+.interface-interface-skeleton__editor .editor-styles-wrapper h5,
+.interface-interface-skeleton__editor .editor-styles-wrapper h6 {
+  font-family: "Viga", sans-serif !important;
+}
+
+/* Block editor specific overrides */
+.block-editor-writing-flow {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.block-editor-block-list__layout .wp-block {
+  font-family: "Poppins", sans-serif !important;
+}
+
+/* Ensure typography panel shows correct fonts */
+.components-font-family-control__select {
+  font-family: "Poppins", sans-serif !important;
+}

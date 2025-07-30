@@ -21,30 +21,6 @@ export default function Edit() {
             "carpentry-blocks"
           )}
         </p>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "2rem",
-            marginTop: "1rem",
-          }}
-        >
-          <div>
-            <h4>{__("Contacto", "carpentry-blocks")}</h4>
-            <p>{__("Teléfono: +34 xxx xxx xxx", "carpentry-blocks")}</p>
-            <p>{__("Email: info@servilucas.com", "carpentry-blocks")}</p>
-          </div>
-          <div>
-            <h4>{__("Servicios", "carpentry-blocks")}</h4>
-            <p>
-              {__("Carpintería • Reformas • Instalaciones", "carpentry-blocks")}
-            </p>
-          </div>
-          <div>
-            <h4>{__("Redes Sociales", "carpentry-blocks")}</h4>
-            <p>{__("Facebook • Instagram • LinkedIn", "carpentry-blocks")}</p>
-          </div>
-        </div>
       </div>
     </div>
   );

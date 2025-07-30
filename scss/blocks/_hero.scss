@@ -1,0 +1,291 @@
+// ===================================
+// HERO BLOCK - Carpentry Block Theme
+// ===================================
+
+// Block wrapper class for editor
+.wp-block-carpentry-hero {
+  // Base hero section styles
+  .hero-section {
+    background: linear-gradient(135deg, #007cba 0%, #005a87 100%);
+    color: $white;
+    padding: 120px 0 80px;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+  }
+
+  // Hero Expertos - Specific Design
+  .hero-expertos {
+    background-size: cover;
+    background-position: center;
+    height: 768px;
+    position: relative;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin-top: -37px;
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to right,
+        rgba($white, 0.8) 0%,
+        rgba($white, 0.4) 50%,
+        rgba($white, 0) 100%
+      );
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-row {
+      height: 768px;
+    }
+  }
+
+  // Hero title styles
+  .hero-expertos-title {
+    font-size: 90px;
+    line-height: 90px;
+    color: #3b3430;
+    font-family: $font-headings;
+    font-weight: $font-weight-normal;
+    margin-bottom: 30px;
+
+    // Responsive adjustments
+    @media (max-width: 768px) {
+      font-size: 48px;
+      line-height: 52px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 36px;
+      line-height: 40px;
+    }
+  }
+
+  // Hero description styles
+  .hero-expertos-description {
+    font-size: 16px;
+    line-height: 26px;
+    color: #27262d;
+    font-weight: 500;
+    max-width: 563px;
+    margin-bottom: 40px;
+  }
+
+  // Hero button styles
+  .btn-hero-modern {
+    background-color: $primary-color !important;
+    color: $white !important;
+    padding: 15px 35px;
+    border-radius: $border-radius-xl;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-base;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 25px rgba(161, 122, 102, 0.2);
+
+    &:hover {
+      background-color: darken($primary-color, 10%) !important;
+      color: $white !important;
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(161, 122, 102, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+      text-decoration: none !important;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+    }
+  }
+
+  // Responsive hero section
+  @media (max-width: 992px) {
+    .hero-expertos {
+      height: 600px;
+      margin-top: 0;
+
+      .hero-row {
+        height: 600px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-expertos {
+      height: 500px;
+      padding: 60px 0;
+
+      .hero-row {
+        height: auto;
+        min-height: 400px;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+    }
+
+    .hero-buttons {
+      .btn-hero-modern {
+        display: block;
+        margin: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+// Front-end styles (without .wp-block-carpentry-hero wrapper)
+.hero-section {
+  background: linear-gradient(135deg, #007cba 0%, #005a87 100%);
+  color: $white;
+  padding: 120px 0 80px;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+// Hero Expertos - Front-end styles
+.hero-expertos {
+  background-size: cover;
+  background-position: center;
+  height: 768px;
+  position: relative;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-top: -37px;
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to right,
+      rgba($white, 0.8) 0%,
+      rgba($white, 0.4) 50%,
+      rgba($white, 0) 100%
+    );
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-row {
+    height: 768px;
+  }
+}
+
+.hero-expertos-title {
+  font-size: 90px;
+  line-height: 90px;
+  color: #3b3430;
+  font-family: $font-headings;
+  font-weight: $font-weight-normal;
+  margin-bottom: 30px;
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    font-size: 48px;
+    line-height: 52px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 36px;
+    line-height: 40px;
+  }
+}
+
+.hero-expertos-description {
+  font-size: 16px;
+  line-height: 26px;
+  color: #27262d;
+  font-weight: 500;
+  max-width: 563px;
+  margin-bottom: 40px;
+}
+
+.btn-hero-modern {
+  background-color: $primary-color !important;
+  color: $white !important;
+  padding: 15px 35px;
+  border-radius: $border-radius-xl;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-base;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 25px rgba(161, 122, 102, 0.2);
+
+  &:hover {
+    background-color: darken($primary-color, 10%) !important;
+    color: $white !important;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(161, 122, 102, 0.3);
+  }
+
+  &:focus {
+    outline: none;
+    text-decoration: none !important;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+  }
+}
+
+// Responsive styles for front-end
+@media (max-width: 992px) {
+  .hero-expertos {
+    height: 600px;
+    margin-top: 0;
+
+    .hero-row {
+      height: 600px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-expertos {
+    height: 500px;
+    padding: 60px 0;
+
+    .hero-row {
+      height: auto;
+      min-height: 400px;
+    }
+
+    .hero-content {
+      text-align: center;
+    }
+  }
+
+  .hero-buttons {
+    .btn-hero-modern {
+      display: block;
+      margin: 0.5rem 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

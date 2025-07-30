@@ -24,6 +24,9 @@ function carpentry_blocks_setup() {
     // Add support for editor styles
     add_theme_support('editor-styles');
     
+    // Enqueue editor styles
+    add_editor_style('editor-style.css');
+    
     // Add support for wide alignment
     add_theme_support('align-wide');
     
@@ -132,13 +135,8 @@ add_action('wp_enqueue_scripts', 'carpentry_blocks_scripts');
  * Enqueue editor styles
  */
 function carpentry_blocks_editor_styles() {
-    // Enqueue Google Fonts for editor
-    wp_enqueue_style(
-        'carpentry-blocks-editor-fonts',
-        'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Viga:wght@400&display=swap',
-        array(),
-        wp_get_theme()->get('Version')
-    );
+    // Note: Google Fonts are now loaded via editor-style.css
+    // This ensures better integration with Gutenberg editor
     
     // Enqueue Font Awesome for editor
     wp_enqueue_style(
@@ -204,11 +202,168 @@ add_action('init', 'carpentry_blocks_register_servicios_post_type');
 function carpentry_blocks_register_blocks() {
     // Register our custom blocks using metadata
     if (function_exists('register_block_type_from_metadata')) {
+        register_block_type_from_metadata(__DIR__ . '/build/button');
         register_block_type_from_metadata(__DIR__ . '/build/header');
         register_block_type_from_metadata(__DIR__ . '/build/footer');
+        register_block_type_from_metadata(__DIR__ . '/build/hero');
+        register_block_type_from_metadata(__DIR__ . '/build/about');
+        register_block_type_from_metadata(__DIR__ . '/build/services-projects');
+        register_block_type_from_metadata(__DIR__ . '/build/added-value');
+        register_block_type_from_metadata(__DIR__ . '/build/how-we-work');
+        register_block_type_from_metadata(__DIR__ . '/build/request-quote');
+        register_block_type_from_metadata(__DIR__ . '/build/professional-experts');
+        register_block_type_from_metadata(__DIR__ . '/build/cta-casa-suenos');
+        register_block_type_from_metadata(__DIR__ . '/build/valor-anadido-nosotros');
     }
 }
 add_action('init', 'carpentry_blocks_register_blocks');
+
+/**
+ * Customize register - Add custom fields for header data
+ */
+function carpentry_blocks_customize_register($wp_customize) {
+    // Add Company Information Section
+    $wp_customize->add_section('carpentry_company_info', array(
+        'title'    => __('Información de la Empresa', 'carpentry-blocks'),
+        'priority' => 30,
+    ));
+
+    // Company Address
+    $wp_customize->add_setting('carpentry_company_address', array(
+        'default'           => 'Calle Teleférico de las Canteras 4, bajo A, 28052 Madrid',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('carpentry_company_address', array(
+        'label'   => __('Dirección de la Empresa', 'carpentry-blocks'),
+        'section' => 'carpentry_company_info',
+        'type'    => 'text',
+    ));
+
+    // Company Email
+    $wp_customize->add_setting('carpentry_company_email', array(
+        'default'           => 'info@reformasservilucas.com',
+        'sanitize_callback' => 'sanitize_email',
+    ));
+    $wp_customize->add_control('carpentry_company_email', array(
+        'label'   => __('Email de la Empresa', 'carpentry-blocks'),
+        'section' => 'carpentry_company_info',
+        'type'    => 'email',
+    ));
+
+    // Company Phone
+    $wp_customize->add_setting('carpentry_company_phone', array(
+        'default'           => '910 05 37 00',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('carpentry_company_phone', array(
+        'label'   => __('Teléfono de la Empresa', 'carpentry-blocks'),
+        'section' => 'carpentry_company_info',
+        'type'    => 'text',
+    ));
+
+    // Company Phone Link (without spaces for tel: link)
+    $wp_customize->add_setting('carpentry_company_phone_link', array(
+        'default'           => '910053700',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('carpentry_company_phone_link', array(
+        'label'       => __('Teléfono para Enlace (sin espacios)', 'carpentry-blocks'),
+        'description' => __('Ej: 910053700 - Se usa para el enlace tel:', 'carpentry-blocks'),
+        'section'     => 'carpentry_company_info',
+        'type'        => 'text',
+    ));
+
+    // Social Media Section
+    $wp_customize->add_section('carpentry_social_media', array(
+        'title'    => __('Redes Sociales', 'carpentry-blocks'),
+        'priority' => 31,
+    ));
+
+    // Instagram URL
+    $wp_customize->add_setting('carpentry_instagram_url', array(
+        'default'           => 'https://www.instagram.com/reformas.servilucas/',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('carpentry_instagram_url', array(
+        'label'   => __('URL de Instagram', 'carpentry-blocks'),
+        'section' => 'carpentry_social_media',
+        'type'    => 'url',
+    ));
+
+    // LinkedIn URL
+    $wp_customize->add_setting('carpentry_linkedin_url', array(
+        'default'           => 'https://www.linkedin.com/company/reformas-servilucas-s-l/',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('carpentry_linkedin_url', array(
+        'label'   => __('URL de LinkedIn', 'carpentry-blocks'),
+        'section' => 'carpentry_social_media',
+        'type'    => 'url',
+    ));
+
+    // Facebook URL (optional)
+    $wp_customize->add_setting('carpentry_facebook_url', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('carpentry_facebook_url', array(
+        'label'   => __('URL de Facebook (opcional)', 'carpentry-blocks'),
+        'section' => 'carpentry_social_media',
+        'type'    => 'url',
+    ));
+
+    // Twitter URL (optional)
+    $wp_customize->add_setting('carpentry_twitter_url', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('carpentry_twitter_url', array(
+        'label'   => __('URL de Twitter (opcional)', 'carpentry-blocks'),
+        'section' => 'carpentry_social_media',
+        'type'    => 'url',
+    ));
+
+    // YouTube URL (optional)
+    $wp_customize->add_setting('carpentry_youtube_url', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('carpentry_youtube_url', array(
+        'label'   => __('URL de YouTube (opcional)', 'carpentry-blocks'),
+        'section' => 'carpentry_social_media',
+        'type'    => 'url',
+    ));
+}
+add_action('customize_register', 'carpentry_blocks_customize_register');
+
+/**
+ * Helper functions to get company information
+ */
+function carpentry_get_company_address() {
+    return get_theme_mod('carpentry_company_address', 'Calle Teleférico de las Canteras 4, bajo A, 28052 Madrid');
+}
+
+function carpentry_get_company_email() {
+    return get_theme_mod('carpentry_company_email', 'info@reformasservilucas.com');
+}
+
+function carpentry_get_company_phone() {
+    return get_theme_mod('carpentry_company_phone', '910 05 37 00');
+}
+
+function carpentry_get_company_phone_link() {
+    return get_theme_mod('carpentry_company_phone_link', '910053700');
+}
+
+function carpentry_get_social_media_links() {
+    return array(
+        'instagram' => get_theme_mod('carpentry_instagram_url', 'https://www.instagram.com/reformas.servilucas/'),
+        'linkedin'  => get_theme_mod('carpentry_linkedin_url', 'https://www.linkedin.com/company/reformas-servilucas-s-l/'),
+        'facebook'  => get_theme_mod('carpentry_facebook_url', ''),
+        'twitter'   => get_theme_mod('carpentry_twitter_url', ''),
+        'youtube'   => get_theme_mod('carpentry_youtube_url', ''),
+    );
+}
 
 /**
  * Register custom block styles
