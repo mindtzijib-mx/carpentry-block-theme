@@ -1,0 +1,49 @@
+/*
+Theme Name: Carpentry Block Theme
+Description: Modern block theme for ServiLucas - Professional carpentry and renovation services. Full Site Editing enabled with custom blocks and modern architecture.
+Version: 1.0.0
+Author: ServiLucas
+Text Domain: carpentry-blocks
+Domain Path: /languages
+Requires at least: 6.0
+Tested up to: 6.4
+Requires PHP: 8.0
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Tags: block-theme, full-site-editing, custom-blocks, responsive, modern
+
+This theme supports Full Site Editing (FSE) and is built with modern WordPress block architecture.
+*/
+
+// Utils
+@import "utils/variables";
+@import "utils/mixins";
+
+// Base
+@import "base/reset";
+@import "base/typography";
+
+// Layout
+@import "layout/header";
+@import "layout/footer";
+@import "layout/navigation";
+
+// Components
+@import "components/buttons";
+@import "components/forms";
+@import "components/cards";
+@import "components/modals";
+
+// Pages
+@import "pages/home";
+@import "pages/about";
+@import "pages/services";
+@import "pages/blog";
+@import "pages/contacto";
+
+// Block-specific styles
+@import "blocks/header";
+@import "blocks/footer";
+@import "pages/services";
+@import "pages/blog";
+@import "pages/contacto";

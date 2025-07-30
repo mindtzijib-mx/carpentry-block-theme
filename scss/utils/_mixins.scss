@@ -1,0 +1,106 @@
+// Media queries
+@mixin mobile {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-md}) and (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Button mixin
+@mixin button-style(
+  $bg-color,
+  $text-color: $white,
+  $hover-bg: darken($bg-color, 10%)
+) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  padding: 12px 24px;
+  border-radius: $border-radius-md;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-base;
+  text-decoration: none;
+  display: inline-block;
+  transition: all $transition-fast;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hover-bg;
+    color: $text-color;
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+}
+
+// Container mixin
+@mixin container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+// Card shadow
+@mixin card-shadow {
+  box-shadow: $shadow-lg;
+  transition: box-shadow $transition-fast;
+
+  &:hover {
+    box-shadow: $shadow-xl;
+  }
+}
+
+// Text truncate
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Clearfix
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

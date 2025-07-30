@@ -1,0 +1,75 @@
+// Colors - ServiLucas Brand Colors (Classic Theme Match)
+$primary-color: #a17a66;
+$primary-dark: #8b6854;
+$primary-light: #d4b896;
+$primary-work: #a67c52;
+$secondary-color: #3b3430;
+$accent-color: #ff6b35;
+$accent-hover: #e55a2b;
+$gold-color: #b8860b;
+$gold-hover: #a67c52;
+$triangle-light: #d4b896;
+$triangle-dark: #8b6a47;
+
+$white: #fff;
+$black: #000;
+$gray-light: #f8f9fa;
+$gray-medium: #666;
+$gray-dark: #333;
+$text-muted: #999;
+$border-color: #e9ecef;
+
+// Typography
+$font-primary: "Poppins", sans-serif;
+$font-headings: "Viga", sans-serif;
+
+$font-size-xs: 11px;
+$font-size-sm: 13px;
+$font-size-base: 14px;
+$font-size-md: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 42px;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-base: 1.6;
+$line-height-tight: 1.2;
+
+// Spacing
+$spacing-xs: 5px;
+$spacing-sm: 10px;
+$spacing-md: 15px;
+$spacing-lg: 20px;
+$spacing-xl: 30px;
+$spacing-xxl: 40px;
+$spacing-xxxl: 50px;
+
+// Layout
+$container-max-width: 1200px;
+$header-height: 80px;
+
+// Border radius
+$border-radius-sm: 5px;
+$border-radius-md: 8px;
+$border-radius-lg: 10px;
+$border-radius-xl: 25px;
+$border-radius-round: 50%;
+
+// Shadows
+$shadow-sm: 0 2px 8px rgba(161, 122, 102, 0.3);
+$shadow-md: 0 4px 12px rgba(161, 122, 102, 0.4);
+$shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+// Transitions
+$transition-fast: 0.3s ease;
+$transition-medium: 0.6s ease;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;

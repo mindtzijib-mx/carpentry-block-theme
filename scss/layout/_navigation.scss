@@ -1,0 +1,309 @@
+// Navigation styles
+.main-navigation {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+
+  @include mobile {
+    order: 3;
+    width: 100%;
+    display: none;
+
+    &.active {
+      display: block;
+      position: relative;
+      z-index: 1000;
+
+      &::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba($black, 0.5);
+        z-index: -1;
+      }
+    }
+  }
+
+  // Extended background that goes to the left edge
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100vw;
+    right: 0;
+    bottom: 0;
+    background: $secondary-color;
+    border-radius: 0 $border-radius-xl $border-radius-xl 0;
+    z-index: -1;
+  }
+}
+
+.nav-wrapper {
+  @include flex-between;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+
+  ul {
+    gap: 0 !important;
+  }
+}
+
+.main-navigation .menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0;
+  align-items: center;
+
+  @include mobile {
+    flex-direction: column;
+    background: $secondary-color;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba($black, 0.3);
+    border: 1px solid rgba($white, 0.1);
+  }
+
+  li {
+    position: relative;
+
+    a {
+      display: block;
+      padding: 18px 25px;
+      color: $white;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-base;
+      text-transform: capitalize;
+      transition: all $transition-fast;
+      border-radius: 0;
+      text-decoration: none !important;
+      position: relative;
+
+      &:hover {
+        background: $primary-color;
+        color: $white;
+        text-decoration: none !important;
+        transform: translateY(-1px);
+      }
+
+      &:focus {
+        outline: 2px solid $primary-color;
+        outline-offset: 2px;
+        text-decoration: none !important;
+      }
+
+      @include mobile {
+        border-bottom: 1px solid rgba($white, 0.2);
+        padding: 15px $spacing-lg;
+
+        &:hover {
+          background: rgba($white, 0.1);
+          color: $white;
+        }
+      }
+    }
+
+    // Current menu item
+    &.current-menu-item > a,
+    &.current_page_item > a {
+      @include mobile {
+        background: rgba($white, 0.2);
+        color: $white;
+        font-weight: $font-weight-semibold;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: $primary-color;
+        }
+      }
+    }
+
+    // First and last child styling for mobile
+    @include mobile {
+      &:first-child a {
+        background: $secondary-color;
+        border-radius: 10px 10px 0 0;
+      }
+
+      &:not(:last-child) a {
+        border-bottom: 1px solid rgba($white, 0.2);
+      }
+
+      &:last-child a {
+        border-bottom: none;
+        border-radius: 0 0 10px 10px;
+      }
+    }
+
+    // Submenu indicator
+    &.menu-item-has-children > a:after {
+      content: "\f107";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-left: 8px;
+      font-size: 12px;
+      color: $white;
+      opacity: 0.8;
+      transition: $transition-fast;
+    }
+
+    &.menu-item-has-children > a:hover:after {
+      opacity: 1;
+    }
+  }
+}
+
+// Submenu styles
+.main-navigation .sub-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: $secondary-color;
+  min-width: 200px;
+  box-shadow: 0 5px 15px rgba($black, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all $transition-fast;
+  z-index: 1000;
+  padding: 0;
+  margin: 0;
+
+  li a {
+    padding: 12px $spacing-lg;
+    border-radius: 0;
+    border-bottom: 1px solid #555;
+    font-size: $font-size-sm;
+
+    &:hover {
+      background: $primary-color;
+      padding-left: 25px;
+    }
+  }
+
+  li:last-child a {
+    border-bottom: none;
+  }
+}
+
+.main-navigation .menu li:hover .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+// Search Icon
+.header-search {
+  background: transparent;
+  border-radius: 0 $border-radius-xl $border-radius-xl 0;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  @include flex-center;
+  margin-left: 0;
+
+  @include mobile {
+    order: 2;
+    margin-right: $spacing-sm;
+  }
+}
+
+.search-icon {
+  color: $white;
+  font-size: $font-size-md;
+  transition: color $transition-fast;
+  @include flex-center;
+  width: 100%;
+  height: 100%;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+// Mobile Menu Toggle
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  background: rgba($secondary-color, 0.9);
+  border: none;
+  padding: $spacing-sm;
+  cursor: pointer;
+  border-radius: $border-radius-sm;
+  transition: $transition-fast;
+
+  @include mobile {
+    display: flex;
+    order: 1;
+  }
+
+  &:hover {
+    background: rgba($secondary-color, 1);
+  }
+
+  &.active {
+    background: rgba($secondary-color, 1);
+
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+  }
+
+  span {
+    width: 25px;
+    height: 3px;
+    background: $white;
+    margin: 3px 0;
+    transition: $transition-fast;
+    border-radius: 2px;
+  }
+}
+
+// Mobile menu close button
+.mobile-menu-close {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+  background: rgba($white, 0.1);
+  border: none;
+  color: $white;
+  font-size: $font-size-lg;
+  width: 35px;
+  height: 35px;
+  border-radius: $border-radius-round;
+  cursor: pointer;
+  transition: $transition-fast;
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba($white, 0.2);
+    color: $white;
+  }
+}
+
+.main-navigation.active .mobile-menu-close {
+  display: block;
+}

@@ -1,0 +1,146 @@
+// Typography styles
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-headings;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-tight;
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  font-family: $font-primary;
+  font-weight: $font-weight-normal;
+  margin: 0 0 1rem 0;
+}
+
+// Specific typography classes
+.hero-title {
+  font-family: $font-headings;
+  font-weight: $font-weight-normal;
+  font-size: 3.5rem;
+  line-height: $line-height-tight;
+}
+
+.hero-subtitle {
+  font-family: $font-headings;
+  font-weight: $font-weight-normal;
+  font-size: 2rem;
+  line-height: $line-height-tight;
+}
+
+.hero-description {
+  font-family: $font-primary;
+  font-weight: $font-weight-normal;
+  font-size: 1.2rem;
+}
+
+.section-title {
+  font-family: $font-headings;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $gray-dark;
+  line-height: $line-height-tight;
+  margin-bottom: 25px;
+}
+
+.section-subtitle {
+  color: $text-muted;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.section-description {
+  color: $gray-medium;
+  font-size: $font-size-md;
+  line-height: $line-height-base;
+  margin-bottom: 40px;
+}
+
+// Widget titles
+.widget-title {
+  font-family: $font-headings;
+  font-weight: $font-weight-normal;
+  font-size: $font-size-lg;
+  color: $white;
+  margin-bottom: 25px;
+  text-transform: capitalize;
+}
+
+// Contact typography
+.contact-title {
+  font-family: $font-headings;
+  font-weight: $font-weight-normal;
+  font-size: $font-size-md;
+  text-transform: uppercase;
+  margin: 0 0 5px 0;
+}
+
+.contact-label {
+  font-family: $font-primary;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.contact-value {
+  font-family: $font-primary;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+  line-height: 1;
+}
+
+.contact-text {
+  font-family: $font-primary;
+  font-weight: $font-weight-normal;
+  font-size: $font-size-base;
+  line-height: 1.4;
+  margin: 0;
+}
+
+// Responsive typography
+@include mobile {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}

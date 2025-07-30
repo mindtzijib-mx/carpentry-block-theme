@@ -1,0 +1,105 @@
+// Base reset and global styles
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-primary;
+  margin: 0;
+  padding: 0;
+  line-height: $line-height-base;
+  color: $gray-dark;
+}
+
+// Container
+.container {
+  @include container;
+}
+
+// Utility classes
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+// Links - Estilos profesionales
+a {
+  color: inherit;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+
+  &:hover {
+    text-decoration: none !important;
+    color: $primary-color;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+    text-decoration: none !important;
+  }
+
+  &:visited {
+    text-decoration: none !important;
+  }
+}
+
+// Lists
+ul,
+ol {
+  margin: 0;
+  padding: 0 !important;
+}
+
+li {
+  list-style: none;
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// CSS Custom Properties for Block Styles
+:root {
+  --color-primary: #{$primary-color};
+  --color-primary-dark: #{$primary-dark};
+  --color-primary-light: #{$primary-light};
+  --color-secondary: #{$secondary-color};
+  --color-accent: #{$accent-color};
+  --color-white: #{$white};
+  --color-black: #{$black};
+  --color-gray-light: #{$gray-light};
+  --color-gray-medium: #{$gray-medium};
+  --color-gray-dark: #{$gray-dark};
+  --font-primary: #{$font-primary};
+  --font-headings: #{$font-headings};
+}

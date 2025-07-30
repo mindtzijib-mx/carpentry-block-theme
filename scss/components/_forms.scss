@@ -1,0 +1,169 @@
+// ===================================
+// FORMULARIOS PROFESIONALES
+// ===================================
+
+.form-control {
+  border-radius: $border-radius-md;
+  border: 2px solid $border-color;
+  padding: 15px 20px;
+  font-size: 1rem;
+  font-family: $font-primary;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  width: 100%;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+    outline: none;
+    background: $white;
+  }
+
+  &:hover {
+    border-color: rgba($primary-color, 0.5);
+  }
+
+  &::placeholder {
+    color: #999;
+    font-weight: 400;
+  }
+}
+
+.contact-form {
+  .form-control {
+    border-radius: $border-radius-md;
+    border: 2px solid $border-color;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-family: $font-primary;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+      outline: none;
+      background: $white;
+    }
+
+    &:hover {
+      border-color: rgba($primary-color, 0.5);
+    }
+  }
+}
+
+// Estilos para formularios de presupuesto
+.quote-form {
+  .form-control {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+      outline: none;
+      background: $white;
+    }
+
+    &::placeholder {
+      color: #666;
+      font-weight: 500;
+    }
+  }
+
+  select.form-control {
+    color: #666;
+    font-weight: 500;
+  }
+
+  textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+// Checkbox profesional
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  .form-check-input {
+    margin-top: 4px;
+    accent-color: $primary-color;
+  }
+
+  .form-check-label {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+    cursor: pointer;
+
+    a {
+      color: $primary-color;
+      text-decoration: none !important;
+
+      &:hover {
+        color: darken($primary-color, 10%);
+        text-decoration: none !important;
+      }
+    }
+  }
+}
+
+// Search form styles
+.hendy-searchform {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 90%;
+}
+
+.hendy-searchform-field {
+  display: block;
+  width: 100%;
+  height: 55px;
+  font-size: $font-size-md;
+  color: $gray-dark;
+  font-weight: $font-weight-medium;
+  line-height: normal;
+  padding: 0px 70px 0 25px;
+  background: $white;
+  border: 0;
+  border-radius: $border-radius-xl;
+  transition: all 500ms ease;
+  font-family: $font-primary;
+  outline: none;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+.hendy-search-button {
+  position: absolute;
+  height: 55px;
+  width: 55px;
+  right: 0;
+  top: 0px;
+  padding: 0;
+  color: $white;
+  border-radius: 0 $border-radius-xl $border-radius-xl 0;
+  background: $primary-color;
+  border: none;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
