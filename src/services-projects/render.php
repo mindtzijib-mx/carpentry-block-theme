@@ -55,7 +55,7 @@ $project4_alt = $attributes['project4Alt'] ?? 'Proyecto exterior';
                     <div class="service-icon">
                         <i class="<?php echo esc_attr($service1_icon); ?>"></i>
                     </div>
-                    <h3 class="service-title-home-home"><?php echo esc_html($service1_title); ?></h3>
+                    <h3 class="service-title-home"><?php echo esc_html($service1_title); ?></h3>
                     <p class="service-description"><?php echo esc_html($service1_description); ?></p>
                     <div class="service-arrow">
                         <i class="fas fa-arrow-right"></i>

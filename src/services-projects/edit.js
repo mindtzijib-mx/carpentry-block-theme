@@ -4,6 +4,7 @@ import {
   InspectorControls,
   MediaUpload,
   MediaUploadCheck,
+  RichText,
 } from "@wordpress/block-editor";
 import {
   PanelBody,
@@ -11,6 +12,7 @@ import {
   TextareaControl,
   Button,
 } from "@wordpress/components";
+import { useState, useEffect } from "@wordpress/element";
 
 export default function Edit({ attributes, setAttributes }) {
   const {
@@ -39,6 +41,32 @@ export default function Edit({ attributes, setAttributes }) {
     project4Image,
     project4Alt,
   } = attributes;
+
+  // Responsive design state
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Responsive breakpoints
+  const isMobile = windowWidth <= 768;
+  const isTablet = windowWidth <= 992 && windowWidth > 768;
+  const isDesktop = windowWidth > 992;
+
+  // Default images
+  const defaultImages = {
+    project1:
+      "/wp-content/themes/carpentry-block-theme/images/Proyecto-nuevo-64-1024x853.jpg",
+    project2:
+      "/wp-content/themes/carpentry-block-theme/images/Proyecto-nuevo-65-1024x853.jpg",
+    project3:
+      "/wp-content/themes/carpentry-block-theme/images/Proyecto-nuevo-66-1024x853.jpg",
+    project4:
+      "/wp-content/themes/carpentry-block-theme/images/Proyecto-nuevo-70-1024x853.jpg",
+  };
 
   const blockProps = useBlockProps({
     className: "services-projects-editor",
@@ -337,51 +365,249 @@ export default function Edit({ attributes, setAttributes }) {
       </InspectorControls>
 
       <div {...blockProps}>
-        <div className="services-projects-preview">
-          <div className="services-preview">
-            <h3>📋 Sección de Servicios</h3>
-            <p>
-              <strong>Subtítulo:</strong> {servicesSubtitle}
-            </p>
-            <p>
-              <strong>Título:</strong> {servicesTitle}
-            </p>
-            <div className="services-grid">
-              <div className="service-preview">
-                <i className={service1Icon}></i>
-                <h4>{service1Title}</h4>
+        <section className="services-projects-section">
+          {/* Services Section */}
+          <div className="services-wrapper">
+            <div className="container">
+              <div className="services-header text-center">
+                <RichText
+                  allowedFormats={["core/bold", "core/italic"]}
+                  tagName="div"
+                  className="section-subtitle"
+                  value={servicesSubtitle}
+                  onChange={(value) =>
+                    setAttributes({ servicesSubtitle: value })
+                  }
+                  placeholder={__(
+                    "Subtítulo de servicios...",
+                    "carpentry-blocks"
+                  )}
+                />
+
+                <RichText
+                  allowedFormats={["core/bold", "core/italic"]}
+                  tagName="h2"
+                  className="section-title"
+                  value={servicesTitle}
+                  onChange={(value) => setAttributes({ servicesTitle: value })}
+                  placeholder={__("Título de servicios...", "carpentry-blocks")}
+                />
+
+                <div className="services-navigation">
+                  <button className="nav-arrow nav-prev">
+                    <i className="fas fa-chevron-left"></i>
+                  </button>
+                  <button className="nav-arrow nav-next">
+                    <i className="fas fa-chevron-right"></i>
+                  </button>
+                </div>
               </div>
-              <div className="service-preview">
-                <i className={service2Icon}></i>
-                <h4>{service2Title}</h4>
-              </div>
-              <div className="service-preview">
-                <i className={service3Icon}></i>
-                <h4>{service3Title}</h4>
-              </div>
-              <div className="service-preview">
-                <i className={service4Icon}></i>
-                <h4>{service4Title}</h4>
+
+              <div className="services-grid">
+                <div className="service-card">
+                  <div className="service-icon">
+                    <i className={service1Icon}></i>
+                  </div>
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="h3"
+                    className="service-title-home"
+                    value={service1Title}
+                    onChange={(value) =>
+                      setAttributes({ service1Title: value })
+                    }
+                    placeholder={__(
+                      "Título del servicio...",
+                      "carpentry-blocks"
+                    )}
+                  />
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="p"
+                    className="service-description"
+                    value={service1Description}
+                    onChange={(value) =>
+                      setAttributes({ service1Description: value })
+                    }
+                    placeholder={__(
+                      "Descripción del servicio...",
+                      "carpentry-blocks"
+                    )}
+                  />
+                  <div className="service-arrow">
+                    <i className="fas fa-arrow-right"></i>
+                  </div>
+                </div>
+
+                <div className="service-card">
+                  <div className="service-icon">
+                    <i className={service2Icon}></i>
+                  </div>
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="h3"
+                    className="service-title-home"
+                    value={service2Title}
+                    onChange={(value) =>
+                      setAttributes({ service2Title: value })
+                    }
+                    placeholder={__(
+                      "Título del servicio...",
+                      "carpentry-blocks"
+                    )}
+                  />
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="p"
+                    className="service-description"
+                    value={service2Description}
+                    onChange={(value) =>
+                      setAttributes({ service2Description: value })
+                    }
+                    placeholder={__(
+                      "Descripción del servicio...",
+                      "carpentry-blocks"
+                    )}
+                  />
+                  <div className="service-arrow">
+                    <i className="fas fa-arrow-right"></i>
+                  </div>
+                </div>
+
+                <div className="service-card">
+                  <div className="service-icon">
+                    <i className={service3Icon}></i>
+                  </div>
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="h3"
+                    className="service-title-home"
+                    value={service3Title}
+                    onChange={(value) =>
+                      setAttributes({ service3Title: value })
+                    }
+                    placeholder={__(
+                      "Título del servicio...",
+                      "carpentry-blocks"
+                    )}
+                  />
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="p"
+                    className="service-description"
+                    value={service3Description}
+                    onChange={(value) =>
+                      setAttributes({ service3Description: value })
+                    }
+                    placeholder={__(
+                      "Descripción del servicio...",
+                      "carpentry-blocks"
+                    )}
+                  />
+                  <div className="service-arrow">
+                    <i className="fas fa-arrow-right"></i>
+                  </div>
+                </div>
+
+                <div className="service-card">
+                  <div className="service-icon">
+                    <i className={service4Icon}></i>
+                  </div>
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="h3"
+                    className="service-title-home"
+                    value={service4Title}
+                    onChange={(value) =>
+                      setAttributes({ service4Title: value })
+                    }
+                    placeholder={__(
+                      "Título del servicio...",
+                      "carpentry-blocks"
+                    )}
+                  />
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="p"
+                    className="service-description"
+                    value={service4Description}
+                    onChange={(value) =>
+                      setAttributes({ service4Description: value })
+                    }
+                    placeholder={__(
+                      "Descripción del servicio...",
+                      "carpentry-blocks"
+                    )}
+                  />
+                  <div className="service-arrow">
+                    <i className="fas fa-arrow-right"></i>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="projects-preview">
-            <h3>🏗️ Sección de Proyectos</h3>
-            <p>
-              <strong>Subtítulo:</strong> {projectsSubtitle}
-            </p>
-            <p>
-              <strong>Título:</strong> {projectsTitle}
-            </p>
-            <div className="projects-grid">
-              {project1Image && <img src={project1Image} alt={project1Alt} />}
-              {project2Image && <img src={project2Image} alt={project2Alt} />}
-              {project3Image && <img src={project3Image} alt={project3Alt} />}
-              {project4Image && <img src={project4Image} alt={project4Alt} />}
+          {/* Projects Section */}
+          <div className="projects-wrapper">
+            <div className="container">
+              <div className="projects-header text-center">
+                <RichText
+                  allowedFormats={["core/bold", "core/italic"]}
+                  tagName="div"
+                  className="section-subtitle text-white"
+                  value={projectsSubtitle}
+                  onChange={(value) =>
+                    setAttributes({ projectsSubtitle: value })
+                  }
+                  placeholder={__(
+                    "Subtítulo de proyectos...",
+                    "carpentry-blocks"
+                  )}
+                />
+
+                <RichText
+                  allowedFormats={["core/bold", "core/italic"]}
+                  tagName="h2"
+                  className="section-title text-white"
+                  value={projectsTitle}
+                  onChange={(value) => setAttributes({ projectsTitle: value })}
+                  placeholder={__("Título de proyectos...", "carpentry-blocks")}
+                />
+              </div>
+
+              <div className="projects-grid">
+                <div className="project-item">
+                  <img
+                    src={project1Image || defaultImages.project1}
+                    alt={project1Alt}
+                    className="img-fluid"
+                  />
+                </div>
+                <div className="project-item">
+                  <img
+                    src={project2Image || defaultImages.project2}
+                    alt={project2Alt}
+                    className="img-fluid"
+                  />
+                </div>
+                <div className="project-item">
+                  <img
+                    src={project3Image || defaultImages.project3}
+                    alt={project3Alt}
+                    className="img-fluid"
+                  />
+                </div>
+                <div className="project-item">
+                  <img
+                    src={project4Image || defaultImages.project4}
+                    alt={project4Alt}
+                    className="img-fluid"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </>
   );

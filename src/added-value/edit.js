@@ -4,6 +4,7 @@ import {
   InspectorControls,
   MediaUpload,
   MediaUploadCheck,
+  RichText,
 } from "@wordpress/block-editor";
 import {
   PanelBody,
@@ -40,6 +41,13 @@ export default function Edit({ attributes, setAttributes }) {
     servicesButtonText,
     servicesButtonUrl,
   } = attributes;
+
+  // Default images
+  const defaultImages = {
+    main: "/wp-content/themes/carpentry-block-theme/images/RSL_Home_Valor_Anadido_1041_800_2-qu1he63kz8be8rsaap0ps4a4d1yybb3sdh3zg8nmek.jpg",
+    circular:
+      "/wp-content/themes/carpentry-block-theme/images/RSL_Home_Valor-Anadido_1200_X_1000_2-qu1he63fh06pyra1vyw5iigtof48a8anep86vfk4ge.jpg",
+  };
 
   const blockProps = useBlockProps({
     className: "added-value-editor",
@@ -286,85 +294,255 @@ export default function Edit({ attributes, setAttributes }) {
       </InspectorControls>
 
       <div {...blockProps}>
-        <div className="added-value-preview">
-          <h3>⭐ Sección Valor Añadido</h3>
-          <div className="preview-content">
-            <div className="section-info">
-              <p>
-                <strong>Subtítulo:</strong> {sectionSubtitle}
-              </p>
-              <p>
-                <strong>Título:</strong> {sectionTitle}
-              </p>
-              <p>
-                <strong>Descripción:</strong> {sectionDescription}
-              </p>
-            </div>
-
-            <div className="images-preview">
-              <h4>📸 Imágenes</h4>
-              <div style={{ display: "flex", gap: "10px" }}>
-                {mainImage && (
-                  <div>
-                    <small>Principal:</small>
-                    <img
-                      src={mainImage}
-                      alt={mainImageAlt}
-                      style={{ maxWidth: "100px", height: "auto" }}
-                    />
+        <section className="added-value-section">
+          <div className="decorative-triangle triangle-top"></div>
+          <div className="decorative-triangle triangle-bottom"></div>
+          <div className="container-fluid">
+            <div className="row align-items-center">
+              <div className="col-lg-6 p-0">
+                <div className="value-image-wrapper">
+                  <div className="geometric-shape">
+                    <div className="main-image">
+                      <img
+                        src={mainImage || defaultImages.main}
+                        alt={mainImageAlt || "Sala de estar moderna"}
+                        className="img-fluid"
+                      />
+                    </div>
+                    <div className="circular-image">
+                      <img
+                        src={circularImage || defaultImages.circular}
+                        alt={circularImageAlt || "Comedor moderno"}
+                        className="img-fluid"
+                      />
+                    </div>
                   </div>
-                )}
-                {circularImage && (
-                  <div>
-                    <small>Circular:</small>
-                    <img
-                      src={circularImage}
-                      alt={circularImageAlt}
-                      style={{ maxWidth: "100px", height: "auto" }}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="features-preview">
-              <h4>🔧 Características</h4>
-              <div className="features-grid">
-                <div className="feature-item">
-                  <i className={feature1Icon}></i>
-                  <strong>{feature1Title}</strong>
-                </div>
-                <div className="feature-item">
-                  <i className={feature2Icon}></i>
-                  <strong>{feature2Title}</strong>
-                </div>
-                <div className="feature-item">
-                  <i className={feature3Icon}></i>
-                  <strong>{feature3Title}</strong>
-                </div>
-                <div className="feature-item">
-                  <i className={feature4Icon}></i>
-                  <strong>{feature4Title}</strong>
                 </div>
               </div>
-            </div>
+              <div className="col-lg-6">
+                <div className="value-content">
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="div"
+                    className="section-subtitle"
+                    value={sectionSubtitle}
+                    onChange={(value) =>
+                      setAttributes({ sectionSubtitle: value })
+                    }
+                    placeholder={__("Subtítulo...", "carpentry-blocks")}
+                  />
 
-            <div className="services-preview">
-              <h4>✅ Servicios Adicionales</h4>
-              <ul>
-                <li>{additionalService1}</li>
-                <li>{additionalService2}</li>
-              </ul>
-            </div>
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="h2"
+                    className="section-title"
+                    value={sectionTitle}
+                    onChange={(value) => setAttributes({ sectionTitle: value })}
+                    placeholder={__("Título principal...", "carpentry-blocks")}
+                  />
 
-            <div className="buttons-preview">
-              <h4>🔘 Botones</h4>
-              <p>
-                {contactButtonText} | {servicesButtonText}
-              </p>
+                  <RichText
+                    allowedFormats={["core/bold", "core/italic"]}
+                    tagName="p"
+                    className="section-description"
+                    value={sectionDescription}
+                    onChange={(value) =>
+                      setAttributes({ sectionDescription: value })
+                    }
+                    placeholder={__("Descripción...", "carpentry-blocks")}
+                  />
+
+                  <div className="value-features">
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="feature-item">
+                          <div className="feature-icon">
+                            <i className={feature1Icon}></i>
+                          </div>
+                          <RichText
+                            allowedFormats={["core/bold", "core/italic"]}
+                            tagName="h4"
+                            className="feature-title"
+                            value={feature1Title}
+                            onChange={(value) =>
+                              setAttributes({ feature1Title: value })
+                            }
+                            placeholder={__(
+                              "Título característica...",
+                              "carpentry-blocks"
+                            )}
+                          />
+                          <RichText
+                            allowedFormats={["core/bold", "core/italic"]}
+                            tagName="p"
+                            className="feature-description"
+                            value={feature1Description}
+                            onChange={(value) =>
+                              setAttributes({ feature1Description: value })
+                            }
+                            placeholder={__(
+                              "Descripción característica...",
+                              "carpentry-blocks"
+                            )}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="feature-item">
+                          <div className="feature-icon">
+                            <i className={feature2Icon}></i>
+                          </div>
+                          <RichText
+                            allowedFormats={["core/bold", "core/italic"]}
+                            tagName="h4"
+                            className="feature-title"
+                            value={feature2Title}
+                            onChange={(value) =>
+                              setAttributes({ feature2Title: value })
+                            }
+                            placeholder={__(
+                              "Título característica...",
+                              "carpentry-blocks"
+                            )}
+                          />
+                          <RichText
+                            allowedFormats={["core/bold", "core/italic"]}
+                            tagName="p"
+                            className="feature-description"
+                            value={feature2Description}
+                            onChange={(value) =>
+                              setAttributes({ feature2Description: value })
+                            }
+                            placeholder={__(
+                              "Descripción característica...",
+                              "carpentry-blocks"
+                            )}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="feature-item">
+                          <div className="feature-icon">
+                            <i className={feature3Icon}></i>
+                          </div>
+                          <RichText
+                            allowedFormats={["core/bold", "core/italic"]}
+                            tagName="h4"
+                            className="feature-title"
+                            value={feature3Title}
+                            onChange={(value) =>
+                              setAttributes({ feature3Title: value })
+                            }
+                            placeholder={__(
+                              "Título característica...",
+                              "carpentry-blocks"
+                            )}
+                          />
+                          <RichText
+                            allowedFormats={["core/bold", "core/italic"]}
+                            tagName="p"
+                            className="feature-description"
+                            value={feature3Description}
+                            onChange={(value) =>
+                              setAttributes({ feature3Description: value })
+                            }
+                            placeholder={__(
+                              "Descripción característica...",
+                              "carpentry-blocks"
+                            )}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="feature-item">
+                          <div className="feature-icon">
+                            <i className={feature4Icon}></i>
+                          </div>
+                          <RichText
+                            allowedFormats={["core/bold", "core/italic"]}
+                            tagName="h4"
+                            className="feature-title"
+                            value={feature4Title}
+                            onChange={(value) =>
+                              setAttributes({ feature4Title: value })
+                            }
+                            placeholder={__(
+                              "Título característica...",
+                              "carpentry-blocks"
+                            )}
+                          />
+                          <RichText
+                            allowedFormats={["core/bold", "core/italic"]}
+                            tagName="p"
+                            className="feature-description"
+                            value={feature4Description}
+                            onChange={(value) =>
+                              setAttributes({ feature4Description: value })
+                            }
+                            placeholder={__(
+                              "Descripción característica...",
+                              "carpentry-blocks"
+                            )}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="additional-services">
+                    <ul className="services-list">
+                      <li>
+                        <i className="fas fa-arrow-right"></i>
+                        <RichText
+                          allowedFormats={["core/bold", "core/italic"]}
+                          tagName="span"
+                          value={additionalService1}
+                          onChange={(value) =>
+                            setAttributes({ additionalService1: value })
+                          }
+                          placeholder={__(
+                            "Servicio adicional 1...",
+                            "carpentry-blocks"
+                          )}
+                        />
+                      </li>
+                      <li>
+                        <i className="fas fa-arrow-right"></i>
+                        <RichText
+                          allowedFormats={["core/bold", "core/italic"]}
+                          tagName="span"
+                          value={additionalService2}
+                          onChange={(value) =>
+                            setAttributes({ additionalService2: value })
+                          }
+                          placeholder={__(
+                            "Servicio adicional 2...",
+                            "carpentry-blocks"
+                          )}
+                        />
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="value-buttons">
+                    <a
+                      href={contactButtonUrl || "#contacto"}
+                      className="btn btn-primary-custom"
+                    >
+                      {contactButtonText || "Contacta"}
+                    </a>
+                    <a
+                      href={servicesButtonUrl || "#servicios"}
+                      className="btn btn-dark-custom"
+                    >
+                      {servicesButtonText || "Servicios"}
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </>
   );

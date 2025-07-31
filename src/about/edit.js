@@ -12,6 +12,7 @@ import {
   TextControl,
   __experimentalDivider as Divider,
 } from "@wordpress/components";
+import { useState, useEffect } from "@wordpress/element";
 
 export default function Edit({ attributes, setAttributes }) {
   const blockProps = useBlockProps();
@@ -33,12 +34,42 @@ export default function Edit({ attributes, setAttributes }) {
     phoneNumber,
   } = attributes;
 
+  // Responsive design state
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Responsive breakpoints
+  const isMobile = windowWidth <= 768;
+  const isTablet = windowWidth <= 992 && windowWidth > 768;
+  const isDesktop = windowWidth > 992;
+
+  // Default image fallback
+  const defaultAboutImage =
+    "/wp-content/themes/carpentry-block-theme/images/RSL_Home_Valor-Anadido_1200_X_1000_2-qu1he63fh06pyra1vyw5iigtof48a8anep86vfk4ge.jpg";
+  const currentAboutImage = aboutImage || defaultAboutImage;
+
   const onSelectImage = (media) => {
     setAttributes({ aboutImage: media.url });
   };
 
   return (
     <>
+      <style>{`
+        .wp-block-carpentry-about .section-title {
+          font-family: 'Viga', sans-serif !important;
+        }
+        .wp-block-carpentry-about .section-description,
+        .wp-block-carpentry-about .additional-text,
+        .wp-block-carpentry-about .email-address,
+        .wp-block-carpentry-about .about-phone-number {
+          font-family: 'Poppins', sans-serif !important;
+        }
+      `}</style>
       <InspectorControls>
         <PanelBody title={__("Configuración General", "carpentry-blocks")}>
           <TextControl
@@ -141,11 +172,46 @@ export default function Edit({ attributes, setAttributes }) {
       </InspectorControls>
 
       <div {...blockProps}>
-        <section className="about-us-section py-5 wp-block-carpentry-about">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6">
-                <div className="about-content">
+        <section
+          className="about-us-section py-5 wp-block-carpentry-about"
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: isMobile ? "60px 0" : "80px 0",
+          }}
+        >
+          <div
+            className="container"
+            style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
+              padding: "0 15px",
+            }}
+          >
+            <div
+              className="row align-items-center"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                margin: "0 -15px",
+                flexDirection: isMobile ? "column" : "row",
+              }}
+            >
+              <div
+                className="col-lg-6"
+                style={{
+                  flex: isMobile ? "1 0 100%" : "0 0 50%",
+                  maxWidth: isMobile ? "100%" : "50%",
+                  padding: "0 15px",
+                  marginBottom: isMobile ? "40px" : "0",
+                }}
+              >
+                <div
+                  className="about-content"
+                  style={{
+                    paddingRight: isDesktop ? "30px" : "0",
+                    textAlign: isMobile ? "center" : "left",
+                  }}
+                >
                   <div
                     className="section-subtitle"
                     style={{
@@ -165,7 +231,7 @@ export default function Edit({ attributes, setAttributes }) {
                     tagName="h2"
                     className="section-title"
                     style={{
-                      fontSize: "42px",
+                      fontSize: isMobile ? "28px" : isTablet ? "36px" : "42px",
                       fontWeight: "700",
                       color: "#333",
                       lineHeight: "1.2",
@@ -198,7 +264,9 @@ export default function Edit({ attributes, setAttributes }) {
                     className="stats-wrapper"
                     style={{
                       display: "flex",
-                      gap: "40px",
+                      gap: isMobile ? "20px" : "40px",
+                      flexDirection: isMobile ? "column" : "row",
+                      alignItems: isMobile ? "center" : "flex-start",
                       marginBottom: "30px",
                     }}
                   >
@@ -332,7 +400,9 @@ export default function Edit({ attributes, setAttributes }) {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "30px",
+                      gap: isMobile ? "20px" : "30px",
+                      flexDirection: isMobile ? "column" : "row",
+                      alignItems: isMobile ? "center" : "flex-start",
                     }}
                   >
                     <div className="contact-cta">
@@ -409,7 +479,15 @@ export default function Edit({ attributes, setAttributes }) {
                 </div>
               </div>
 
-              <div className="col-lg-6">
+              <div
+                className="col-lg-6"
+                style={{
+                  flex: isMobile ? "1 0 100%" : "0 0 50%",
+                  maxWidth: isMobile ? "100%" : "50%",
+                  padding: "0 15px",
+                  marginBottom: isMobile ? "40px" : "0",
+                }}
+              >
                 <div
                   className="about-image-wrapper"
                   style={{
@@ -418,9 +496,9 @@ export default function Edit({ attributes, setAttributes }) {
                     overflow: "hidden",
                   }}
                 >
-                  {aboutImage ? (
+                  {currentAboutImage ? (
                     <img
-                      src={aboutImage}
+                      src={currentAboutImage}
                       alt="Reforma de baño moderna"
                       className="img-fluid"
                       style={{
