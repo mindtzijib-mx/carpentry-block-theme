@@ -39,113 +39,111 @@ $project4_alt = $attributes['project4Alt'] ?? 'Proyecto exterior';
 
 <section class="services-projects-section">
     <!-- Services Section -->
-    <div class="services-section">
+    <div class="services-wrapper">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-header">
-                        <span class="subtitle"><?php echo esc_html($services_subtitle); ?></span>
-                        <h2 class="title"><?php echo esc_html($services_title); ?></h2>
-                    </div>
+            <div class="services-header text-center">
+                <div class="section-subtitle"><?php echo esc_html($services_subtitle); ?></div>
+                <h2 class="section-title"><?php echo esc_html($services_title); ?></h2>
+                <div class="services-navigation">
+                    <button class="nav-arrow nav-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-arrow nav-next"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
-            
-            <div class="row services-row">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="<?php echo esc_attr($service1_icon); ?>"></i>
-                        </div>
-                        <h3 class="service-title"><?php echo esc_html($service1_title); ?></h3>
-                        <p class="service-description"><?php echo esc_html($service1_description); ?></p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="<?php echo esc_attr($service1_icon); ?>"></i>
+                    </div>
+                    <h3 class="service-title-home-home"><?php echo esc_html($service1_title); ?></h3>
+                    <p class="service-description"><?php echo esc_html($service1_description); ?></p>
+                    <div class="service-arrow">
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="<?php echo esc_attr($service2_icon); ?>"></i>
-                        </div>
-                        <h3 class="service-title"><?php echo esc_html($service2_title); ?></h3>
-                        <p class="service-description"><?php echo esc_html($service2_description); ?></p>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="<?php echo esc_attr($service2_icon); ?>"></i>
+                    </div>
+                    <h3 class="service-title-home"><?php echo esc_html($service2_title); ?></h3>
+                    <p class="service-description"><?php echo esc_html($service2_description); ?></p>
+                    <div class="service-arrow">
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="<?php echo esc_attr($service3_icon); ?>"></i>
-                        </div>
-                        <h3 class="service-title"><?php echo esc_html($service3_title); ?></h3>
-                        <p class="service-description"><?php echo esc_html($service3_description); ?></p>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="<?php echo esc_attr($service3_icon); ?>"></i>
+                    </div>
+                    <h3 class="service-title-home"><?php echo esc_html($service3_title); ?></h3>
+                    <p class="service-description"><?php echo esc_html($service3_description); ?></p>
+                    <div class="service-arrow">
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="<?php echo esc_attr($service4_icon); ?>"></i>
-                        </div>
-                        <h3 class="service-title"><?php echo esc_html($service4_title); ?></h3>
-                        <p class="service-description"><?php echo esc_html($service4_description); ?></p>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="<?php echo esc_attr($service4_icon); ?>"></i>
+                    </div>
+                    <h3 class="service-title-home"><?php echo esc_html($service4_title); ?></h3>
+                    <p class="service-description"><?php echo esc_html($service4_description); ?></p>
+                    <div class="service-arrow">
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Navigation Arrows -->
-            <div class="services-nav">
-                <button class="nav-arrow nav-prev" aria-label="Servicios anteriores">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="nav-arrow nav-next" aria-label="Siguientes servicios">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
         </div>
     </div>
-    
+
     <!-- Projects Section -->
-    <div class="projects-section">
+    <div class="projects-wrapper">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-header">
-                        <span class="subtitle"><?php echo esc_html($projects_subtitle); ?></span>
-                        <h2 class="title"><?php echo esc_html($projects_title); ?></h2>
-                    </div>
-                </div>
+            <div class="projects-header text-center">
+                <div class="section-subtitle text-white"><?php echo esc_html($projects_subtitle); ?></div>
+                <h2 class="section-title text-white"><?php echo esc_html($projects_title); ?></h2>
             </div>
-            
-            <div class="row projects-row">
+
+            <div class="projects-grid">
                 <?php if ($project1_image): ?>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="project-item">
-                        <img src="<?php echo esc_url($project1_image); ?>" alt="<?php echo esc_attr($project1_alt); ?>" class="project-image">
-                    </div>
+                <div class="project-item">
+                    <img src="<?php echo esc_url($project1_image); ?>" alt="<?php echo esc_attr($project1_alt); ?>" class="img-fluid">
+                </div>
+                <?php else: ?>
+                <div class="project-item">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/Proyecto-nuevo-64-1024x853.jpg" alt="<?php echo esc_attr($project1_alt); ?>" class="img-fluid">
                 </div>
                 <?php endif; ?>
                 
                 <?php if ($project2_image): ?>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="project-item">
-                        <img src="<?php echo esc_url($project2_image); ?>" alt="<?php echo esc_attr($project2_alt); ?>" class="project-image">
-                    </div>
+                <div class="project-item">
+                    <img src="<?php echo esc_url($project2_image); ?>" alt="<?php echo esc_attr($project2_alt); ?>" class="img-fluid">
+                </div>
+                <?php else: ?>
+                <div class="project-item">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/Proyecto-nuevo-65-1024x853.jpg" alt="<?php echo esc_attr($project2_alt); ?>" class="img-fluid">
                 </div>
                 <?php endif; ?>
                 
                 <?php if ($project3_image): ?>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="project-item">
-                        <img src="<?php echo esc_url($project3_image); ?>" alt="<?php echo esc_attr($project3_alt); ?>" class="project-image">
-                    </div>
+                <div class="project-item">
+                    <img src="<?php echo esc_url($project3_image); ?>" alt="<?php echo esc_attr($project3_alt); ?>" class="img-fluid">
+                </div>
+                <?php else: ?>
+                <div class="project-item">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/Proyecto-nuevo-66-1024x853.jpg" alt="<?php echo esc_attr($project3_alt); ?>" class="img-fluid">
                 </div>
                 <?php endif; ?>
                 
                 <?php if ($project4_image): ?>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="project-item">
-                        <img src="<?php echo esc_url($project4_image); ?>" alt="<?php echo esc_attr($project4_alt); ?>" class="project-image">
-                    </div>
+                <div class="project-item">
+                    <img src="<?php echo esc_url($project4_image); ?>" alt="<?php echo esc_attr($project4_alt); ?>" class="img-fluid">
+                </div>
+                <?php else: ?>
+                <div class="project-item">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/Proyecto-nuevo-70-1024x853.jpg" alt="<?php echo esc_attr($project4_alt); ?>" class="img-fluid">
                 </div>
                 <?php endif; ?>
             </div>

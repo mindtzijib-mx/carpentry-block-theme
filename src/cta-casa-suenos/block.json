@@ -11,29 +11,28 @@
     "align": ["wide", "full"]
   },
   "attributes": {
-    "backgroundImage": {
+    "title": {
       "type": "string",
-      "default": ""
+      "default": "¿Quieres tener la casa de tus sueños?"
     },
-    "backgroundImageAlt": {
+    "description": {
       "type": "string",
-      "default": "Casa de sueños"
-    },
-    "mainText": {
-      "type": "string",
-      "default": "Hacemos de tu casa, la casa de tus sueños"
+      "default": "No dudes en ponerte en contacto con nosotros."
     },
     "buttonText": {
       "type": "string",
-      "default": "Contactanos"
+      "default": "Contacta"
     },
     "buttonUrl": {
       "type": "string",
       "default": "/contacto"
     },
-    "overlayOpacity": {
-      "type": "number",
-      "default": 0.6
+    "image": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "alt": "Cocina moderna reformada"
+      }
     }
   },
   "textdomain": "carpentry-blocks",

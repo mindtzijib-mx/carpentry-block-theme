@@ -1,130 +1,145 @@
-.cta-casa-suenos-block {
-  position: relative;
+// ===================================
+// SECCIÓN "¿QUIERES TENER LA CASA DE TUS SUEÑOS?"
+// ===================================
+.cta-casa-suenos {
+  background-color: $primary-color;
+
+  .row {
+    min-height: 200px;
+  }
+}
+
+.cta-image {
+  height: 200px;
   overflow: hidden;
+  border-radius: 10px;
 
-  .cta-casa-suenos-content {
-    position: relative;
-    min-height: 400px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 0;
-
-    @media (max-width: 768px) {
-      min-height: 300px;
-      padding: 60px 0;
-    }
+  img {
+    object-fit: cover;
+    object-position: center;
+    height: 200px !important;
+    width: 100% !important;
+    border-radius: 10px;
   }
+}
 
-  .cta-casa-suenos-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, var(--overlay-opacity, 0.6));
-    z-index: 1;
-  }
+.cta-content {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+}
 
-  .container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
+.cta-title {
+  font-family: $font-headings;
+  font-size: 28px;
+  font-weight: $font-weight-normal;
+  color: $white;
+  margin-bottom: 15px;
+  line-height: $line-height-tight;
+}
 
-  .cta-casa-suenos-inner {
-    text-align: center;
-    color: white;
-    max-width: 800px;
-    margin: 0 auto;
-  }
+.cta-description {
+  font-family: $font-primary;
+  font-size: $font-size-md;
+  font-weight: $font-weight-normal;
+  color: $white;
+  margin: 0;
+  opacity: 0.9;
+}
 
-  .cta-casa-suenos-title {
-    font-family: "Poppins", sans-serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin: 0 0 40px 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+.cta-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 200px;
+  padding: 0 30px;
 
-    @media (max-width: 768px) {
-      margin-bottom: 30px;
-    }
-  }
-
-  .cta-casa-suenos-button-wrapper {
-    display: flex;
-    justify-content: center;
-  }
-
-  .cta-casa-suenos-button {
-    background: $primary-color;
-    color: white;
+  .btn-primary {
+    background-color: $gray-dark;
+    color: $white;
     border: none;
-    padding: 15px 40px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: $border-radius-xl;
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
     text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    display: inline-block;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+    transition: $transition-fast;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
     &:hover {
-      background: darken($primary-color, 10%);
+      background-color: $primary-color;
+      color: $white;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba($primary-color, 0.4);
-      color: white;
+      box-shadow: 0 5px 15px rgba(161, 122, 102, 0.3);
       text-decoration: none;
     }
+  }
+}
 
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
-    }
+// Responsive styles para CTA
+@media (max-width: 991px) {
+  .cta-casa-suenos .row {
+    min-height: auto;
+  }
 
-    @media (max-width: 768px) {
-      padding: 12px 30px;
-      font-size: 1rem;
+  .cta-image {
+    height: 250px;
+
+    img {
+      height: 250px !important;
     }
   }
 
-  // Editor styles
-  .cta-casa-suenos-placeholder {
-    padding: 60px 20px;
+  .cta-content {
+    height: auto;
+    padding: 30px 20px;
     text-align: center;
-    background: #f8f9fa;
-    border: 2px dashed #dee2e6;
-    border-radius: 8px;
-    color: #6c757d;
+  }
 
-    p {
-      margin: 0;
-      font-size: 1.1rem;
+  .cta-title {
+    font-size: 24px;
+  }
+
+  .cta-button-wrapper {
+    height: auto;
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta-image {
+    height: 200px;
+
+    img {
+      height: 200px !important;
     }
   }
 
-  // When no background image in editor
-  .cta-casa-suenos-content:not([style*="background-image"]) {
-    background: linear-gradient(
-      135deg,
-      $primary-color,
-      darken($primary-color, 20%)
-    );
+  .cta-content {
+    padding: 25px 15px;
   }
 
-  // Editor preview adjustments
-  .block-editor-block-list__block & {
-    .cta-casa-suenos-button {
-      pointer-events: none;
+  .cta-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .cta-description {
+    font-size: $font-size-base;
+  }
+
+  .cta-button-wrapper {
+    padding: 25px 15px;
+    justify-content: center;
+
+    .btn-primary {
+      width: 100%;
+      max-width: 200px;
     }
   }
 }

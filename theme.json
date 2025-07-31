@@ -212,6 +212,9 @@
     }
   },
   "styles": {
+    "spacing": {
+      "blockGap": "0px"
+    },
     "typography": {
       "fontFamily": "var(--wp--preset--font-family--poppins)",
       "fontSize": "var(--wp--preset--font-size--medium)",

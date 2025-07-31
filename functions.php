@@ -214,6 +214,12 @@ function carpentry_blocks_register_blocks() {
         register_block_type_from_metadata(__DIR__ . '/build/professional-experts');
         register_block_type_from_metadata(__DIR__ . '/build/cta-casa-suenos');
         register_block_type_from_metadata(__DIR__ . '/build/valor-anadido-nosotros');
+        register_block_type_from_metadata(__DIR__ . '/build/contact-section');
+        register_block_type_from_metadata(__DIR__ . '/build/google-maps');
+        register_block_type_from_metadata(__DIR__ . '/build/blog-posts-grid');
+        register_block_type_from_metadata(__DIR__ . '/build/blog-post-single');
+        register_block_type_from_metadata(__DIR__ . '/build/services-grid');
+        register_block_type_from_metadata(__DIR__ . '/build/service-single');
     }
 }
 add_action('init', 'carpentry_blocks_register_blocks');
@@ -555,4 +561,80 @@ function carpentry_footer_legal_fallback()
     echo '<li><a href="' . home_url('/declaracion-de-accesibilidad') . '">Declaración de Accesibilidad</a></li>';
     echo '</ul>';
 }
+
+/**
+ * Handle contact form AJAX submission
+ */
+function carpentry_handle_contact_form() {
+    // Verify nonce
+    if (!wp_verify_nonce($_POST['contact_nonce'], 'carpentry_contact_form')) {
+        wp_die('Security check failed');
+    }
+    
+    // Sanitize and validate input
+    $nombre = sanitize_text_field($_POST['nombre']);
+    $email = sanitize_email($_POST['email']);
+    $telefono = sanitize_text_field($_POST['telefono']);
+    $servicio = sanitize_text_field($_POST['servicio']);
+    $mensaje = sanitize_textarea_field($_POST['mensaje']);
+    
+    // Basic validation
+    $errors = array();
+    
+    if (empty($nombre)) {
+        $errors[] = 'El nombre es obligatorio';
+    }
+    
+    if (empty($email) || !is_email($email)) {
+        $errors[] = 'Email válido es obligatorio';
+    }
+    
+    if (empty($telefono)) {
+        $errors[] = 'El teléfono es obligatorio';
+    }
+    
+    if (empty($mensaje)) {
+        $errors[] = 'El mensaje es obligatorio';
+    }
+    
+    if (!empty($errors)) {
+        wp_send_json_error(implode(', ', $errors));
+    }
+    
+    // Prepare email content
+    $to = get_option('admin_email');
+    $subject = 'Nuevo mensaje de contacto - ' . get_bloginfo('name');
+    
+    $email_message = "Has recibido un nuevo mensaje de contacto:\n\n";
+    $email_message .= "Nombre: {$nombre}\n";
+    $email_message .= "Email: {$email}\n";
+    $email_message .= "Teléfono: {$telefono}\n";
+    
+    if (!empty($servicio)) {
+        $email_message .= "Servicio: {$servicio}\n";
+    }
+    
+    $email_message .= "\nMensaje:\n{$mensaje}\n\n";
+    $email_message .= "---\n";
+    $email_message .= "Enviado desde: " . home_url();
+    
+    $headers = array(
+        'Content-Type: text/plain; charset=UTF-8',
+        'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
+        'Reply-To: ' . $nombre . ' <' . $email . '>'
+    );
+    
+    // Send email
+    $sent = wp_mail($to, $subject, $email_message, $headers);
+    
+    if ($sent) {
+        wp_send_json_success('Mensaje enviado correctamente');
+    } else {
+        wp_send_json_error('Error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+    }
+}
+
+// Hook for logged in and non-logged in users
+add_action('wp_ajax_carpentry_contact_form', 'carpentry_handle_contact_form');
+add_action('wp_ajax_nopriv_carpentry_contact_form', 'carpentry_handle_contact_form');
 

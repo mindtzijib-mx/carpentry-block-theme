@@ -1,0 +1,104 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "carpentry/blog-post-single",
+  "version": "1.0.0",
+  "title": "Blog Post Single",
+  "category": "carpentry-blocks",
+  "icon": "media-document",
+  "description": "Plantilla para mostrar una entrada individual del blog con contenido completo.",
+  "keywords": [
+    "blog",
+    "post",
+    "single",
+    "article",
+    "entrada"
+  ],
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "showFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showMeta": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDate": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAuthor": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCategory": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTags": {
+      "type": "boolean",
+      "default": true
+    },
+    "showSocialShare": {
+      "type": "boolean",
+      "default": true
+    },
+    "shareTitle": {
+      "type": "string",
+      "default": "Compartir este artículo"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#333333"
+    },
+    "accentColor": {
+      "type": "string",
+      "default": "#a17a66"
+    },
+    "showNavigation": {
+      "type": "boolean",
+      "default": true
+    },
+    "navigationText": {
+      "type": "string",
+      "default": "Navegación de Entradas"
+    },
+    "prevText": {
+      "type": "string",
+      "default": "Entrada Anterior"
+    },
+    "nextText": {
+      "type": "string",
+      "default": "Siguiente Entrada"
+    }
+  },
+  "example": {
+    "attributes": {
+      "showFeaturedImage": true,
+      "showTitle": true,
+      "showMeta": true
+    }
+  }
+}

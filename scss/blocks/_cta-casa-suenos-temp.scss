@@ -1,0 +1,142 @@
+.cta-casa-suenos {
+  background-color: $primary-color;
+
+  .row {
+    min-height: 200px;
+  }
+}
+
+.cta-image {
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+
+  img {
+    object-fit: cover;
+    object-position: center;
+    height: 200px !important;
+    width: 100% !important;
+    border-radius: 10px;
+  }
+}
+
+.cta-content {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+}
+
+.cta-title {
+  font-family: $font-headings;
+  font-size: 28px;
+  font-weight: $font-weight-normal;
+  color: $white;
+  margin-bottom: 15px;
+  line-height: $line-height-tight;
+}
+
+.cta-description {
+  font-family: $font-primary;
+  font-size: $font-size-md;
+  font-weight: $font-weight-normal;
+  color: $white;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.cta-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 200px;
+  padding: 0 30px;
+
+  .btn-primary {
+    background-color: $gray-dark;
+    color: $white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: $border-radius-xl;
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: $transition-fast;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: $primary-color;
+      color: $white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(161, 122, 102, 0.3);
+      text-decoration: none;
+    }
+  }
+}
+
+// Responsive styles para CTA
+@media (max-width: 991px) {
+  .cta-casa-suenos .row {
+    min-height: auto;
+  }
+
+  .cta-image {
+    height: 250px;
+
+    img {
+      height: 250px !important;
+    }
+  }
+
+  .cta-content {
+    height: auto;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: 24px;
+  }
+
+  .cta-button-wrapper {
+    height: auto;
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta-image {
+    height: 200px;
+
+    img {
+      height: 200px !important;
+    }
+  }
+
+  .cta-content {
+    padding: 25px 15px;
+  }
+
+  .cta-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .cta-description {
+    font-size: $font-size-base;
+  }
+
+  .cta-button-wrapper {
+    padding: 25px 15px;
+    justify-content: center;
+
+    .btn-primary {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+}

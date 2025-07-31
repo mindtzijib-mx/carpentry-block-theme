@@ -1,0 +1,283 @@
+// Service Single Container Styles (migrated from classic theme)
+
+.service-single-container {
+  padding: 3rem 0;
+  background: #f8f9fa;
+
+  .container {
+    max-width: 1200px;
+  }
+
+  .services-sidebar {
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+
+    .services-sidebar-header {
+      background: #a17a66;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .services-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        a {
+          display: block;
+          padding: 1rem 1.5rem;
+          color: #333;
+          text-decoration: none;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: #f8f9fa;
+            color: #a17a66;
+            padding-left: 2rem;
+          }
+
+          &.active {
+            font-weight: 600;
+
+            &:hover {
+              background: #8d6652;
+              padding-left: 1.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .service-content {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .service-hero-image {
+    margin-bottom: 2rem;
+
+    img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+
+  .service-details {
+    padding: 2rem;
+
+    .service-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+      font-family: "Viga", sans-serif;
+
+      @include tablet {
+        font-size: 2rem;
+      }
+
+      @include mobile {
+        font-size: 1.75rem;
+      }
+    }
+
+    .service-subtitle {
+      font-size: 1.3rem;
+      color: #a17a66;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .service-description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 2rem;
+
+      p {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .service-features {
+      margin-bottom: 2rem;
+
+      h4 {
+        color: #a17a66;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          padding: 0.5rem 0;
+          border-bottom: 1px solid #eee;
+          position: relative;
+          padding-left: 1.5rem;
+
+          &:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #a17a66;
+            font-weight: bold;
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+
+  .service-navigation {
+    padding: 2rem;
+    border-top: 1px solid #eee;
+
+    .service-nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+
+      @include mobile {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    .service-nav-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      &.service-nav-prev {
+        justify-content: flex-start;
+      }
+
+      &.service-nav-next {
+        justify-content: flex-end;
+      }
+
+      .service-nav-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: #a17a66;
+        color: white;
+        border-radius: 50%;
+        margin: 0 1rem;
+      }
+
+      .service-nav-content {
+        flex: 1;
+
+        .service-nav-title {
+          font-size: 1rem;
+          font-weight: 600;
+          margin: 0;
+          color: #333;
+          line-height: 1.3;
+        }
+      }
+    }
+  }
+
+  .service-cta {
+    background: #a17a66;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    margin: 2rem;
+    border-radius: 8px;
+
+    h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .btn {
+      display: inline-block;
+      background: white;
+      color: #a17a66;
+      padding: 0.75rem 2rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  // Responsive design
+  @include tablet {
+    .row {
+      flex-direction: column;
+    }
+
+    .services-sidebar {
+      margin-bottom: 2rem;
+    }
+  }
+
+  @include mobile {
+    padding: 2rem 0;
+
+    .service-details {
+      padding: 1.5rem;
+    }
+
+    .service-navigation {
+      padding: 1.5rem;
+    }
+
+    .service-cta {
+      margin: 1.5rem;
+      padding: 1.5rem;
+    }
+  }
+}

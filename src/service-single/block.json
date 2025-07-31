@@ -1,0 +1,99 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "carpentry/service-single",
+  "version": "1.0.0",
+  "title": "Service Single",
+  "category": "carpentry-blocks",
+  "icon": "admin-tools",
+  "description": "Display single service content with sidebar navigation",
+  "example": {},
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "color": {
+      "background": true,
+      "text": true
+    }
+  },
+  "attributes": {
+    "showFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showContent": {
+      "type": "boolean",
+      "default": true
+    },
+    "showSidebar": {
+      "type": "boolean",
+      "default": true
+    },
+    "sidebarTitle": {
+      "type": "string",
+      "default": "Servicios"
+    },
+    "showNavigationButtons": {
+      "type": "boolean",
+      "default": true
+    },
+    "prevText": {
+      "type": "string",
+      "default": "Servicio Anterior"
+    },
+    "nextText": {
+      "type": "string",
+      "default": "Siguiente Servicio"
+    },
+    "showContactCTA": {
+      "type": "boolean",
+      "default": true
+    },
+    "ctaTitle": {
+      "type": "string",
+      "default": "¿Interesado en este servicio?"
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Contacta con nosotros para más información y presupuesto sin compromiso"
+    },
+    "ctaButtonText": {
+      "type": "string",
+      "default": "Solicitar Presupuesto"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#333333"
+    },
+    "accentColor": {
+      "type": "string",
+      "default": "#a17a66"
+    },
+    "sidebarBackground": {
+      "type": "string",
+      "default": "#f8f9fa"
+    },
+    "layout": {
+      "type": "string",
+      "default": "sidebar-left",
+      "enum": ["sidebar-left", "sidebar-right", "full-width"]
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

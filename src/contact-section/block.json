@@ -1,0 +1,67 @@
+{
+  "apiVersion": 3,
+  "name": "carpentry/contact-section",
+  "version": "0.1.0",
+  "title": "Sección de Contacto",
+  "category": "carpentry-blocks",
+  "icon": "email-alt",
+  "description": "Sección unificada de contacto con formulario e información como en el tema clásico",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "formTitle": {
+      "type": "string",
+      "default": "Contacta con nosotros"
+    },
+    "addressTitle": {
+      "type": "string",
+      "default": "Dirección"
+    },
+    "addressText": {
+      "type": "string",
+      "default": "Calle Teléfrico de las<br>Canteras 4, bajo A, 28052<br>Madrid"
+    },
+    "phoneTitle": {
+      "type": "string",
+      "default": "Teléfono"
+    },
+    "phoneText": {
+      "type": "string",
+      "default": "910 05 37 00"
+    },
+    "phoneLink": {
+      "type": "string",
+      "default": "910053700"
+    },
+    "emailTitle": {
+      "type": "string",
+      "default": "Email"
+    },
+    "emailText": {
+      "type": "string",
+      "default": "info@reformas<br>servilucas.com"
+    },
+    "emailLink": {
+      "type": "string",
+      "default": "info@reformasservilucas.com"
+    },
+    "showSocialMedia": {
+      "type": "boolean",
+      "default": true
+    },
+    "instagramUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "linkedinUrl": {
+      "type": "string",
+      "default": "#"
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:../../build/contact-section/style-index.css",
+  "render": "file:./render.php"
+}

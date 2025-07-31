@@ -24,8 +24,7 @@ This theme supports Full Site Editing (FSE) and is built with modern WordPress b
 @import "base/typography";
 
 // Layout
-@import "layout/header";
-@import "layout/footer";
+@import "layout/grid";
 @import "layout/navigation";
 
 // Components
@@ -33,13 +32,6 @@ This theme supports Full Site Editing (FSE) and is built with modern WordPress b
 @import "components/forms";
 @import "components/cards";
 @import "components/modals";
-
-// Pages
-@import "pages/home";
-@import "pages/about";
-@import "pages/services";
-@import "pages/blog";
-@import "pages/contacto";
 
 // Block-specific styles
 @import "blocks/header";
@@ -54,3 +46,11 @@ This theme supports Full Site Editing (FSE) and is built with modern WordPress b
 @import "blocks/professional-experts";
 @import "blocks/cta-casa-suenos";
 @import "blocks/valor-anadido-nosotros";
+@import "blocks/contact-section";
+@import "blocks/contact-form";
+@import "blocks/contact-info";
+@import "blocks/google-maps";
+@import "blocks/blog-posts-grid";
+@import "blocks/blog-post-single";
+@import "blocks/services-grid";
+@import "blocks/service-single";

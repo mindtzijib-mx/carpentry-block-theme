@@ -1,0 +1,31 @@
+{
+  "apiVersion": 3,
+  "name": "carpentry/google-maps",
+  "version": "0.1.0",
+  "title": "Google Maps",
+  "category": "carpentry-blocks",
+  "icon": "location-alt",
+  "description": "Mapa de Google Maps idéntico al tema clásico",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "mapSrc": {
+      "type": "string",
+      "default": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.4567890123456!2d-3.6795!3d40.4165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI0JzU5LjQiTiAzwrA0MCc0Ni4yIlc!5e0!3m2!1ses!2ses!4v1234567890123!5m2!1ses!2ses"
+    },
+    "mapTitle": {
+      "type": "string",
+      "default": "Ubicación de ServiLucas - Calle Teléfrico de las Canteras 4, Madrid"
+    },
+    "mapHeight": {
+      "type": "number",
+      "default": 400
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:../../build/google-maps/style-index.css",
+  "render": "file:./render.php"
+}

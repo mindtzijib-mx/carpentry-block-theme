@@ -1,0 +1,261 @@
+// Contact Info Block Styles
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.contact-info-block {
+  padding: 80px 0;
+
+  .contact-info-title {
+    font-family: "Viga", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+
+    @include tablet {
+      font-size: 2rem;
+    }
+
+    @include mobile {
+      font-size: 1.8rem;
+    }
+  }
+
+  .contact-items {
+    margin-bottom: 2rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: rgba(161, 122, 102, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include mobile {
+      padding: 1.5rem;
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  .contact-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(161, 122, 102, 0.3);
+
+    i {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    @include mobile {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .contact-content {
+    flex: 1;
+  }
+
+  .contact-item-title {
+    font-family: "Viga", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .contact-item-text {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  .contact-link {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      text-decoration: underline;
+      transform: translateX(5px);
+    }
+  }
+
+  // Social Media Section
+  .social-media-section {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(161, 122, 102, 0.1);
+    margin-top: 2rem;
+  }
+
+  .social-title {
+    font-family: "Viga", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    i {
+      color: white;
+      font-size: 1.3rem;
+    }
+
+    &:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    // Social media brand colors
+    &.instagram {
+      background: linear-gradient(
+        45deg,
+        #f09433 0%,
+        #e6683c 25%,
+        #dc2743 50%,
+        #cc2366 75%,
+        #bc1888 100%
+      );
+    }
+
+    &.linkedin {
+      background-color: #0077b5;
+    }
+
+    &.facebook {
+      background-color: #1877f2;
+    }
+
+    &.twitter {
+      background-color: #1da1f2;
+    }
+
+    &.youtube {
+      background-color: #ff0000;
+    }
+  }
+
+  // Animation for contact items
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .contact-item {
+    animation: fadeInUp 0.6s ease forwards;
+
+    &:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+
+  // Editor specific styles
+  &.contact-info-editor {
+    .contact-item {
+      animation: none;
+    }
+  }
+
+  // Responsive adjustments
+  @include large-desktop {
+    padding: 60px 0;
+
+    .contact-info-title {
+      font-size: 2.2rem;
+    }
+  }
+
+  @include tablet {
+    padding: 50px 0;
+
+    .contact-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+
+      i {
+        font-size: 1.2rem;
+      }
+    }
+
+    .social-icon {
+      width: 45px;
+      height: 45px;
+
+      i {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @include mobile {
+    padding: 40px 0;
+
+    .contact-info-title {
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      padding: 1.5rem;
+    }
+
+    .social-icons {
+      gap: 0.8rem;
+    }
+  }
+}

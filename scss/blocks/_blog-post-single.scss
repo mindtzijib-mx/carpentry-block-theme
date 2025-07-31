@@ -1,196 +1,4 @@
-// Blog styles
-
-// Blog Archive (index.php)
-.blog-archive {
-  padding: 80px 0;
-}
-
-.blog-posts-section {
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-}
-
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-  margin-bottom: 50px;
-
-  @include mobile {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
-
-.blog-card {
-  background: $white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  }
-}
-
-.blog-image {
-  position: relative;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  a:hover img {
-    transform: scale(1.05);
-  }
-}
-
-.blog-date {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: $primary-color;
-  color: $white;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-  min-width: 60px;
-
-  .day {
-    display: block;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1;
-  }
-
-  .month {
-    display: block;
-    font-size: 12px;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-}
-
-.blog-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  font-size: 13px;
-  color: $gray-medium;
-}
-
-.blog-category {
-  background: $gray-light;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-weight: 500;
-  color: $primary-color;
-}
-
-.blog-author {
-  font-weight: 500;
-}
-
-.blog-title {
-  margin-bottom: 15px;
-
-  a {
-    color: $gray-dark;
-    font-family: $font-headings;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.3;
-    transition: color 0.3s ease;
-
-    &:hover {
-      color: $primary-color;
-    }
-  }
-}
-
-.blog-description {
-  color: $gray-medium;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.blog-link {
-  color: $primary-color;
-  font-weight: 600;
-  font-size: 14px;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: $primary-dark;
-  }
-
-  i {
-    margin-left: 5px;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover i {
-    transform: translateX(3px);
-  }
-}
-
-// Blog Pagination
-.blog-pagination {
-  text-align: center;
-  margin-top: 50px;
-
-  .pagination-custom {
-    display: inline-flex;
-    gap: 10px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .page-numbers {
-    display: inline-block;
-    padding: 10px 15px;
-    background: $white;
-    color: $gray-dark;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-
-    &:hover,
-    &.current {
-      background: $primary-color;
-      color: $white;
-      border-color: $primary-color;
-    }
-  }
-}
-
-// No posts section
-.no-posts-section {
-  padding: 80px 0;
-  text-align: center;
-
-  h2 {
-    color: $gray-dark;
-    margin-bottom: 15px;
-  }
-
-  p {
-    color: $gray-medium;
-    font-size: 16px;
-  }
-}
+// Blog Post Single Block Styles - Idéntico al tema clásico
 
 // Single Blog Post (single.php)
 .blog-single-container {
@@ -437,6 +245,7 @@
   margin: 40px 0;
   background: #f8f9fa;
   border-radius: 15px;
+  padding: 40px;
   border-top: none;
 
   h4 {
@@ -470,7 +279,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
     }
   }
@@ -482,12 +291,7 @@
 
     .comment {
       border-left-color: #ddd;
-      background: #fafafa;
-
-      .children .comment {
-        border-left-color: #ccc;
-        background: #f5f5f5;
-      }
+      background: #f8f9fa;
     }
 
     @include mobile {
@@ -567,7 +371,7 @@
     &:before {
       content: "\f017";
       font-family: "Font Awesome 5 Free";
-      font-weight: 900;
+      font-weight: 400;
     }
   }
 }
@@ -578,9 +382,7 @@
 
   &:before {
     content: "\f044";
-    font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    margin-right: 5px;
   }
 }
 
@@ -620,7 +422,6 @@
 
   &:hover {
     background: darken($primary-color, 10%);
-    color: $white;
     transform: translateY(-1px);
   }
 
@@ -655,20 +456,14 @@
 
   small {
     font-size: 14px;
-    font-weight: normal;
     margin-left: 15px;
 
     a {
-      color: $primary-color;
+      color: #888;
       text-decoration: none;
-      padding: 4px 12px;
-      background: #f8f9fa;
-      border-radius: 15px;
-      transition: all 0.3s ease;
 
       &:hover {
-        background: $primary-color;
-        color: $white;
+        color: $primary-color;
       }
     }
   }
@@ -685,7 +480,6 @@
   a {
     color: $primary-color;
     text-decoration: none;
-    font-weight: 500;
 
     &:hover {
       text-decoration: underline;
@@ -698,10 +492,9 @@
 
   label {
     display: block;
-    color: $gray-dark;
-    font-weight: 500;
     margin-bottom: 8px;
-    font-size: 15px;
+    font-weight: 600;
+    color: $gray-dark;
   }
 
   textarea {
@@ -710,16 +503,14 @@
     padding: 15px;
     border: 2px solid #e9ecef;
     border-radius: 8px;
-    font-family: inherit;
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.5;
     resize: vertical;
     transition: border-color 0.3s ease;
 
     &:focus {
       outline: none;
       border-color: $primary-color;
-      box-shadow: 0 0 0 3px rgba(161, 122, 102, 0.1);
     }
   }
 }
@@ -735,10 +526,9 @@
 
   label {
     display: block;
-    color: $gray-dark;
-    font-weight: 500;
     margin-bottom: 8px;
-    font-size: 15px;
+    font-weight: 600;
+    color: $gray-dark;
   }
 
   input {
@@ -752,7 +542,6 @@
     &:focus {
       outline: none;
       border-color: $primary-color;
-      box-shadow: 0 0 0 3px rgba(161, 122, 102, 0.1);
     }
   }
 }
@@ -765,14 +554,12 @@
 
   input[type="checkbox"] {
     margin-top: 3px;
-    accent-color: $primary-color;
   }
 
   label {
-    color: $gray-medium;
     font-size: 14px;
     line-height: 1.5;
-    cursor: pointer;
+    color: $gray-medium;
   }
 }
 
@@ -797,7 +584,7 @@
   &:hover {
     background: darken($primary-color, 10%);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(161, 122, 102, 0.3);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.3);
   }
 
   &:before {
@@ -821,27 +608,14 @@
 
   .nav-previous,
   .nav-next {
-    background: #f8f9fa;
-    padding: 12px 20px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: $primary-color;
-
-      a {
-        color: $white;
-      }
-    }
-
     a {
-      color: $gray-medium;
+      color: $primary-color;
       text-decoration: none;
       font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.3s ease;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -862,7 +636,7 @@
 
   p {
     font-size: 16px;
-    margin-bottom: 0;
+    margin: 0;
   }
 }
 
@@ -874,14 +648,16 @@
   margin-top: 40px;
 
   h4 {
-    font-size: 20px;
-    margin-bottom: 15px;
     color: $gray-dark;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
   }
 
   p {
     color: $gray-medium;
     margin-bottom: 25px;
+    font-size: 16px;
   }
 }
 
@@ -892,7 +668,6 @@
   flex-wrap: wrap;
 
   @include mobile {
-    flex-direction: column;
     gap: 10px;
   }
 }
@@ -909,12 +684,12 @@
   transition: all 0.3s ease;
 
   &.btn-facebook {
-    background: #3b5998;
+    background: #1877f2;
     color: $white;
 
     &:hover {
-      background: #2d4373;
-      color: $white;
+      background: darken(#1877f2, 10%);
+      transform: translateY(-2px);
     }
   }
 
@@ -923,8 +698,8 @@
     color: $white;
 
     &:hover {
-      background: #0d8bd9;
-      color: $white;
+      background: darken(#1da1f2, 10%);
+      transform: translateY(-2px);
     }
   }
 
@@ -933,22 +708,25 @@
     color: $white;
 
     &:hover {
-      background: #005885;
-      color: $white;
+      background: darken(#0077b5, 10%);
+      transform: translateY(-2px);
     }
   }
 }
 
 // Blog Sidebar
 .blog-sidebar {
+  background: $white;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 30px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
 }
 
 .blog-sidebar-header,
 .widget-header {
-  color: $primary-color;
+  background: $primary-color;
+  color: $white;
   padding: 20px;
   font-size: 18px;
   font-weight: 600;
@@ -977,34 +755,37 @@
     color: $gray-dark;
     text-decoration: none;
     transition: all 0.3s ease;
+    font-weight: 500;
 
     &:hover,
     &.active {
-      background: #f8f9fa;
-      color: $primary-color;
-      padding-left: 25px;
-
-      .post-count {
-        background: $primary-color;
-        color: $white;
-      }
+      background: $primary-color;
+      color: $white;
     }
   }
 
   .post-count {
-    background: #e9ecef;
-    color: $gray-medium;
+    background: #f0f0f0;
     padding: 2px 8px;
     border-radius: 12px;
     font-size: 12px;
+    color: $gray-medium;
     transition: all 0.3s ease;
+  }
+
+  a:hover .post-count,
+  a.active .post-count {
+    background: rgba($white, 0.2);
+    color: $white;
   }
 }
 
 .recent-posts-widget {
   margin-top: 30px;
+  background: $white;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
 }
 
 .recent-posts-list {
@@ -1013,8 +794,8 @@
   margin: 0;
 
   li {
-    padding: 15px 20px;
     border-bottom: 1px solid #f0f0f0;
+    padding: 15px 20px;
 
     &:last-child {
       border-bottom: none;
@@ -1023,11 +804,11 @@
 
   a {
     color: $gray-dark;
-    font-weight: 500;
     text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.4;
     transition: color 0.3s ease;
-    display: block;
-    margin-bottom: 5px;
 
     &:hover {
       color: $primary-color;
@@ -1035,8 +816,10 @@
   }
 
   .recent-post-date {
+    display: block;
+    color: $gray-medium;
     font-size: 12px;
-    color: #888;
+    margin-top: 5px;
   }
 }
 
@@ -1051,7 +834,7 @@
   }
 
   .blog-post-details {
-    padding: 25px;
+    padding: 30px 20px;
   }
 
   .blog-post-title {
@@ -1075,7 +858,7 @@
 
   // Comment responsive styles
   .blog-comments-section {
-    padding: 25px;
+    padding: 30px 20px;
   }
 
   .commentlist .comment {

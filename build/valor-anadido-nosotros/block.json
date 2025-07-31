@@ -5,7 +5,7 @@
   "title": "Valor Añadido Nosotros",
   "category": "carpentry-blocks",
   "icon": "star-filled",
-  "description": "Sección de valor añadido con características principales y testimonios",
+  "description": "Sección de valor añadido con características principales del tema clásico",
   "supports": {
     "html": false,
     "align": [
@@ -14,85 +14,93 @@
     ]
   },
   "attributes": {
-    "sectionTitle": {
+    "backgroundImage": {
       "type": "string",
-      "default": "Nuestro Valor Añadido"
+      "default": ""
     },
-    "sectionSubtitle": {
+    "leftSubtitle": {
       "type": "string",
-      "default": "Lo que nos diferencia"
+      "default": "NUESTRO ENFOQUE"
+    },
+    "leftTitle": {
+      "type": "string",
+      "default": "Máximo Compromiso Con Nuestros Clientes"
+    },
+    "progress1Title": {
+      "type": "string",
+      "default": "Calidad de nuestros servicios"
+    },
+    "progress1Value": {
+      "type": "number",
+      "default": 100
+    },
+    "progress2Title": {
+      "type": "string",
+      "default": "Soluciones a medida"
+    },
+    "progress2Value": {
+      "type": "number",
+      "default": 100
+    },
+    "rightSubtitle": {
+      "type": "string",
+      "default": "VALOR AÑADIDO"
+    },
+    "rightTitle": {
+      "type": "string",
+      "default": "Lo Que Marca Nuestra Diferencia"
+    },
+    "rightDescription": {
+      "type": "string",
+      "default": "Nuestra dedicación y atención al detalle nos distinguen en cada proyecto que realizamos."
     },
     "feature1Icon": {
       "type": "string",
-      "default": "fas fa-clock"
+      "default": "fas fa-user-tie"
     },
     "feature1Title": {
       "type": "string",
-      "default": "Puntualidad"
+      "default": "Profesionales Expertos"
     },
-    "feature1Description": {
+    "feature1Text": {
       "type": "string",
-      "default": "Cumplimos con los plazos establecidos y respetamos tu tiempo"
+      "default": "Equipo de profesionales altamente capacitados y experimentados en el campo de las reformas."
     },
     "feature2Icon": {
       "type": "string",
-      "default": "fas fa-shield-alt"
+      "default": "fas fa-home"
     },
     "feature2Title": {
       "type": "string",
-      "default": "Garantía"
+      "default": "Soluciones a medida"
     },
-    "feature2Description": {
+    "feature2Text": {
       "type": "string",
-      "default": "Todos nuestros trabajos incluyen garantía de satisfacción"
+      "default": "Nuestro objetivo es entender completamente tus deseos y expectativas para poder ofrecerte soluciones a medida."
     },
     "feature3Icon": {
       "type": "string",
-      "default": "fas fa-tools"
+      "default": "fas fa-heart"
     },
     "feature3Title": {
       "type": "string",
-      "default": "Calidad"
+      "default": "Satisfacción de nuestros clientes"
     },
-    "feature3Description": {
+    "feature3Text": {
       "type": "string",
-      "default": "Utilizamos materiales de primera calidad y técnicas profesionales"
+      "default": "Nos aseguraremos de que cada detalle sea tenido en cuenta y de que se cumplan todas tus exigencias durante el proceso de reforma."
     },
     "feature4Icon": {
       "type": "string",
-      "default": "fas fa-users"
+      "default": "fas fa-star"
     },
     "feature4Title": {
       "type": "string",
-      "default": "Profesionalismo"
+      "default": "Máxima Calidad"
     },
-    "feature4Description": {
+    "feature4Text": {
       "type": "string",
-      "default": "Equipo experimentado y certificado en reformas y construcción"
-    },
-    "testimonial1Name": {
-      "type": "string",
-      "default": "María González"
-    },
-    "testimonial1Text": {
-      "type": "string",
-      "default": "Excelente trabajo en la reforma de mi cocina. Muy profesionales y puntuales."
-    },
-    "testimonial1Rating": {
-      "type": "number",
-      "default": 5
-    },
-    "testimonial2Name": {
-      "type": "string",
-      "default": "Carlos López"
-    },
-    "testimonial2Text": {
-      "type": "string",
-      "default": "Reformaron mi baño completamente. El resultado superó mis expectativas."
-    },
-    "testimonial2Rating": {
-      "type": "number",
-      "default": 5
+      "default": "Estamos aquí para hacer realidad tus sueños y transformar tu espacio en algo que supere tus expectativas."
     }
   },
   "textdomain": "carpentry-blocks",
