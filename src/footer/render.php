@@ -142,17 +142,6 @@ $youtube_url = get_theme_mod('carpentry_youtube_url', '');
         </div>
     </div>
 
-    <!-- European Funding Banner -->
-    <div class="footer-funding-banner">
-        <div class="container">
-            <div class="funding-banner-wrapper">
-                <div class="funding-logos">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/eu-funding-banner.png" alt="Financiado por la Unión Europea - Kit Digital - Next Generation EU" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer Bottom -->
     <div class="footer-bottom">
         <div class="container">

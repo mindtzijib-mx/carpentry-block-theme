@@ -4,16 +4,55 @@
  * Replica exacta de la sección de contacto del tema clásico
  */
 
+// Obtener servicios dinámicamente del custom post type
+$services_query = new WP_Query([
+    'post_type' => 'servicios',
+    'posts_per_page' => -1,
+    'post_status' => 'publish',
+    'orderby' => 'title',
+    'order' => 'ASC'
+]);
+
+$service_options = [];
+
+if ($services_query->have_posts()) {
+    while ($services_query->have_posts()) {
+        $services_query->the_post();
+        $service_options[get_the_ID()] = get_the_title();
+    }
+    wp_reset_postdata();
+}
+
+// Fallback a opciones estáticas si no hay servicios disponibles
+if (empty($service_options)) {
+    $service_options = [
+        'carpinteria' => 'Carpintería General',
+        'reformas' => 'Reformas Integrales',
+        'mantenimiento' => 'Mantenimiento',
+        'acabados' => 'Acabados',
+        'otro' => 'Otro'
+    ];
+}
+
+// Obtener datos de contacto de la configuración global del Customizer
+$global_address = get_theme_mod('carpentry_company_address', 'Calle Teléfrico de las Canteras 4, bajo A, 28052 Madrid');
+$global_email = get_theme_mod('carpentry_company_email', 'info@reformasservilucas.com');
+$global_phone = get_theme_mod('carpentry_company_phone', '910 05 37 00');
+$global_phone_link = get_theme_mod('carpentry_company_phone_link', '910053700');
+
 // Obtener atributos con valores por defecto
 $form_title = !empty($attributes['formTitle']) ? esc_html($attributes['formTitle']) : 'Contacta con nosotros';
 $address_title = !empty($attributes['addressTitle']) ? esc_html($attributes['addressTitle']) : 'Dirección';
-$address_text = !empty($attributes['addressText']) ? wp_kses_post($attributes['addressText']) : 'Calle Teléfrico de las Canteras 4, bajo A, 28052 Madrid';
 $phone_title = !empty($attributes['phoneTitle']) ? esc_html($attributes['phoneTitle']) : 'Teléfono';
-$phone_text = !empty($attributes['phoneText']) ? esc_html($attributes['phoneText']) : '910 05 37 00';
-$phone_link = !empty($attributes['phoneLink']) ? esc_attr($attributes['phoneLink']) : '910053700';
 $email_title = !empty($attributes['emailTitle']) ? esc_html($attributes['emailTitle']) : 'Email';
-$email_text = !empty($attributes['emailText']) ? wp_kses_post($attributes['emailText']) : 'info@reformas servilucas.com';
-$email_link = !empty($attributes['emailLink']) ? esc_attr($attributes['emailLink']) : 'info@reformasservilucas.com';
+
+// Usar datos globales pero permitir override desde atributos del bloque
+$address_text = !empty($attributes['addressText']) ? wp_kses_post($attributes['addressText']) : wp_kses_post($global_address);
+$phone_text = !empty($attributes['phoneText']) ? esc_html($attributes['phoneText']) : esc_html($global_phone);
+$phone_link = !empty($attributes['phoneLink']) ? esc_attr($attributes['phoneLink']) : esc_attr($global_phone_link);
+$email_text = !empty($attributes['emailText']) ? wp_kses_post($attributes['emailText']) : wp_kses_post(str_replace('@', '<br>@', $global_email));
+$email_link = !empty($attributes['emailLink']) ? esc_attr($attributes['emailLink']) : esc_attr($global_email);
+
 $show_social_media = !empty($attributes['showSocialMedia']) ? $attributes['showSocialMedia'] : true;
 $instagram_url = !empty($attributes['instagramUrl']) ? esc_url($attributes['instagramUrl']) : '#';
 $linkedin_url = !empty($attributes['linkedinUrl']) ? esc_url($attributes['linkedinUrl']) : '#';
@@ -54,11 +93,11 @@ $wrapper_attributes = get_block_wrapper_attributes([
                                     <div class="form-group">
                                         <select id="servicio" name="servicio" class="form-control">
                                             <option value="">—Por favor, elige una opción—</option>
-                                            <option value="carpinteria">Carpintería General</option>
-                                            <option value="reformas">Reformas Integrales</option>
-                                            <option value="mantenimiento">Mantenimiento</option>
-                                            <option value="acabados">Acabados</option>
-                                            <option value="otro">Otro</option>
+                                            <?php foreach ($service_options as $value => $label): ?>
+                                                <option value="<?php echo esc_attr($value); ?>">
+                                                    <?php echo esc_html($label); ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>

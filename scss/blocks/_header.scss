@@ -7,7 +7,7 @@
 // Header Top
 .site-header-top {
   background: $white;
-  padding: 15px 0 45px;
+  padding: 15px 0 30px;
 
   @include mobile {
     padding: 10px 0;
@@ -20,7 +20,7 @@
 
 .site-logo {
   img {
-    max-height: 50px;
+    max-height: 65px;
     width: auto;
 
     @include mobile {
@@ -117,7 +117,7 @@
 // Phone Button
 .header-phone-button {
   background: $primary-color;
-  border-radius: $border-radius-xl 0px $border-radius-xl $border-radius-xl;
+  border-radius: 35px 0px 35px 35px;
   overflow: hidden;
   margin-left: auto;
 

@@ -7,22 +7,65 @@
 
 $services_subtitle = $attributes['servicesSubtitle'] ?? 'NUESTROS SERVICIOS';
 $services_title = $attributes['servicesTitle'] ?? 'Servicios integrales y de la máxima calidad';
+$use_dynamic_services = $attributes['useDynamicServices'] ?? true;
 
-$service1_title = $attributes['service1Title'] ?? 'Mantenimiento';
-$service1_description = $attributes['service1Description'] ?? 'Nuestros servicios integrales son clave para garantizar la operatividad continua de los sistemas e infraestructuras esenciales de su empresa.';
-$service1_icon = $attributes['service1Icon'] ?? 'fas fa-tools';
+// Prepare services array
+$services = [];
 
-$service2_title = $attributes['service2Title'] ?? 'Reformas';
-$service2_description = $attributes['service2Description'] ?? 'Transformamos tu hogar o negocio con reformas completas que incluyen diseño, planificación y ejecución, adaptándonos a tus gustos y necesidades.';
-$service2_icon = $attributes['service2Icon'] ?? 'fas fa-home';
+if ($use_dynamic_services) {
+    // Query dynamic services from custom post type
+    $services_query = new WP_Query([
+        'post_type' => 'servicios',
+        'posts_per_page' => 8, // Show up to 8 services for slider
+        'post_status' => 'publish',
+        'orderby' => 'menu_order',
+        'order' => 'ASC'
+    ]);
+    
+    if ($services_query->have_posts()) {
+        while ($services_query->have_posts()) {
+            $services_query->the_post();
+            $service_id = get_the_ID();
+            $services[] = [
+                'title' => get_the_title(),
+                'description' => get_the_excerpt() ?: wp_trim_words(get_the_content(), 25),
+                'icon' => get_post_meta($service_id, 'service_icon', true) ?: 'fas fa-tools',
+                'url' => get_permalink()
+            ];
+        }
+        wp_reset_postdata();
+    }
+}
 
-$service3_title = $attributes['service3Title'] ?? 'Tabiquería';
-$service3_description = $attributes['service3Description'] ?? 'Realizamos todo tipo de estructuras en pladur garantizando seguridad y eficiencia en cada proyecto.';
-$service3_icon = $attributes['service3Icon'] ?? 'fas fa-hammer';
-
-$service4_title = $attributes['service4Title'] ?? 'Electricidad';
-$service4_description = $attributes['service4Description'] ?? 'Desde la actualización de sistemas eléctricos hasta la instalación de iluminación y soluciones de ahorro energético, nos aseguramos de que todo funcione de manera segura y eficiente.';
-$service4_icon = $attributes['service4Icon'] ?? 'fas fa-bolt';
+// Fallback to static services if dynamic is disabled or no dynamic services exist
+if (!$use_dynamic_services || empty($services)) {
+    $services = [
+        [
+            'title' => $attributes['service1Title'] ?? 'Mantenimiento',
+            'description' => $attributes['service1Description'] ?? 'Nuestros servicios integrales son clave para garantizar la operatividad continua de los sistemas e infraestructuras esenciales de su empresa.',
+            'icon' => $attributes['service1Icon'] ?? 'fas fa-tools',
+            'url' => '#'
+        ],
+        [
+            'title' => $attributes['service2Title'] ?? 'Reformas',
+            'description' => $attributes['service2Description'] ?? 'Transformamos tu hogar o negocio con reformas completas que incluyen diseño, planificación y ejecución, adaptándonos a tus gustos y necesidades.',
+            'icon' => $attributes['service2Icon'] ?? 'fas fa-home',
+            'url' => '#'
+        ],
+        [
+            'title' => $attributes['service3Title'] ?? 'Tabiquería',
+            'description' => $attributes['service3Description'] ?? 'Realizamos todo tipo de estructuras en pladur garantizando seguridad y eficiencia en cada proyecto.',
+            'icon' => $attributes['service3Icon'] ?? 'fas fa-hammer',
+            'url' => '#'
+        ],
+        [
+            'title' => $attributes['service4Title'] ?? 'Electricidad',
+            'description' => $attributes['service4Description'] ?? 'Desde la actualización de sistemas eléctricos hasta la instalación de iluminación y soluciones de ahorro energético, nos aseguramos de que todo funcione de manera segura y eficiente.',
+            'icon' => $attributes['service4Icon'] ?? 'fas fa-bolt',
+            'url' => '#'
+        ]
+    ];
+}
 
 $projects_subtitle = $attributes['projectsSubtitle'] ?? 'ÚLTIMOS PROYECTOS';
 $projects_title = $attributes['projectsTitle'] ?? 'Compromiso de calidad en cada uno de nuestros trabajos';
@@ -50,50 +93,40 @@ $project4_alt = $attributes['project4Alt'] ?? 'Proyecto exterior';
                 </div>
             </div>
 
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="<?php echo esc_attr($service1_icon); ?>"></i>
+            <div class="services-grid<?php echo count($services) > 4 ? ' slider-mode' : ''; ?>">
+                <?php if (count($services) > 4): ?>
+                <div class="services-slider-container">
+                    <?php foreach ($services as $index => $service): ?>
+                    <div class="service-card" data-index="<?php echo $index; ?>">
+                        <div class="service-icon">
+                            <i class="<?php echo esc_attr($service['icon']); ?>"></i>
+                        </div>
+                        <h3 class="service-title-home"><?php echo esc_html($service['title']); ?></h3>
+                        <p class="service-description"><?php echo esc_html($service['description']); ?></p>
+                        <div class="service-arrow">
+                            <a href="<?php echo esc_url($service['url']); ?>" aria-label="<?php echo esc_attr(sprintf(__('Ver más sobre %s', 'carpentry-blocks'), $service['title'])); ?>">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="service-title-home"><?php echo esc_html($service1_title); ?></h3>
-                    <p class="service-description"><?php echo esc_html($service1_description); ?></p>
-                    <div class="service-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="<?php echo esc_attr($service2_icon); ?>"></i>
+                <?php else: ?>
+                    <?php foreach ($services as $service): ?>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="<?php echo esc_attr($service['icon']); ?>"></i>
+                        </div>
+                        <h3 class="service-title-home"><?php echo esc_html($service['title']); ?></h3>
+                        <p class="service-description"><?php echo esc_html($service['description']); ?></p>
+                        <div class="service-arrow">
+                            <a href="<?php echo esc_url($service['url']); ?>" aria-label="<?php echo esc_attr(sprintf(__('Ver más sobre %s', 'carpentry-blocks'), $service['title'])); ?>">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="service-title-home"><?php echo esc_html($service2_title); ?></h3>
-                    <p class="service-description"><?php echo esc_html($service2_description); ?></p>
-                    <div class="service-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="<?php echo esc_attr($service3_icon); ?>"></i>
-                    </div>
-                    <h3 class="service-title-home"><?php echo esc_html($service3_title); ?></h3>
-                    <p class="service-description"><?php echo esc_html($service3_description); ?></p>
-                    <div class="service-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="<?php echo esc_attr($service4_icon); ?>"></i>
-                    </div>
-                    <h3 class="service-title-home"><?php echo esc_html($service4_title); ?></h3>
-                    <p class="service-description"><?php echo esc_html($service4_description); ?></p>
-                    <div class="service-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

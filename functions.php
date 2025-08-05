@@ -100,7 +100,15 @@ function carpentry_blocks_scripts() {
         '6.4.0'
     );
     
-    // Enqueue theme styles
+    // Enqueue compiled SCSS styles (style-index.css)
+    wp_enqueue_style(
+        'carpentry-blocks-style-index',
+        get_template_directory_uri() . '/build/style-index.css',
+        array(),
+        wp_get_theme()->get('Version')
+    );
+    
+    // Enqueue theme styles (fallback)
     wp_enqueue_style(
         'carpentry-blocks-style',
         get_stylesheet_uri(),
@@ -436,6 +444,15 @@ function carpentry_blocks_frontend_scripts() {
         true
     );
 
+    // Enqueue services-projects slider functionality
+    wp_enqueue_script(
+        'carpentry-services-projects-slider',
+        get_template_directory_uri() . '/assets/js/services-projects-slider.js',
+        array(),
+        filemtime(get_template_directory() . '/assets/js/services-projects-slider.js'),
+        true
+    );
+
     // Add Font Awesome for icons
     wp_enqueue_style(
         'font-awesome',
@@ -542,13 +559,36 @@ function carpentry_footer_menu_fallback()
 
 function carpentry_footer_services_fallback()
 {
+    // Query dynamic services from custom post type
+    $services_query = new WP_Query([
+        'post_type' => 'servicios',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'orderby' => 'title',
+        'order' => 'ASC'
+    ]);
+    
     echo '<ul class="footer-menu">';
-    echo '<li><a href="' . home_url('/service/reformas') . '">Reformas</a></li>';
-    echo '<li><a href="' . home_url('/service/tabiqueria') . '">Tabiquería</a></li>';
-    echo '<li><a href="' . home_url('/service/electricidad') . '">Electricidad</a></li>';
-    echo '<li><a href="' . home_url('/service/fontaneria') . '">Fontanería</a></li>';
-    echo '<li><a href="' . home_url('/service/pintura') . '">Pintura</a></li>';
-    echo '<li><a href="' . home_url('/service/albanileria') . '">Albañilería</a></li>';
+    
+    if ($services_query->have_posts()) {
+        // Display dynamic services from CPT
+        while ($services_query->have_posts()) {
+            $services_query->the_post();
+            $service_title = get_the_title();
+            $service_url = get_permalink();
+            echo '<li><a href="' . esc_url($service_url) . '">' . esc_html($service_title) . '</a></li>';
+        }
+        wp_reset_postdata();
+    } else {
+        // Fallback to static services if no dynamic services exist
+        echo '<li><a href="' . home_url('/service/reformas') . '">Reformas</a></li>';
+        echo '<li><a href="' . home_url('/service/tabiqueria') . '">Tabiquería</a></li>';
+        echo '<li><a href="' . home_url('/service/electricidad') . '">Electricidad</a></li>';
+        echo '<li><a href="' . home_url('/service/fontaneria') . '">Fontanería</a></li>';
+        echo '<li><a href="' . home_url('/service/pintura') . '">Pintura</a></li>';
+        echo '<li><a href="' . home_url('/service/albanileria') . '">Albañilería</a></li>';
+    }
+    
     echo '</ul>';
 }
 
@@ -637,4 +677,61 @@ function carpentry_handle_contact_form() {
 // Hook for logged in and non-logged in users
 add_action('wp_ajax_carpentry_contact_form', 'carpentry_handle_contact_form');
 add_action('wp_ajax_nopriv_carpentry_contact_form', 'carpentry_handle_contact_form');
+
+/**
+ * Create sample services on theme activation
+ */
+function carpentry_create_sample_services() {
+    // Check if services already exist
+    $existing_services = get_posts([
+        'post_type' => 'servicios',
+        'post_status' => 'publish',
+        'numberposts' => 1
+    ]);
+
+    // If no services exist, create sample ones
+    if (empty($existing_services)) {
+        $sample_services = [
+            [
+                'title' => 'Reformas Integrales',
+                'content' => 'Realizamos reformas completas de viviendas, oficinas y locales comerciales con la máxima calidad y profesionalidad.',
+                'excerpt' => 'Reformas completas con calidad profesional'
+            ],
+            [
+                'title' => 'Carpintería a Medida',
+                'content' => 'Diseñamos y fabricamos muebles y elementos de carpintería personalizados según tus necesidades específicas.',
+                'excerpt' => 'Muebles y carpintería personalizada'
+            ],
+            [
+                'title' => 'Instalaciones Eléctricas',
+                'content' => 'Servicios completos de instalación y mantenimiento eléctrico con certificación y garantía.',
+                'excerpt' => 'Instalaciones eléctricas certificadas'
+            ],
+            [
+                'title' => 'Fontanería y Sanitarios',
+                'content' => 'Instalación, reparación y mantenimiento de sistemas de fontanería y equipos sanitarios.',
+                'excerpt' => 'Servicios completos de fontanería'
+            ],
+            [
+                'title' => 'Pintura y Decoración',
+                'content' => 'Trabajos de pintura interior y exterior, decoración y acabados con materiales de primera calidad.',
+                'excerpt' => 'Pintura y decoración profesional'
+            ]
+        ];
+
+        foreach ($sample_services as $service) {
+            wp_insert_post([
+                'post_title' => $service['title'],
+                'post_content' => $service['content'],
+                'post_excerpt' => $service['excerpt'],
+                'post_status' => 'publish',
+                'post_type' => 'servicios',
+                'post_author' => 1
+            ]);
+        }
+    }
+}
+
+// Run on theme activation
+add_action('after_switch_theme', 'carpentry_create_sample_services');
 

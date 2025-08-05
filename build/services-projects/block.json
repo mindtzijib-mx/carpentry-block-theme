@@ -22,6 +22,10 @@
       "type": "string",
       "default": "Servicios integrales y de la máxima calidad"
     },
+    "useDynamicServices": {
+      "type": "boolean",
+      "default": true
+    },
     "service1Title": {
       "type": "string",
       "default": "Mantenimiento"

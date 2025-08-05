@@ -81,6 +81,43 @@
   margin-bottom: -60px;
   position: relative;
   z-index: 3;
+  overflow: hidden;
+
+  // Slider mode - when more than 4 services
+  &.slider-mode {
+    display: block; // Keep as block to maintain background
+    overflow: hidden; // Hide services that are outside the viewport
+
+    .services-slider-container {
+      display: flex;
+      transition: transform 0.3s ease;
+      width: 100%; // Container width stays 100%
+    }
+
+    .service-card {
+      flex: 0 0 25%; // Each card is exactly 25% width (4 visible on desktop)
+      width: 25%;
+      padding: 30px 25px; // Keep original padding
+      margin-right: 0; // No margin needed
+      border-right: 1px solid #e0e0e0; // Keep borders
+
+      &:last-child {
+        border-right: none; // Last card has no border
+      }
+
+      // Tablet: 2 cards visible
+      @media (max-width: 991px) {
+        flex: 0 0 50%; // 50% width for 2 cards
+        width: 50%;
+      }
+
+      // Mobile: 1 card visible
+      @media (max-width: 767px) {
+        flex: 0 0 100%; // 100% width for 1 card
+        width: 100%;
+      }
+    }
+  }
 }
 
 .service-card {
@@ -184,6 +221,18 @@
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
+
+    &.slider-mode .service-card {
+      min-width: 50%; // 2 cards visible on tablet
+
+      &:nth-child(2n) {
+        border-right: none; // Remove border on every 2nd visible card
+      }
+
+      &:nth-child(4n) {
+        border-right: 1px solid #e0e0e0; // Reset 4n rule
+      }
+    }
   }
 
   .projects-grid {
@@ -217,6 +266,16 @@
     grid-template-columns: 1fr;
     padding: 30px 20px;
     margin-bottom: -40px;
+
+    &.slider-mode .service-card {
+      min-width: 100%; // 1 card visible on mobile
+      border-right: none; // No borders on mobile
+
+      &:nth-child(2n),
+      &:nth-child(4n) {
+        border-right: none; // Override tablet/desktop rules
+      }
+    }
   }
 
   .projects-grid {

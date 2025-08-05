@@ -3,14 +3,36 @@
  * Request Quote Block Template
  */
 
-$service_options = [
-    'reformas' => 'Reformas',
-    'mantenimiento' => 'Mantenimiento',
-    'tabiqueria' => 'Tabiquería',
-    'electricidad' => 'Electricidad',
-    'fontaneria' => 'Fontanería',
-    'pintura' => 'Pintura'
-];
+// Obtener servicios dinámicamente del custom post type
+$services_query = new WP_Query([
+    'post_type' => 'servicios',
+    'posts_per_page' => -1,
+    'post_status' => 'publish',
+    'orderby' => 'title',
+    'order' => 'ASC'
+]);
+
+$service_options = [];
+
+if ($services_query->have_posts()) {
+    while ($services_query->have_posts()) {
+        $services_query->the_post();
+        $service_options[get_the_ID()] = get_the_title();
+    }
+    wp_reset_postdata();
+}
+
+// Fallback a opciones estáticas si no hay servicios disponibles
+if (empty($service_options)) {
+    $service_options = [
+        'reformas' => 'Reformas',
+        'mantenimiento' => 'Mantenimiento',
+        'tabiqueria' => 'Tabiquería',
+        'electricidad' => 'Electricidad',
+        'fontaneria' => 'Fontanería',
+        'pintura' => 'Pintura'
+    ];
+}
 ?>
 
 <section class="request-quote-section">

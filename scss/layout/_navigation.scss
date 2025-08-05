@@ -37,7 +37,7 @@
     right: 0;
     bottom: 0;
     background: $secondary-color;
-    border-radius: 0 $border-radius-xl $border-radius-xl 0;
+    border-radius: 0 35px 35px 0;
     z-index: -1;
   }
 }
@@ -75,7 +75,7 @@
 
     a {
       display: block;
-      padding: 18px 25px;
+      padding: 23px 25px;
       color: $white;
       font-weight: $font-weight-medium;
       font-size: $font-size-base;
@@ -306,4 +306,10 @@
 
 .main-navigation.active .mobile-menu-close {
   display: block;
+}
+
+.header-phone-button {
+  .phone-button {
+    padding: 15px 20px;
+  }
 }

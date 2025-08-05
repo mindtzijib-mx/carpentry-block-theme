@@ -4,6 +4,7 @@ import {
   InspectorControls,
   RichText,
 } from "@wordpress/block-editor";
+import { useSelect } from "@wordpress/data";
 import { PanelBody, TextControl, ToggleControl } from "@wordpress/components";
 import { Fragment } from "@wordpress/element";
 
@@ -23,6 +24,53 @@ export default function Edit({ attributes, setAttributes }) {
     linkedinUrl,
   } = attributes;
 
+  // Obtener servicios dinámicamente en el editor
+  const services = useSelect((select) => {
+    const { getEntityRecords } = select("core");
+    return getEntityRecords("postType", "servicios", {
+      per_page: -1,
+      status: "publish",
+      orderby: "title",
+      order: "asc",
+    });
+  }, []);
+
+  // Obtener configuraciones globales del Customizer
+  const globalSettings = useSelect((select) => {
+    const { getEntityRecord } = select("core");
+    const siteData = getEntityRecord("root", "site");
+    return {
+      globalAddress:
+        siteData?.carpentry_company_address ||
+        "Calle Teléfrico de las Canteras 4, bajo A, 28052 Madrid",
+      globalEmail:
+        siteData?.carpentry_company_email || "info@reformasservilucas.com",
+      globalPhone: siteData?.carpentry_company_phone || "910 05 37 00",
+      globalPhoneLink: siteData?.carpentry_company_phone_link || "910053700",
+    };
+  }, []);
+
+  // Determinar si se están usando valores globales
+  const isUsingGlobalAddress =
+    !addressText || addressText === globalSettings.globalAddress;
+  const isUsingGlobalEmail =
+    !emailText ||
+    emailText === globalSettings.globalEmail ||
+    emailText === globalSettings.globalEmail.replace("@", "<br>@");
+  const isUsingGlobalPhone =
+    !phoneText || phoneText === globalSettings.globalPhone;
+
+  // Preparar opciones de servicios para mostrar en la vista previa
+  const serviceOptions = services
+    ? services.map((service) => service.title.rendered)
+    : [
+        "Carpintería General",
+        "Reformas Integrales",
+        "Mantenimiento",
+        "Acabados",
+        "Otro",
+      ];
+
   const blockProps = useBlockProps({
     className: "contacto-section",
   });
@@ -38,13 +86,37 @@ export default function Edit({ attributes, setAttributes }) {
             label={__("Enlace del teléfono (solo números)", "carpentry-blocks")}
             value={phoneLink}
             onChange={(value) => setAttributes({ phoneLink: value })}
-            placeholder="910053700"
+            placeholder={globalSettings.globalPhoneLink}
+            help={
+              !phoneLink || phoneLink === globalSettings.globalPhoneLink ? (
+                <span style={{ color: "#28a745" }}>
+                  ✓ Usando configuración global del Customizer
+                </span>
+              ) : (
+                <span style={{ color: "#6c757d" }}>
+                  Personalizado (deja vacío para usar global:{" "}
+                  {globalSettings.globalPhoneLink})
+                </span>
+              )
+            }
           />
           <TextControl
             label={__("Email para enlace", "carpentry-blocks")}
             value={emailLink}
             onChange={(value) => setAttributes({ emailLink: value })}
-            placeholder="info@reformasservilucas.com"
+            placeholder={globalSettings.globalEmail}
+            help={
+              !emailLink || emailLink === globalSettings.globalEmail ? (
+                <span style={{ color: "#28a745" }}>
+                  ✓ Usando configuración global del Customizer
+                </span>
+              ) : (
+                <span style={{ color: "#6c757d" }}>
+                  Personalizado (deja vacío para usar global:{" "}
+                  {globalSettings.globalEmail})
+                </span>
+              )
+            }
           />
         </PanelBody>
 
@@ -131,7 +203,37 @@ export default function Edit({ attributes, setAttributes }) {
                         <div className="form-group">
                           <select className="form-control" disabled>
                             <option>—Por favor, elige una opción—</option>
+                            {serviceOptions
+                              .slice(0, 3)
+                              .map((service, index) => (
+                                <option key={index}>{service}</option>
+                              ))}
+                            {services && services.length > 3 && (
+                              <option>... y {services.length - 3} más</option>
+                            )}
                           </select>
+                          {services ? (
+                            <small
+                              style={{
+                                color: "#28a745",
+                                marginTop: "5px",
+                                display: "block",
+                              }}
+                            >
+                              ✓ {services.length} servicios cargados
+                              dinámicamente
+                            </small>
+                          ) : (
+                            <small
+                              style={{
+                                color: "#ffc107",
+                                marginTop: "5px",
+                                display: "block",
+                              }}
+                            >
+                              ⏳ Cargando servicios...
+                            </small>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -183,11 +285,20 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(value) =>
                           setAttributes({ addressText: value })
                         }
-                        placeholder={__(
-                          "Escribe tu dirección aquí...",
-                          "carpentry-blocks"
-                        )}
+                        placeholder={globalSettings.globalAddress}
                       />
+                      {isUsingGlobalAddress && (
+                        <small
+                          style={{
+                            color: "#28a745",
+                            fontSize: "12px",
+                            marginTop: "5px",
+                            display: "block",
+                          }}
+                        >
+                          ✓ Usando configuración global del Customizer
+                        </small>
+                      )}
                     </div>
                   </div>
 
@@ -210,8 +321,20 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(value) =>
                           setAttributes({ phoneText: value })
                         }
-                        placeholder={__("910 05 37 00", "carpentry-blocks")}
+                        placeholder={globalSettings.globalPhone}
                       />
+                      {isUsingGlobalPhone && (
+                        <small
+                          style={{
+                            color: "#28a745",
+                            fontSize: "12px",
+                            marginTop: "5px",
+                            display: "block",
+                          }}
+                        >
+                          ✓ Usando configuración global del Customizer
+                        </small>
+                      )}
                     </div>
                   </div>
 
@@ -234,11 +357,20 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(value) =>
                           setAttributes({ emailText: value })
                         }
-                        placeholder={__(
-                          "info@reformasservilucas.com",
-                          "carpentry-blocks"
-                        )}
+                        placeholder={globalSettings.globalEmail}
                       />
+                      {isUsingGlobalEmail && (
+                        <small
+                          style={{
+                            color: "#28a745",
+                            fontSize: "12px",
+                            marginTop: "5px",
+                            display: "block",
+                          }}
+                        >
+                          ✓ Usando configuración global del Customizer
+                        </small>
+                      )}
                     </div>
                   </div>
 

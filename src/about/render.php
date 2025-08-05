@@ -3,6 +3,10 @@
  * About Us Block Render Template
  */
 
+// Obtener datos de contacto de la configuración global del Customizer
+$global_email = get_theme_mod('carpentry_company_email', 'info@reformasservilucas.com');
+$global_phone = get_theme_mod('carpentry_company_phone', '910 05 37 00');
+
 $subtitle = $attributes['subtitle'] ?? 'SOBRE NOSOTROS';
 $title = $attributes['title'] ?? 'Expertos profesionales en reformas';
 $description = $attributes['description'] ?? 'Proporcionamos servicios de reformas de alta calidad, asegurando la satisfacción total de nuestros clientes a través de un trabajo detallado y profesional.';
@@ -19,9 +23,12 @@ $additionalText = $attributes['additionalText'] ?? 'Nos encargamos de todos los 
 
 $buttonText = $attributes['buttonText'] ?? 'Conócenos';
 $buttonUrl = $attributes['buttonUrl'] ?? '/nosotros';
-$emailAddress = $attributes['emailAddress'] ?? 'info@reformasservilucas.com';
+
+// Usar datos globales pero permitir override desde atributos del bloque
+$emailAddress = !empty($attributes['emailAddress']) ? $attributes['emailAddress'] : $global_email;
+$phoneNumber = !empty($attributes['phoneNumber']) ? $attributes['phoneNumber'] : $global_phone;
+
 $aboutImage = $attributes['aboutImage'] ?? '';
-$phoneNumber = $attributes['phoneNumber'] ?? '910 05 37 00';
 
 // Fallback image if no about image is set
 if (empty($aboutImage)) {

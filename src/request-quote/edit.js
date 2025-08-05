@@ -1,5 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
+import { useSelect } from "@wordpress/data";
 import {
   PanelBody,
   TextControl,
@@ -25,6 +26,32 @@ export default function Edit({ attributes, setAttributes }) {
     statNumber,
     statLabel,
   } = attributes;
+
+  // Obtener servicios dinámicamente en el editor
+  const services = useSelect((select) => {
+    const { getEntityRecords } = select("core");
+    return getEntityRecords("postType", "servicios", {
+      per_page: -1,
+      status: "publish",
+      orderby: "title",
+      order: "asc",
+    });
+  }, []);
+
+  // Preparar opciones de servicios para el select
+  const serviceOptions = services
+    ? services.map((service) => ({
+        value: service.id,
+        label: service.title.rendered,
+      }))
+    : [
+        { value: "reformas", label: "Reformas" },
+        { value: "mantenimiento", label: "Mantenimiento" },
+        { value: "tabiqueria", label: "Tabiquería" },
+        { value: "electricidad", label: "Electricidad" },
+        { value: "fontaneria", label: "Fontanería" },
+        { value: "pintura", label: "Pintura" },
+      ];
 
   const blockProps = useBlockProps({
     className: "request-quote-editor",
@@ -161,6 +188,18 @@ export default function Edit({ attributes, setAttributes }) {
                 <p>
                   <strong>Campos:</strong> {namePlaceholder}, {emailPlaceholder}
                   , {phonePlaceholder}
+                </p>
+                <p>
+                  <strong>Servicios disponibles:</strong>{" "}
+                  {services ? (
+                    <span style={{ color: "#28a745" }}>
+                      {services.length} servicios cargados dinámicamente
+                    </span>
+                  ) : (
+                    <span style={{ color: "#ffc107" }}>
+                      Cargando servicios...
+                    </span>
+                  )}
                 </p>
                 <p>
                   <strong>Mensaje:</strong> {messageePlaceholder}

@@ -15,8 +15,11 @@
     "build:production": "npm run build && npm run build:sass && npm run lint:css && npm run lint:js",
     "watch": "npm run start",
     "clean": "rm -rf build",
-    "build:sass": "sass scss/style.scss:style.css --style=compressed",
-    "watch:sass": "sass scss/style.scss:style.css --watch",
+    "build:sass": "sass scss/style.scss:build/style-index.css --style=compressed",
+    "watch:sass": "sass scss/style.scss:build/style-index.css --watch",
+    "build:sass-original": "sass scss/style.scss:style.css --style=compressed",
+    "build:style-index": "sass scss/style.scss:build/style-index.css --style=compressed",
+    "watch:style-index": "sass scss/style.scss:build/style-index.css --watch",
     "dev:all": "concurrently \"npm run start\" \"npm run watch:sass\"",
     "build:all": "npm run build && npm run build:sass"
   },

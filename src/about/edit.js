@@ -6,6 +6,7 @@ import {
   MediaUploadCheck,
   RichText,
 } from "@wordpress/block-editor";
+import { useSelect } from "@wordpress/data";
 import {
   PanelBody,
   Button,
@@ -33,6 +34,23 @@ export default function Edit({ attributes, setAttributes }) {
     aboutImage,
     phoneNumber,
   } = attributes;
+
+  // Obtener configuraciones globales del Customizer
+  const globalSettings = useSelect((select) => {
+    const { getEntityRecord } = select("core");
+    const siteData = getEntityRecord("root", "site");
+    return {
+      globalEmail:
+        siteData?.carpentry_company_email || "info@reformasservilucas.com",
+      globalPhone: siteData?.carpentry_company_phone || "910 05 37 00",
+    };
+  }, []);
+
+  // Determinar si se están usando valores globales
+  const isUsingGlobalEmail =
+    !emailAddress || emailAddress === globalSettings.globalEmail;
+  const isUsingGlobalPhone =
+    !phoneNumber || phoneNumber === globalSettings.globalPhone;
 
   // Responsive design state
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -162,11 +180,37 @@ export default function Edit({ attributes, setAttributes }) {
             label={__("Email", "carpentry-blocks")}
             value={emailAddress}
             onChange={(value) => setAttributes({ emailAddress: value })}
+            placeholder={globalSettings.globalEmail}
+            help={
+              isUsingGlobalEmail ? (
+                <span style={{ color: "#28a745" }}>
+                  ✓ Usando configuración global del Customizer
+                </span>
+              ) : (
+                <span style={{ color: "#6c757d" }}>
+                  Personalizado (deja vacío para usar global:{" "}
+                  {globalSettings.globalEmail})
+                </span>
+              )
+            }
           />
           <TextControl
             label={__("Teléfono", "carpentry-blocks")}
             value={phoneNumber}
             onChange={(value) => setAttributes({ phoneNumber: value })}
+            placeholder={globalSettings.globalPhone}
+            help={
+              isUsingGlobalPhone ? (
+                <span style={{ color: "#28a745" }}>
+                  ✓ Usando configuración global del Customizer
+                </span>
+              ) : (
+                <span style={{ color: "#6c757d" }}>
+                  Personalizado (deja vacío para usar global:{" "}
+                  {globalSettings.globalPhone})
+                </span>
+              )
+            }
           />
         </PanelBody>
       </InspectorControls>
@@ -471,7 +515,18 @@ export default function Edit({ attributes, setAttributes }) {
                             fontWeight: "500",
                           }}
                         >
-                          {emailAddress}
+                          {emailAddress || globalSettings.globalEmail}
+                          {isUsingGlobalEmail && (
+                            <small
+                              style={{
+                                color: "#28a745",
+                                display: "block",
+                                fontSize: "12px",
+                              }}
+                            >
+                              (Global)
+                            </small>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -578,7 +633,18 @@ export default function Edit({ attributes, setAttributes }) {
                           fontWeight: "700",
                         }}
                       >
-                        {phoneNumber}
+                        {phoneNumber || globalSettings.globalPhone}
+                        {isUsingGlobalPhone && (
+                          <small
+                            style={{
+                              color: "#28a745",
+                              display: "block",
+                              fontSize: "12px",
+                            }}
+                          >
+                            (Global)
+                          </small>
+                        )}
                       </div>
                     </div>
                   </div>

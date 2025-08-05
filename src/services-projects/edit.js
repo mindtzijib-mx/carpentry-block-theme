@@ -11,13 +11,17 @@ import {
   TextControl,
   TextareaControl,
   Button,
+  ToggleControl,
+  Notice,
 } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
 
 export default function Edit({ attributes, setAttributes }) {
   const {
     servicesSubtitle,
     servicesTitle,
+    useDynamicServices = true,
     service1Title,
     service1Description,
     service1Icon,
@@ -41,6 +45,30 @@ export default function Edit({ attributes, setAttributes }) {
     project4Image,
     project4Alt,
   } = attributes;
+
+  // Get dynamic services from WordPress API
+  const services = useSelect((select) => {
+    const { getEntityRecords } = select("core");
+    return getEntityRecords("postType", "servicios", {
+      per_page: 8,
+      status: "publish",
+      orderby: "menu_order",
+      order: "asc",
+    });
+  }, []);
+
+  // Prepare services array for display
+  const dynamicServices = services
+    ? services.map((service) => ({
+        title: service.title.rendered,
+        description: service.excerpt.rendered
+          ? service.excerpt.rendered.replace(/<[^>]*>/g, "").substring(0, 120) +
+            "..."
+          : "Descripción del servicio",
+        icon: service.meta?.service_icon || "fas fa-tools",
+        url: service.link,
+      }))
+    : [];
 
   // Responsive design state
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -89,95 +117,142 @@ export default function Edit({ attributes, setAttributes }) {
             value={servicesTitle}
             onChange={(value) => setAttributes({ servicesTitle: value })}
           />
+          <ToggleControl
+            label={__("Usar servicios dinámicos", "carpentry-blocks")}
+            help={
+              useDynamicServices
+                ? __(
+                    "Los servicios se obtienen del custom post type 'servicios'",
+                    "carpentry-blocks"
+                  )
+                : __(
+                    "Usar servicios estáticos configurables manualmente",
+                    "carpentry-blocks"
+                  )
+            }
+            checked={useDynamicServices}
+            onChange={(value) => setAttributes({ useDynamicServices: value })}
+          />
+          {useDynamicServices && dynamicServices.length === 0 && (
+            <Notice status="warning" isDismissible={false}>
+              {__(
+                "No se encontraron servicios publicados. Se mostrarán servicios estáticos.",
+                "carpentry-blocks"
+              )}
+            </Notice>
+          )}
+          {useDynamicServices && dynamicServices.length > 0 && (
+            <Notice status="success" isDismissible={false}>
+              {__(
+                `Se encontraron ${dynamicServices.length} servicios dinámicos.`,
+                "carpentry-blocks"
+              )}
+            </Notice>
+          )}
         </PanelBody>
 
-        <PanelBody
-          title={__("Servicio 1", "carpentry-blocks")}
-          initialOpen={false}
-        >
-          <TextControl
-            label={__("Título", "carpentry-blocks")}
-            value={service1Title}
-            onChange={(value) => setAttributes({ service1Title: value })}
-          />
-          <TextareaControl
-            label={__("Descripción", "carpentry-blocks")}
-            value={service1Description}
-            onChange={(value) => setAttributes({ service1Description: value })}
-            rows={3}
-          />
-          <TextControl
-            label={__("Clase del Icono (ej: fas fa-tools)", "carpentry-blocks")}
-            value={service1Icon}
-            onChange={(value) => setAttributes({ service1Icon: value })}
-          />
-        </PanelBody>
+        {!useDynamicServices && (
+          <>
+            <PanelBody
+              title={__("Servicio 1", "carpentry-blocks")}
+              initialOpen={false}
+            >
+              <TextControl
+                label={__("Título", "carpentry-blocks")}
+                value={service1Title}
+                onChange={(value) => setAttributes({ service1Title: value })}
+              />
+              <TextareaControl
+                label={__("Descripción", "carpentry-blocks")}
+                value={service1Description}
+                onChange={(value) =>
+                  setAttributes({ service1Description: value })
+                }
+                rows={3}
+              />
+              <TextControl
+                label={__(
+                  "Clase del Icono (ej: fas fa-tools)",
+                  "carpentry-blocks"
+                )}
+                value={service1Icon}
+                onChange={(value) => setAttributes({ service1Icon: value })}
+              />
+            </PanelBody>
 
-        <PanelBody
-          title={__("Servicio 2", "carpentry-blocks")}
-          initialOpen={false}
-        >
-          <TextControl
-            label={__("Título", "carpentry-blocks")}
-            value={service2Title}
-            onChange={(value) => setAttributes({ service2Title: value })}
-          />
-          <TextareaControl
-            label={__("Descripción", "carpentry-blocks")}
-            value={service2Description}
-            onChange={(value) => setAttributes({ service2Description: value })}
-            rows={3}
-          />
-          <TextControl
-            label={__("Clase del Icono", "carpentry-blocks")}
-            value={service2Icon}
-            onChange={(value) => setAttributes({ service2Icon: value })}
-          />
-        </PanelBody>
+            <PanelBody
+              title={__("Servicio 2", "carpentry-blocks")}
+              initialOpen={false}
+            >
+              <TextControl
+                label={__("Título", "carpentry-blocks")}
+                value={service2Title}
+                onChange={(value) => setAttributes({ service2Title: value })}
+              />
+              <TextareaControl
+                label={__("Descripción", "carpentry-blocks")}
+                value={service2Description}
+                onChange={(value) =>
+                  setAttributes({ service2Description: value })
+                }
+                rows={3}
+              />
+              <TextControl
+                label={__("Clase del Icono", "carpentry-blocks")}
+                value={service2Icon}
+                onChange={(value) => setAttributes({ service2Icon: value })}
+              />
+            </PanelBody>
 
-        <PanelBody
-          title={__("Servicio 3", "carpentry-blocks")}
-          initialOpen={false}
-        >
-          <TextControl
-            label={__("Título", "carpentry-blocks")}
-            value={service3Title}
-            onChange={(value) => setAttributes({ service3Title: value })}
-          />
-          <TextareaControl
-            label={__("Descripción", "carpentry-blocks")}
-            value={service3Description}
-            onChange={(value) => setAttributes({ service3Description: value })}
-            rows={3}
-          />
-          <TextControl
-            label={__("Clase del Icono", "carpentry-blocks")}
-            value={service3Icon}
-            onChange={(value) => setAttributes({ service3Icon: value })}
-          />
-        </PanelBody>
+            <PanelBody
+              title={__("Servicio 3", "carpentry-blocks")}
+              initialOpen={false}
+            >
+              <TextControl
+                label={__("Título", "carpentry-blocks")}
+                value={service3Title}
+                onChange={(value) => setAttributes({ service3Title: value })}
+              />
+              <TextareaControl
+                label={__("Descripción", "carpentry-blocks")}
+                value={service3Description}
+                onChange={(value) =>
+                  setAttributes({ service3Description: value })
+                }
+                rows={3}
+              />
+              <TextControl
+                label={__("Clase del Icono", "carpentry-blocks")}
+                value={service3Icon}
+                onChange={(value) => setAttributes({ service3Icon: value })}
+              />
+            </PanelBody>
 
-        <PanelBody
-          title={__("Servicio 4", "carpentry-blocks")}
-          initialOpen={false}
-        >
-          <TextControl
-            label={__("Título", "carpentry-blocks")}
-            value={service4Title}
-            onChange={(value) => setAttributes({ service4Title: value })}
-          />
-          <TextareaControl
-            label={__("Descripción", "carpentry-blocks")}
-            value={service4Description}
-            onChange={(value) => setAttributes({ service4Description: value })}
-            rows={3}
-          />
-          <TextControl
-            label={__("Clase del Icono", "carpentry-blocks")}
-            value={service4Icon}
-            onChange={(value) => setAttributes({ service4Icon: value })}
-          />
-        </PanelBody>
+            <PanelBody
+              title={__("Servicio 4", "carpentry-blocks")}
+              initialOpen={false}
+            >
+              <TextControl
+                label={__("Título", "carpentry-blocks")}
+                value={service4Title}
+                onChange={(value) => setAttributes({ service4Title: value })}
+              />
+              <TextareaControl
+                label={__("Descripción", "carpentry-blocks")}
+                value={service4Description}
+                onChange={(value) =>
+                  setAttributes({ service4Description: value })
+                }
+                rows={3}
+              />
+              <TextControl
+                label={__("Clase del Icono", "carpentry-blocks")}
+                value={service4Icon}
+                onChange={(value) => setAttributes({ service4Icon: value })}
+              />
+            </PanelBody>
+          </>
+        )}
 
         <PanelBody
           title={__("Configuración de Proyectos", "carpentry-blocks")}
@@ -403,146 +478,174 @@ export default function Edit({ attributes, setAttributes }) {
                 </div>
               </div>
 
-              <div className="services-grid">
-                <div className="service-card">
-                  <div className="service-icon">
-                    <i className={service1Icon}></i>
-                  </div>
-                  <RichText
-                    allowedFormats={["core/bold", "core/italic"]}
-                    tagName="h3"
-                    className="service-title-home"
-                    value={service1Title}
-                    onChange={(value) =>
-                      setAttributes({ service1Title: value })
-                    }
-                    placeholder={__(
-                      "Título del servicio...",
-                      "carpentry-blocks"
-                    )}
-                  />
-                  <RichText
-                    allowedFormats={["core/bold", "core/italic"]}
-                    tagName="p"
-                    className="service-description"
-                    value={service1Description}
-                    onChange={(value) =>
-                      setAttributes({ service1Description: value })
-                    }
-                    placeholder={__(
-                      "Descripción del servicio...",
-                      "carpentry-blocks"
-                    )}
-                  />
-                  <div className="service-arrow">
-                    <i className="fas fa-arrow-right"></i>
-                  </div>
-                </div>
+              <div
+                className={`services-grid ${
+                  (useDynamicServices && dynamicServices.length > 4) ||
+                  (!useDynamicServices && 4 > 4)
+                    ? "slider-mode"
+                    : ""
+                }`}
+              >
+                {useDynamicServices && dynamicServices.length > 0 ? (
+                  // Dynamic Services from CPT
+                  dynamicServices.map((service, index) => (
+                    <div key={index} className="service-card">
+                      <div className="service-icon">
+                        <i className={service.icon}></i>
+                      </div>
+                      <h3 className="service-title-home">{service.title}</h3>
+                      <p className="service-description">
+                        {service.description}
+                      </p>
+                      <div className="service-arrow">
+                        <i className="fas fa-arrow-right"></i>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  // Static Services (editable)
+                  <>
+                    <div className="service-card">
+                      <div className="service-icon">
+                        <i className={service1Icon}></i>
+                      </div>
+                      <RichText
+                        allowedFormats={["core/bold", "core/italic"]}
+                        tagName="h3"
+                        className="service-title-home"
+                        value={service1Title}
+                        onChange={(value) =>
+                          setAttributes({ service1Title: value })
+                        }
+                        placeholder={__(
+                          "Título del servicio...",
+                          "carpentry-blocks"
+                        )}
+                      />
+                      <RichText
+                        allowedFormats={["core/bold", "core/italic"]}
+                        tagName="p"
+                        className="service-description"
+                        value={service1Description}
+                        onChange={(value) =>
+                          setAttributes({ service1Description: value })
+                        }
+                        placeholder={__(
+                          "Descripción del servicio...",
+                          "carpentry-blocks"
+                        )}
+                      />
+                      <div className="service-arrow">
+                        <i className="fas fa-arrow-right"></i>
+                      </div>
+                    </div>
 
-                <div className="service-card">
-                  <div className="service-icon">
-                    <i className={service2Icon}></i>
-                  </div>
-                  <RichText
-                    allowedFormats={["core/bold", "core/italic"]}
-                    tagName="h3"
-                    className="service-title-home"
-                    value={service2Title}
-                    onChange={(value) =>
-                      setAttributes({ service2Title: value })
-                    }
-                    placeholder={__(
-                      "Título del servicio...",
-                      "carpentry-blocks"
-                    )}
-                  />
-                  <RichText
-                    allowedFormats={["core/bold", "core/italic"]}
-                    tagName="p"
-                    className="service-description"
-                    value={service2Description}
-                    onChange={(value) =>
-                      setAttributes({ service2Description: value })
-                    }
-                    placeholder={__(
-                      "Descripción del servicio...",
-                      "carpentry-blocks"
-                    )}
-                  />
-                  <div className="service-arrow">
-                    <i className="fas fa-arrow-right"></i>
-                  </div>
-                </div>
+                    <div className="service-card">
+                      <div className="service-icon">
+                        <i className={service2Icon}></i>
+                      </div>
+                      <RichText
+                        allowedFormats={["core/bold", "core/italic"]}
+                        tagName="h3"
+                        className="service-title-home"
+                        value={service2Title}
+                        onChange={(value) =>
+                          setAttributes({ service2Title: value })
+                        }
+                        placeholder={__(
+                          "Título del servicio...",
+                          "carpentry-blocks"
+                        )}
+                      />
+                      <RichText
+                        allowedFormats={["core/bold", "core/italic"]}
+                        tagName="p"
+                        className="service-description"
+                        value={service2Description}
+                        onChange={(value) =>
+                          setAttributes({ service2Description: value })
+                        }
+                        placeholder={__(
+                          "Descripción del servicio...",
+                          "carpentry-blocks"
+                        )}
+                      />
+                      <div className="service-arrow">
+                        <i className="fas fa-arrow-right"></i>
+                      </div>
+                    </div>
 
-                <div className="service-card">
-                  <div className="service-icon">
-                    <i className={service3Icon}></i>
-                  </div>
-                  <RichText
-                    allowedFormats={["core/bold", "core/italic"]}
-                    tagName="h3"
-                    className="service-title-home"
-                    value={service3Title}
-                    onChange={(value) =>
-                      setAttributes({ service3Title: value })
-                    }
-                    placeholder={__(
-                      "Título del servicio...",
-                      "carpentry-blocks"
-                    )}
-                  />
-                  <RichText
-                    allowedFormats={["core/bold", "core/italic"]}
-                    tagName="p"
-                    className="service-description"
-                    value={service3Description}
-                    onChange={(value) =>
-                      setAttributes({ service3Description: value })
-                    }
-                    placeholder={__(
-                      "Descripción del servicio...",
-                      "carpentry-blocks"
-                    )}
-                  />
-                  <div className="service-arrow">
-                    <i className="fas fa-arrow-right"></i>
-                  </div>
-                </div>
+                    <div className="service-card">
+                      <div className="service-icon">
+                        <i className={service3Icon}></i>
+                      </div>
+                      <RichText
+                        allowedFormats={["core/bold", "core/italic"]}
+                        tagName="h3"
+                        className="service-title-home"
+                        value={service3Title}
+                        onChange={(value) =>
+                          setAttributes({ service3Title: value })
+                        }
+                        placeholder={__(
+                          "Título del servicio...",
+                          "carpentry-blocks"
+                        )}
+                      />
+                      <RichText
+                        allowedFormats={["core/bold", "core/italic"]}
+                        tagName="p"
+                        className="service-description"
+                        value={service3Description}
+                        onChange={(value) =>
+                          setAttributes({ service3Description: value })
+                        }
+                        placeholder={__(
+                          "Descripción del servicio...",
+                          "carpentry-blocks"
+                        )}
+                      />
+                      <div className="service-arrow">
+                        <i className="fas fa-arrow-right"></i>
+                      </div>
+                    </div>
 
-                <div className="service-card">
-                  <div className="service-icon">
-                    <i className={service4Icon}></i>
-                  </div>
-                  <RichText
-                    allowedFormats={["core/bold", "core/italic"]}
-                    tagName="h3"
-                    className="service-title-home"
-                    value={service4Title}
-                    onChange={(value) =>
-                      setAttributes({ service4Title: value })
-                    }
-                    placeholder={__(
-                      "Título del servicio...",
-                      "carpentry-blocks"
-                    )}
-                  />
-                  <RichText
-                    allowedFormats={["core/bold", "core/italic"]}
-                    tagName="p"
-                    className="service-description"
-                    value={service4Description}
-                    onChange={(value) =>
-                      setAttributes({ service4Description: value })
-                    }
-                    placeholder={__(
-                      "Descripción del servicio...",
-                      "carpentry-blocks"
-                    )}
-                  />
-                  <div className="service-arrow">
-                    <i className="fas fa-arrow-right"></i>
-                  </div>
-                </div>
+                    <div className="service-card">
+                      <div className="service-icon">
+                        <i className={service4Icon}></i>
+                      </div>
+                      <RichText
+                        allowedFormats={["core/bold", "core/italic"]}
+                        tagName="h3"
+                        className="service-title-home"
+                        value={service4Title}
+                        onChange={(value) =>
+                          setAttributes({ service4Title: value })
+                        }
+                        placeholder={__(
+                          "Título del servicio...",
+                          "carpentry-blocks"
+                        )}
+                      />
+                      <RichText
+                        allowedFormats={["core/bold", "core/italic"]}
+                        tagName="p"
+                        className="service-description"
+                        value={service4Description}
+                        onChange={(value) =>
+                          setAttributes({ service4Description: value })
+                        }
+                        placeholder={__(
+                          "Descripción del servicio...",
+                          "carpentry-blocks"
+                        )}
+                      />
+                      <div className="service-arrow">
+                        <i className="fas fa-arrow-right"></i>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
