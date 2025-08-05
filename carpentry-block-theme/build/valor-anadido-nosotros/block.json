@@ -1,0 +1,110 @@
+{
+  "apiVersion": 3,
+  "name": "carpentry/valor-anadido-nosotros",
+  "version": "0.1.0",
+  "title": "Valor Añadido Nosotros",
+  "category": "carpentry-blocks",
+  "icon": "star-filled",
+  "description": "Sección de valor añadido con características principales del tema clásico",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "backgroundImage": {
+      "type": "string",
+      "default": ""
+    },
+    "leftSubtitle": {
+      "type": "string",
+      "default": "NUESTRO ENFOQUE"
+    },
+    "leftTitle": {
+      "type": "string",
+      "default": "Máximo Compromiso Con Nuestros Clientes"
+    },
+    "progress1Title": {
+      "type": "string",
+      "default": "Calidad de nuestros servicios"
+    },
+    "progress1Value": {
+      "type": "number",
+      "default": 100
+    },
+    "progress2Title": {
+      "type": "string",
+      "default": "Soluciones a medida"
+    },
+    "progress2Value": {
+      "type": "number",
+      "default": 100
+    },
+    "rightSubtitle": {
+      "type": "string",
+      "default": "VALOR AÑADIDO"
+    },
+    "rightTitle": {
+      "type": "string",
+      "default": "Lo Que Marca Nuestra Diferencia"
+    },
+    "rightDescription": {
+      "type": "string",
+      "default": "Nuestra dedicación y atención al detalle nos distinguen en cada proyecto que realizamos."
+    },
+    "feature1Icon": {
+      "type": "string",
+      "default": "fas fa-user-tie"
+    },
+    "feature1Title": {
+      "type": "string",
+      "default": "Profesionales Expertos"
+    },
+    "feature1Text": {
+      "type": "string",
+      "default": "Equipo de profesionales altamente capacitados y experimentados en el campo de las reformas."
+    },
+    "feature2Icon": {
+      "type": "string",
+      "default": "fas fa-home"
+    },
+    "feature2Title": {
+      "type": "string",
+      "default": "Soluciones a medida"
+    },
+    "feature2Text": {
+      "type": "string",
+      "default": "Nuestro objetivo es entender completamente tus deseos y expectativas para poder ofrecerte soluciones a medida."
+    },
+    "feature3Icon": {
+      "type": "string",
+      "default": "fas fa-heart"
+    },
+    "feature3Title": {
+      "type": "string",
+      "default": "Satisfacción de nuestros clientes"
+    },
+    "feature3Text": {
+      "type": "string",
+      "default": "Nos aseguraremos de que cada detalle sea tenido en cuenta y de que se cumplan todas tus exigencias durante el proceso de reforma."
+    },
+    "feature4Icon": {
+      "type": "string",
+      "default": "fas fa-star"
+    },
+    "feature4Title": {
+      "type": "string",
+      "default": "Máxima Calidad"
+    },
+    "feature4Text": {
+      "type": "string",
+      "default": "Estamos aquí para hacer realidad tus sueños y transformar tu espacio en algo que supere tus expectativas."
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "style": "file:../../build/valor-anadido-nosotros/style-index.css",
+  "render": "file:./render.php"
+}

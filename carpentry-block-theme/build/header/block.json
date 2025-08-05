@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "carpentry/header",
+  "title": "Carpentry Header",
+  "description": "Header profesional para ServiLucas con navegación dinámica",
+  "category": "theme",
+  "icon": "admin-appearance",
+  "keywords": [
+    "header",
+    "navigation",
+    "carpentry",
+    "servilucas"
+  ],
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

@@ -1,0 +1,81 @@
+{
+  "apiVersion": 3,
+  "name": "carpentry/about",
+  "version": "0.1.0",
+  "title": "About Us Section",
+  "category": "carpentry-blocks",
+  "icon": "groups",
+  "description": "Sección Sobre Nosotros con estadísticas y información de contacto",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "subtitle": {
+      "type": "string",
+      "default": "SOBRE NOSOTROS"
+    },
+    "title": {
+      "type": "string",
+      "default": "Expertos profesionales en reformas"
+    },
+    "description": {
+      "type": "string",
+      "default": "Proporcionamos servicios de reformas de alta calidad, asegurando la satisfacción total de nuestros clientes a través de un trabajo detallado y profesional."
+    },
+    "stat1Number": {
+      "type": "string",
+      "default": "15+"
+    },
+    "stat1Label": {
+      "type": "string",
+      "default": "AÑOS DE EXPERIENCIA"
+    },
+    "stat1Icon": {
+      "type": "string",
+      "default": "fas fa-award"
+    },
+    "stat2Number": {
+      "type": "string",
+      "default": "300+"
+    },
+    "stat2Label": {
+      "type": "string",
+      "default": "CLIENTES"
+    },
+    "stat2Icon": {
+      "type": "string",
+      "default": "fas fa-users"
+    },
+    "additionalText": {
+      "type": "string",
+      "default": "Nos encargamos de todos los aspectos del proceso de reforma, desde el diseño y la planificación, hasta la ejecución y el acabado final. Nuestra dedicación y atención al detalle nos distinguen en cada proyecto que realizamos."
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Conócenos"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "/nosotros"
+    },
+    "emailAddress": {
+      "type": "string",
+      "default": "info@reformasservilucas.com"
+    },
+    "aboutImage": {
+      "type": "string",
+      "default": ""
+    },
+    "phoneNumber": {
+      "type": "string",
+      "default": "910 05 37 00"
+    }
+  },
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

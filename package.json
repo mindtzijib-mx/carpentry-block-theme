@@ -12,6 +12,7 @@
     "format": "wp-scripts format",
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
+    "theme-zip": "npm run build:all && rm -f carpentry-block-theme.zip && cd .. && zip -r carpentry-block-theme/carpentry-block-theme.zip carpentry-block-theme -x 'carpentry-block-theme/node_modules/*' 'carpentry-block-theme/src/*' 'carpentry-block-theme/scss/*' 'carpentry-block-theme/.git/*' 'carpentry-block-theme/.github/*' 'carpentry-block-theme/package*.json' 'carpentry-block-theme/webpack.config.js' 'carpentry-block-theme/*.md' 'carpentry-block-theme/.gitignore' 'carpentry-block-theme/carpentry-block-theme.zip' 'carpentry-block-theme/carpentry-block-theme/*'",
     "build:production": "npm run build && npm run build:sass && npm run lint:css && npm run lint:js",
     "watch": "npm run start",
     "clean": "rm -rf build",
@@ -20,8 +21,10 @@
     "build:sass-original": "sass scss/style.scss:style.css --style=compressed",
     "build:style-index": "sass scss/style.scss:build/style-index.css --style=compressed",
     "watch:style-index": "sass scss/style.scss:build/style-index.css --watch",
-    "dev:all": "concurrently \"npm run start\" \"npm run watch:sass\"",
-    "build:all": "npm run build && npm run build:sass"
+    "build:assets": "wp-scripts build src/index.js --output-path=build",
+    "watch:assets": "wp-scripts start src/index.js --output-path=build",
+    "dev:all": "concurrently \"npm run start\" \"npm run watch:sass\" \"npm run watch:assets\"",
+    "build:all": "npm run build && npm run build:assets && npm run build:sass"
   },
   "keywords": [
     "wordpress",

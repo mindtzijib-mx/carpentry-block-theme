@@ -1,0 +1,149 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "carpentry/blog-posts-grid",
+  "version": "1.0.0",
+  "title": "Blog Posts Grid",
+  "category": "carpentry-blocks",
+  "icon": "grid-view",
+  "description": "Cuadrícula de entradas de blog con paginación y configuración flexible.",
+  "keywords": [
+    "blog",
+    "posts",
+    "grid",
+    "entries",
+    "entradas"
+  ],
+  "textdomain": "carpentry-blocks",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "default": "Últimas Entradas"
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "postsPerPage": {
+      "type": "number",
+      "default": 6
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "showExcerpt": {
+      "type": "boolean",
+      "default": true
+    },
+    "excerptLength": {
+      "type": "number",
+      "default": 20
+    },
+    "showFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDate": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAuthor": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCategory": {
+      "type": "boolean",
+      "default": true
+    },
+    "showReadMore": {
+      "type": "boolean",
+      "default": true
+    },
+    "readMoreText": {
+      "type": "string",
+      "default": "Leer Más"
+    },
+    "dateFormat": {
+      "type": "string",
+      "default": "d M Y"
+    },
+    "orderBy": {
+      "type": "string",
+      "default": "date",
+      "enum": [
+        "date",
+        "title",
+        "menu_order",
+        "rand"
+      ]
+    },
+    "order": {
+      "type": "string",
+      "default": "DESC",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
+    },
+    "categoryFilter": {
+      "type": "array",
+      "default": []
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#333333"
+    },
+    "accentColor": {
+      "type": "string",
+      "default": "#a17a66"
+    },
+    "cardStyle": {
+      "type": "string",
+      "default": "modern",
+      "enum": [
+        "modern",
+        "classic",
+        "minimal"
+      ]
+    },
+    "showPagination": {
+      "type": "boolean",
+      "default": true
+    },
+    "paginationStyle": {
+      "type": "string",
+      "default": "numbers",
+      "enum": [
+        "numbers",
+        "arrows",
+        "both"
+      ]
+    }
+  },
+  "example": {
+    "attributes": {
+      "sectionTitle": "Blog ServiLucas",
+      "postsPerPage": 3,
+      "columns": 3,
+      "showTitle": true
+    }
+  }
+}

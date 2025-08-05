@@ -35,6 +35,11 @@
   text-align: center;
   margin-right: $spacing-lg;
 
+  @include tablet {
+    margin-right: 0;
+    margin-bottom: $spacing-lg;
+  }
+
   @include mobile {
     margin-right: 0;
     margin-bottom: $spacing-lg;
