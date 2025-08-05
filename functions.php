@@ -116,12 +116,13 @@ function carpentry_blocks_scripts() {
         wp_get_theme()->get('Version')
     );
     
-    // Enqueue theme scripts
+    // Enqueue compiled theme scripts
+    $asset_file = include(get_template_directory() . '/build/index.asset.php');
     wp_enqueue_script(
         'carpentry-blocks-script',
-        get_template_directory_uri() . '/assets/js/theme.js',
-        array('jquery'),
-        wp_get_theme()->get('Version'),
+        get_template_directory_uri() . '/build/index.js',
+        $asset_file['dependencies'],
+        $asset_file['version'],
         true
     );
     
@@ -134,6 +135,16 @@ function carpentry_blocks_scripts() {
             'nonce' => wp_create_nonce('carpentry_blocks_nonce'),
             'restUrl' => rest_url('wp/v2/'),
             'restNonce' => wp_create_nonce('wp_rest')
+        )
+    );
+    
+    // Localize script for contact forms AJAX
+    wp_localize_script(
+        'carpentry-contact-forms',
+        'carpentryAjax',
+        array(
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('carpentry_contact_form')
         )
     );
 }

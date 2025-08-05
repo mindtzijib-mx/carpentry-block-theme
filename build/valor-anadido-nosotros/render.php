@@ -80,8 +80,8 @@ $wrapper_attributes = get_block_wrapper_attributes([
             </div>
 
             <!-- Lado Derecho - Caja blanca -->
-            <div class="col-lg-7" style="margin-top: -180px;">
-                <div class="diferencia-content bg-white p-5 rounded-3 shadow">
+            <div class="col-lg-7 d-flex align-items-start">
+                <div class="diferencia-content bg-white p-5 rounded-3 shadow w-100 mt-0 mt-lg-n180">
                     <div class="section-subtitle text-uppercase mb-2">
                         <span><?php echo $right_subtitle; ?></span>
                     </div>

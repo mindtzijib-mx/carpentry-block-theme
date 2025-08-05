@@ -297,3 +297,10 @@
     font-size: $font-size-base;
   }
 }
+
+// Clases de utilidad para margin-top responsive
+.mt-lg-n180 {
+  @media (min-width: 992px) {
+    margin-top: -180px !important;
+  }
+}

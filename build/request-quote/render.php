@@ -126,9 +126,13 @@ if (empty($service_options)) {
                             </div>
                         </div>
 
+                        <?php wp_nonce_field('carpentry_contact_form', 'contact_nonce'); ?>
+                        
                         <button type="submit" class="btn btn-submit">
                             <?php echo esc_html($attributes['submitButtonText'] ?? 'Enviar'); ?>
                         </button>
+                        
+                        <div class="form-messages" style="display: none;"></div>
                     </form>
                 </div>
 

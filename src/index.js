@@ -14,6 +14,8 @@ import "./assets/footer.js";
 // Import services projects slider functionality
 import "./assets/services-projects-slider.js";
 
+import "./assets/contact-forms.js";
+
 // Additional global initialization if needed
 document.addEventListener("DOMContentLoaded", function () {
   // Any global initialization code can go here

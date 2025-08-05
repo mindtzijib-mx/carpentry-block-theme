@@ -58,7 +58,7 @@ $blog_query = new WP_Query($query_args);
 ?>
 
 <section class="<?php echo esc_attr($block_classes); ?> card-style-<?php echo esc_attr($card_style); ?>" 
-         style="background-color: <?php echo esc_attr($background_color); ?>; color: <?php echo esc_attr($text_color); ?>;">
+         style="color: <?php echo esc_attr($text_color); ?>;">
     <div class="container">
         <?php if ($show_title && !empty($section_title)): ?>
             <h2 class="blog-posts-title text-center mb-5" 

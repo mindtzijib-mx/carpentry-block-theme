@@ -111,7 +111,9 @@ $wrapper_attributes = get_block_wrapper_attributes([
                                     <label for="privacy">He leído y acepto la política de privacidad</label>
                                 </div>
                             </div>
+                            <?php wp_nonce_field('carpentry_contact_form', 'contact_nonce'); ?>
                             <button type="submit" class="btn btn-contact-submit">Enviar</button>
+                            <div class="form-messages" style="display: none;"></div>
                         </form>
                     </div>
                 </div>
