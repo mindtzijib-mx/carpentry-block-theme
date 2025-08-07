@@ -2,6 +2,7 @@ import { registerBlockType } from "@wordpress/blocks";
 import Edit from "./edit";
 import "./style.scss";
 
-registerBlockType("carpentry-blocks/google-maps", {
+registerBlockType("carpentry/google-maps", {
   edit: Edit,
+  save: () => null, // Server-side rendering
 });

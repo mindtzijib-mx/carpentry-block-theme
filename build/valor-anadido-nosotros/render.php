@@ -39,7 +39,8 @@ $feature4_title = !empty($attributes['feature4Title']) ? esc_html($attributes['f
 $feature4_text = !empty($attributes['feature4Text']) ? esc_html($attributes['feature4Text']) : 'Estamos aquí para hacer realidad tus sueños y transformar tu espacio en algo que supere tus expectativas.';
 
 $wrapper_attributes = get_block_wrapper_attributes([
-    'class' => 'valor-anadido-section py-5'
+    'class' => 'valor-anadido-section py-5',
+    'style' => 'background-image: url(' . $background_image . ');'
 ]);
 ?>
 
