@@ -82,7 +82,7 @@ $section_image = !empty($attributes['sectionImage']) ? $attributes['sectionImage
                             <i class="fas fa-phone-alt me-2"></i>
                             <div>
                                 <small class="d-block text-muted">
-                                    <?php echo esc_html($attributes['contactEmail'] ?? 'info@reformasservilucas.com'); ?>
+                                    <?php echo esc_html($attributes['contactEmail'] ?? 'contacto@carpinterianudo.es'); ?>
                                 </small>
                                 <strong>
                                     <a href="tel:<?php echo esc_attr($attributes['contactPhoneLink'] ?? '910053700'); ?>" 

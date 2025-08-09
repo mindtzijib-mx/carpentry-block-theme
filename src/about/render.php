@@ -4,7 +4,7 @@
  */
 
 // Obtener datos de contacto de la configuración global del Customizer
-$global_email = get_theme_mod('carpentry_company_email', 'info@reformasservilucas.com');
+$global_email = get_theme_mod('carpentry_company_email', 'contacto@carpinterianudo.es');
 $global_phone = get_theme_mod('carpentry_company_phone', '910 05 37 00');
 
 $subtitle = $attributes['subtitle'] ?? 'SOBRE NOSOTROS';

@@ -24,7 +24,7 @@
     width: auto;
 
     @include mobile {
-      max-height: 40px;
+      max-height: 60px;
     }
   }
 }
@@ -121,6 +121,7 @@
   margin-left: auto;
 
   @include mobile {
+    // Keep phone button below navigation even after moving hamburger to the right
     order: 4;
     margin-top: $spacing-sm;
     border-radius: $border-radius-xl;

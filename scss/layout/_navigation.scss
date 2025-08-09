@@ -253,6 +253,8 @@
   @include mobile {
     display: flex;
     order: 1;
+    // Push hamburger button to the right side on mobile
+    margin-left: auto;
   }
 
   &:hover {
@@ -312,6 +314,14 @@
 
 .main-navigation.active .mobile-menu-close {
   display: block;
+}
+
+// Hide hamburger toggle when mobile menu is open (mobile only)
+@include mobile {
+  .main-navigation.active ~ .mobile-menu-toggle,
+  .mobile-menu-toggle.active {
+    display: none !important;
+  }
 }
 
 .header-phone-button {

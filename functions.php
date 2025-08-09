@@ -266,7 +266,8 @@ function carpentry_blocks_customize_register($wp_customize) {
 
     // Company Email
     $wp_customize->add_setting('carpentry_company_email', array(
-        'default'           => 'info@reformasservilucas.com',
+        // Updated default company email
+        'default'           => 'contacto@carpinterianudo.es',
         'sanitize_callback' => 'sanitize_email',
     ));
     $wp_customize->add_control('carpentry_company_email', array(
@@ -324,6 +325,18 @@ function carpentry_blocks_customize_register($wp_customize) {
         'label'   => __('URL de LinkedIn', 'carpentry-blocks'),
         'section' => 'carpentry_social_media',
         'type'    => 'url',
+    ));
+
+    // WhatsApp Number
+    $wp_customize->add_setting('carpentry_whatsapp_number', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('carpentry_whatsapp_number', array(
+        'label'       => __('Número de WhatsApp (sin espacios)', 'carpentry-blocks'),
+        'description' => __('Ej: 34600111222. Se generará un enlace https://wa.me/NUMERO', 'carpentry-blocks'),
+        'section'     => 'carpentry_social_media',
+        'type'        => 'text',
     ));
 
     // Facebook URL (optional)
@@ -599,73 +612,120 @@ function carpentry_footer_legal_fallback()
  * Handle contact form AJAX submission
  */
 function carpentry_handle_contact_form() {
+    // Helper to send structured error
+    $debug_mode = ( defined('WP_DEBUG') && WP_DEBUG ) || current_user_can('manage_options');
+    $send_error = function( $code, $user_message, $extra = array(), $http_status = 200 ) use ( $debug_mode ) {
+        $payload = array(
+            'code' => $code,
+            'message' => $user_message,
+        );
+        if ( $debug_mode && !empty($extra) ) {
+            // Only expose extra debug info to admins / debug mode
+            $payload['debug'] = $extra;
+        }
+        // Always log server side
+        $log = '[CarpentryForms][' . $code . '] ' . $user_message;
+        if ( !empty($extra) ) {
+            $log .= ' | extra=' . wp_json_encode($extra);
+        }
+        error_log( $log );
+        wp_send_json( array( 'success' => false, 'data' => $payload ), $http_status );
+    };
+
     // Verify nonce
-    if (!wp_verify_nonce($_POST['contact_nonce'], 'carpentry_contact_form')) {
-        wp_die('Security check failed');
+    if ( empty($_POST['contact_nonce']) || !wp_verify_nonce( $_POST['contact_nonce'], 'carpentry_contact_form' ) ) {
+        $send_error( 'nonce_failed', 'Sesión caducada. Recarga la página e inténtalo otra vez.', array( 'received' => isset($_POST['contact_nonce']), 'action' => 'carpentry_contact_form' ), 403 );
     }
-    
+
     // Sanitize and validate input
-    $nombre = sanitize_text_field($_POST['nombre']);
-    $email = sanitize_email($_POST['email']);
-    $telefono = sanitize_text_field($_POST['telefono']);
-    $servicio = sanitize_text_field($_POST['servicio']);
-    $mensaje = sanitize_textarea_field($_POST['mensaje']);
-    
-    // Basic validation
+    $nombre   = isset($_POST['nombre']) ? sanitize_text_field($_POST['nombre']) : '';
+    $email    = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+    $telefono = isset($_POST['telefono']) ? sanitize_text_field($_POST['telefono']) : '';
+    $servicio = isset($_POST['servicio']) ? sanitize_text_field($_POST['servicio']) : '';
+    $mensaje  = isset($_POST['mensaje']) ? sanitize_textarea_field($_POST['mensaje']) : '';
+
     $errors = array();
-    
-    if (empty($nombre)) {
-        $errors[] = 'El nombre es obligatorio';
+    if ( empty($nombre) ) { $errors['nombre'] = 'El nombre es obligatorio'; }
+    if ( empty($email) || !is_email($email) ) { $errors['email'] = 'Email válido es obligatorio'; }
+    if ( empty($telefono) ) { $errors['telefono'] = 'El teléfono es obligatorio'; }
+    if ( empty($mensaje) ) { $errors['mensaje'] = 'El mensaje es obligatorio'; }
+
+    if ( !empty($errors) ) {
+        $send_error( 'validation', 'Revisa los campos indicados.', array( 'fields' => $errors ) );
     }
-    
-    if (empty($email) || !is_email($email)) {
-        $errors[] = 'Email válido es obligatorio';
-    }
-    
-    if (empty($telefono)) {
-        $errors[] = 'El teléfono es obligatorio';
-    }
-    
-    if (empty($mensaje)) {
-        $errors[] = 'El mensaje es obligatorio';
-    }
-    
-    if (!empty($errors)) {
-        wp_send_json_error(implode(', ', $errors));
-    }
-    
-    // Prepare email content
-    $to = get_option('admin_email');
-    $subject = 'Nuevo mensaje de contacto - ' . get_bloginfo('name');
-    
-    $email_message = "Has recibido un nuevo mensaje de contacto:\n\n";
+
+    // Prepare email
+    $to       = get_theme_mod('carpentry_company_email', 'contacto@carpinterianudo.es');
+    $subject  = 'Nuevo mensaje de contacto - ' . get_bloginfo('name');
+    $email_message  = "Has recibido un nuevo mensaje de contacto:\n\n";
     $email_message .= "Nombre: {$nombre}\n";
     $email_message .= "Email: {$email}\n";
     $email_message .= "Teléfono: {$telefono}\n";
-    
-    if (!empty($servicio)) {
+    if ( !empty($servicio) ) {
         $email_message .= "Servicio: {$servicio}\n";
     }
-    
     $email_message .= "\nMensaje:\n{$mensaje}\n\n";
     $email_message .= "---\n";
-    $email_message .= "Enviado desde: " . home_url();
-    
+    $email_message .= 'Enviado desde: ' . home_url();
+
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
         'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
         'Reply-To: ' . $nombre . ' <' . $email . '>'
     );
-    
-    // Send email
-    $sent = wp_mail($to, $subject, $email_message, $headers);
-    
-    if ($sent) {
-        wp_send_json_success('Mensaje enviado correctamente');
+
+    /** @var \PHPMailer\PHPMailer\PHPMailer $phpmailer */
+    global $phpmailer;
+    $before = microtime(true);
+    $sent = wp_mail( $to, $subject, $email_message, $headers );
+    $elapsed = round( ( microtime(true) - $before ) * 1000 );
+
+    if ( $sent ) {
+        error_log('[CarpentryForms][success] Email enviado en ' . $elapsed . 'ms a ' . $to);
+        wp_send_json_success( array( 'code' => 'sent', 'message' => 'Mensaje enviado correctamente' ) );
     } else {
-        wp_send_json_error('Error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+        $phpmailer_error = ( isset($phpmailer) && isset($phpmailer->ErrorInfo) ) ? $phpmailer->ErrorInfo : 'unknown';
+        $send_error( 'mail_failed', 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.', array( 'phpmailer' => $phpmailer_error, 'target' => $to, 'timeMs' => $elapsed ) );
     }
 }
+
+/**
+ * Hook: log detailed PHPMailer errors when wp_mail fails
+ */
+add_action('wp_mail_failed', function( $wp_error ) {
+    if ( is_wp_error( $wp_error ) ) {
+        error_log('[CarpentryForms][wp_mail_failed] code=' . $wp_error->get_error_code() . ' msg=' . $wp_error->get_error_message());
+        $data = $wp_error->get_error_data();
+        if ( $data ) {
+            error_log('[CarpentryForms][wp_mail_failed][data] ' . wp_json_encode( $data ));
+        }
+    }
+});
+
+/**
+ * Ensure From/Return-Path use the theme configured email if available (reduces DMARC/SPF issues)
+ */
+add_filter('wp_mail_from', function( $from ) {
+    $configured = get_theme_mod('carpentry_company_email');
+    if ( $configured && is_email( $configured ) ) {
+        return $configured;
+    }
+    return $from;
+});
+
+add_filter('wp_mail_from_name', function( $name ) {
+    return get_bloginfo('name');
+});
+
+add_action('phpmailer_init', function( $phpmailer ) {
+    $configured = get_theme_mod('carpentry_company_email');
+    if ( $configured && is_email( $configured ) ) {
+        // Set Sender / ReturnPath if empty
+        if ( empty( $phpmailer->Sender ) ) {
+            $phpmailer->Sender = $configured; // Return-Path
+        }
+    }
+});
 
 // Hook for logged in and non-logged in users
 add_action('wp_ajax_carpentry_contact_form', 'carpentry_handle_contact_form');

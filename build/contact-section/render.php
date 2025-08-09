@@ -36,9 +36,17 @@ if (empty($service_options)) {
 
 // Obtener datos de contacto de la configuración global del Customizer
 $global_address = get_theme_mod('carpentry_company_address', 'Calle Teléfrico de las Canteras 4, bajo A, 28052 Madrid');
-$global_email = get_theme_mod('carpentry_company_email', 'info@reformasservilucas.com');
+$global_email = get_theme_mod('carpentry_company_email', 'contacto@carpinterianudo.es');
 $global_phone = get_theme_mod('carpentry_company_phone', '910 05 37 00');
 $global_phone_link = get_theme_mod('carpentry_company_phone_link', '910053700');
+$whatsapp_number = get_theme_mod('carpentry_whatsapp_number', '');
+$whatsapp_url = '';
+if (!empty($whatsapp_number)) {
+    $digits = preg_replace('/\D+/', '', $whatsapp_number);
+    if (!empty($digits)) {
+        $whatsapp_url = 'https://wa.me/' . $digits;
+    }
+}
 
 // Obtener atributos con valores por defecto
 $form_title = !empty($attributes['formTitle']) ? esc_html($attributes['formTitle']) : 'Contacta con nosotros';
@@ -160,6 +168,11 @@ $wrapper_attributes = get_block_wrapper_attributes([
                             <?php if ($linkedin_url !== '#'): ?>
                             <a href="<?php echo $linkedin_url; ?>" class="social-link" target="_blank" rel="noopener">
                                 <i class="fab fa-linkedin"></i>
+                            </a>
+                            <?php endif; ?>
+                            <?php if (!empty($whatsapp_url)): ?>
+                            <a href="<?php echo esc_url($whatsapp_url); ?>" class="social-link" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i>
                             </a>
                             <?php endif; ?>
                         </div>

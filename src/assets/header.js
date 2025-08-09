@@ -48,10 +48,6 @@ function initializeHeader() {
     const clickHandler = function (e) {
       e.preventDefault();
       e.stopPropagation(); // Prevent event bubbling
-      console.log("Mobile toggle clicked!");
-      console.log("Event object:", e);
-      console.log("Before toggle - Navigation classes:", navigation.className);
-      console.log("Before toggle - Toggle classes:", mobileToggle.className);
 
       // Check current state and toggle accordingly
       const isActive = navigation.classList.contains("active");
@@ -60,10 +56,6 @@ function initializeHeader() {
       navigation.classList.toggle("active");
       mobileToggle.classList.toggle("active");
       document.body.classList.toggle("menu-open");
-
-      console.log("After toggle - Navigation classes:", navigation.className);
-      console.log("After toggle - Toggle classes:", mobileToggle.className);
-      console.log("Body classes:", document.body.className);
     };
 
     // Store the handler reference and add the event listener

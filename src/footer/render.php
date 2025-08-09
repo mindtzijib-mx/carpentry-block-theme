@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 
 // Get company information from customizer
 $company_address = get_theme_mod('carpentry_company_address', 'Calle Teleférico de las Canteras 4, bajo A, 28052 Madrid');
-$company_email = get_theme_mod('carpentry_company_email', 'info@reformasservilucas.com');
+$company_email = get_theme_mod('carpentry_company_email', 'contacto@carpinterianudo.es');
 $company_phone = get_theme_mod('carpentry_company_phone', '910 05 37 00');
 $company_phone_link = get_theme_mod('carpentry_company_phone_link', '910053700');
 
@@ -23,6 +23,14 @@ $linkedin_url = get_theme_mod('carpentry_linkedin_url', 'https://www.linkedin.co
 $facebook_url = get_theme_mod('carpentry_facebook_url', '');
 $twitter_url = get_theme_mod('carpentry_twitter_url', '');
 $youtube_url = get_theme_mod('carpentry_youtube_url', '');
+$whatsapp_number = get_theme_mod('carpentry_whatsapp_number', '');
+$whatsapp_url = '';
+if (!empty($whatsapp_number)) {
+    $digits = preg_replace('/\D+/', '', $whatsapp_number);
+    if (!empty($digits)) {
+        $whatsapp_url = 'https://wa.me/' . $digits;
+    }
+}
 ?>
 
 <div class="wp-block-carpentry-footer">
@@ -132,10 +140,6 @@ $youtube_url = get_theme_mod('carpentry_youtube_url', '');
                     <div class="footer-widget">
                         <h2 class="widget-title">Legal</h2>
                         <?php echo carpentry_get_footer_legal_menu(); ?>
-                        <!-- Sello Empresa Solidaria -->
-                        <div class="footer-seal mt-3">
-                            <img src="<?php echo get_template_directory_uri(); ?>/images/sello-empresa-solidaria.png" alt="Empresa Solidaria" style="max-width: 65%;">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -181,6 +185,13 @@ $youtube_url = get_theme_mod('carpentry_youtube_url', '');
                             <li>
                                 <a href="<?php echo esc_url($youtube_url); ?>" target="_blank" rel="nofollow">
                                     <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                            <?php if (!empty($whatsapp_url)): ?>
+                            <li>
+                                <a href="<?php echo esc_url($whatsapp_url); ?>" target="_blank" rel="nofollow">
+                                    <i class="fab fa-whatsapp"></i>
                                 </a>
                             </li>
                             <?php endif; ?>
