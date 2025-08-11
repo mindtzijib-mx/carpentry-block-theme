@@ -299,6 +299,20 @@ function carpentry_blocks_customize_register($wp_customize) {
         'type'        => 'text',
     ));
 
+    // Footer Logo (white) - for dark backgrounds
+    $wp_customize->add_setting('carpentry_footer_logo_id', array(
+        'default'           => 0,
+        'sanitize_callback' => 'absint',
+    ));
+    if ( class_exists('WP_Customize_Media_Control') ) {
+        $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'carpentry_footer_logo_id', array(
+            'label'       => __('Logo del Footer (versión blanca)', 'carpentry-blocks'),
+            'description' => __('Se usará en el pie de página. Sube una versión blanca/transparente para fondos oscuros.', 'carpentry-blocks'),
+            'section'     => 'carpentry_company_info',
+            'mime_type'   => 'image',
+        )));
+    }
+
     // Social Media Section
     $wp_customize->add_section('carpentry_social_media', array(
         'title'    => __('Redes Sociales', 'carpentry-blocks'),
@@ -373,6 +387,72 @@ function carpentry_blocks_customize_register($wp_customize) {
     ));
 }
 add_action('customize_register', 'carpentry_blocks_customize_register');
+
+/**
+ * REST route to set global Footer Logo (white) from block editor
+ */
+add_action('rest_api_init', function () {
+    register_rest_route('carpentry/v1', '/footer-logo', array(
+        array(
+            'methods'             => 'GET',
+            'callback'            => function () {
+                $id = absint( get_theme_mod('carpentry_footer_logo_id', 0) );
+                $url = '';
+                $alt = '';
+                if ( $id ) {
+                    $src = wp_get_attachment_image_src( $id, 'medium' );
+                    if ( $src && ! is_wp_error( $src ) ) {
+                        $url = $src[0];
+                    }
+                    $alt = (string) get_post_meta( $id, '_wp_attachment_image_alt', true );
+                }
+                return rest_ensure_response( array(
+                    'id'  => $id,
+                    'url' => $url,
+                    'alt' => $alt,
+                ) );
+            },
+            'permission_callback' => function () { return current_user_can('edit_theme_options'); },
+        ),
+        array(
+            'methods'             => 'POST',
+            'callback'            => function (WP_REST_Request $request) {
+                $id  = absint($request->get_param('id'));
+                $alt = sanitize_text_field((string) $request->get_param('alt'));
+
+                if (!current_user_can('customize') && !current_user_can('manage_options')) {
+                    return new WP_Error('forbidden', __('No tienes permisos para actualizar el logo global.', 'carpentry-blocks'), array('status' => 403));
+                }
+                if (!$id) {
+                    return new WP_Error('invalid_id', __('ID de imagen inválido.', 'carpentry-blocks'), array('status' => 400));
+                }
+
+                // Update theme mod
+                set_theme_mod('carpentry_footer_logo_id', $id);
+
+                // Optionally update attachment alt
+                if ($alt) {
+                    update_post_meta($id, '_wp_attachment_image_alt', $alt);
+                }
+
+                return rest_ensure_response(array('success' => true, 'id' => $id));
+            },
+            'permission_callback' => function () {
+                return current_user_can('customize') || current_user_can('manage_options');
+            },
+            'args' => array(
+                'id' => array(
+                    'required' => true,
+                    'type'     => 'integer',
+                ),
+                'alt' => array(
+                    'required' => false,
+                    'type'     => 'string',
+                ),
+            ),
+        ),
+    ));
+});
 
 /**
  * Helper functions to get company information
@@ -642,6 +722,31 @@ function carpentry_handle_contact_form() {
     $email    = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
     $telefono = isset($_POST['telefono']) ? sanitize_text_field($_POST['telefono']) : '';
     $servicio = isset($_POST['servicio']) ? sanitize_text_field($_POST['servicio']) : '';
+    $servicio_nombre = $servicio;
+    // Mapear el ID al nombre del servicio usando los mismos criterios que en render.php
+    if (!empty($servicio)) {
+        // Buscar en CPT servicios
+        $servicio_post = get_post($servicio);
+        if ($servicio_post && $servicio_post->post_type === 'servicios') {
+            $servicio_nombre = get_the_title($servicio_post);
+        } else {
+            // Fallback a las opciones estáticas
+            $static_services = array(
+                'carpinteria' => 'Carpintería General',
+                'reformas' => 'Reformas Integrales',
+                'mantenimiento' => 'Mantenimiento',
+                'acabados' => 'Acabados',
+                'otro' => 'Otro',
+                'tabiqueria' => 'Tabiquería',
+                'electricidad' => 'Electricidad',
+                'fontaneria' => 'Fontanería',
+                'pintura' => 'Pintura',
+            );
+            if (isset($static_services[$servicio])) {
+                $servicio_nombre = $static_services[$servicio];
+            }
+        }
+    }
     $mensaje  = isset($_POST['mensaje']) ? sanitize_textarea_field($_POST['mensaje']) : '';
 
     $errors = array();
@@ -661,8 +766,8 @@ function carpentry_handle_contact_form() {
     $email_message .= "Nombre: {$nombre}\n";
     $email_message .= "Email: {$email}\n";
     $email_message .= "Teléfono: {$telefono}\n";
-    if ( !empty($servicio) ) {
-        $email_message .= "Servicio: {$servicio}\n";
+    if ( !empty($servicio_nombre) ) {
+        $email_message .= "Servicio: {$servicio_nombre}\n";
     }
     $email_message .= "\nMensaje:\n{$mensaje}\n\n";
     $email_message .= "---\n";

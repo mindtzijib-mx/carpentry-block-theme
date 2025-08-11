@@ -1,7 +1,7 @@
 <?php
 /**
  * Footer Block Template
- * 
+ *
  * Renders the site footer with contact info, widgets and EU funding banner
  * Based on the original carpentry theme design
  */
@@ -31,6 +31,38 @@ if (!empty($whatsapp_number)) {
         $whatsapp_url = 'https://wa.me/' . $digits;
     }
 }
+// Handle logo attributes
+$default_logo = get_template_directory_uri() . '/images/logo_servilucas_bn.png'; // white logo fallback
+$logo_id = !empty($attributes['logoId']) ? intval($attributes['logoId']) : 0;
+$logo_url_attr = !empty($attributes['logoUrl']) ? esc_url($attributes['logoUrl']) : '';
+$logo_alt_attr = isset($attributes['logoAlt']) ? sanitize_text_field($attributes['logoAlt']) : '';
+$use_global_footer_logo = isset($attributes['useGlobalFooterLogo']) ? (bool) $attributes['useGlobalFooterLogo'] : true;
+
+// Global footer logo from Customizer (white variant)
+$global_footer_logo_id = absint( get_theme_mod('carpentry_footer_logo_id', 0) );
+
+if ($use_global_footer_logo && $global_footer_logo_id) {
+    $image_alt = get_bloginfo('name');
+    $logo_img_html = wp_get_attachment_image($global_footer_logo_id, 'medium', false, [
+        'class' => 'img-fluid',
+        'alt' => esc_attr($image_alt)
+    ]);
+} elseif ($logo_id) {
+    // Get image HTML with responsive attributes
+    $image_alt = $logo_alt_attr;
+    if (empty($image_alt)) {
+        $meta_alt = get_post_meta($logo_id, '_wp_attachment_image_alt', true);
+        $image_alt = $meta_alt ?: get_bloginfo('name');
+    }
+    $logo_img_html = wp_get_attachment_image($logo_id, 'medium', false, [
+        'class' => 'img-fluid',
+        'alt' => esc_attr($image_alt)
+    ]);
+} elseif (!empty($logo_url_attr)) {
+    $logo_img_html = sprintf('<img src="%s" alt="%s" class="img-fluid" />', $logo_url_attr, esc_attr($logo_alt_attr ?: get_bloginfo('name')));
+} else {
+    $logo_img_html = sprintf('<img src="%s" alt="%s" class="img-fluid" />', esc_url($default_logo), esc_attr(get_bloginfo('name')));
+}
 ?>
 
 <div class="wp-block-carpentry-footer">
@@ -43,7 +75,7 @@ if (!empty($whatsapp_number)) {
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
                     <div class="footer-logo-container">
                         <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                            <img src="<?php echo get_template_directory_uri(); ?>/images/logo_servilucas_bn.png" alt="<?php bloginfo('name'); ?>" class="img-fluid">
+                            <?php echo $logo_img_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         </a>
                     </div>
                 </div>
@@ -104,11 +136,11 @@ if (!empty($whatsapp_number)) {
                             <ul class="schedule-list">
                                 <li>
                                     <span class="schedule-title">Lu – Ju</span>
-                                    <span class="schedule-value">09:00 am – 06:00 pm</span>
+                                    <span class="schedule-value">09:00 am – 18:00 pm</span>
                                 </li>
                                 <li>
                                     <span class="schedule-title">Viernes</span>
-                                    <span class="schedule-value">09:00 am – 03:00 pm</span>
+                                    <span class="schedule-value">09:00 am – 18:00 pm</span>
                                 </li>
                                 <li>
                                     <span class="schedule-title">Sa – Do</span>
@@ -200,7 +232,7 @@ if (!empty($whatsapp_number)) {
                 </div>
                 <div class="col-lg-6 col-md-6 text-end">
                     <div class="footer-copyright">
-                        Copyright © <?php echo date('Y'); ?> Reformas Servilucas S.L.
+                        Copyright © <?php echo date('Y'); ?> Carpinteria NUDÖ
                     </div>
                 </div>
             </div>

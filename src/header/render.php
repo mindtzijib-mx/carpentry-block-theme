@@ -49,6 +49,13 @@ if (!empty($whatsapp_number)) {
                         <?php endif; ?>
                     </div>
 
+                    <!-- Mobile Menu Toggle moved to top to align with logo on mobile -->
+                    <button class="mobile-menu-toggle d-lg-none" type="button" aria-label="Abrir menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
                     <!-- Contact Info -->
                     <div class="contact-info d-none d-lg-flex">
                         <?php if (!empty($company_address)) : ?>
@@ -181,13 +188,6 @@ if (!empty($whatsapp_number)) {
                         </a>
                     </div>
                     <?php endif; ?>
-
-                    <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-toggle d-lg-none" type="button">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
                 </div>
             </div>
         </div>

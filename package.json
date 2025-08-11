@@ -50,6 +50,7 @@
     "sass": "^1.89.2"
   },
   "dependencies": {
+    "@wordpress/api-fetch": "^6.0.0",
     "@wordpress/block-editor": "^15.0.0",
     "@wordpress/blocks": "^15.0.0",
     "@wordpress/components": "^30.0.0",

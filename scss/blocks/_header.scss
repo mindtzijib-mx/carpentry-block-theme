@@ -13,7 +13,10 @@
     padding: 10px 0;
 
     .d-flex {
-      justify-content: center;
+      /* Keep logo and hamburger on the same row */
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
     }
   }
 }

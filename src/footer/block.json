@@ -7,6 +7,12 @@
   "category": "theme",
   "icon": "admin-appearance",
   "keywords": ["footer", "contact", "carpentry", "servilucas"],
+  "attributes": {
+    "logoId": { "type": "number", "default": 0 },
+    "logoUrl": { "type": "string", "default": "" },
+    "logoAlt": { "type": "string", "default": "" },
+    "useGlobalFooterLogo": { "type": "boolean", "default": true }
+  },
   "supports": {
     "html": false,
     "reusable": true
